@@ -1,0 +1,41 @@
+INSTALL NODE JS
+
+- https://nodejs.org/en/
+
+- node --version OU node -v
+
+--------------------------------------------------------
+
+ACTIVE POWER SHELL SCRIPT EXECUTE
+
+- Get-ExecutionPolicy
+
+- Set-ExecutionPolicy Unrestricted
+
+--------------------------------------------------------
+
+https://cli.vuejs.org/
+
+https://cli.vuejs.org/guide/installation.html
+
+INSTALL VUE CLI: npm install -g @vue/cli
+
+VERSION: vue --version
+
+UPGRADING: npm update -g @vue/cli
+
+CREATE NEW PROJECT: vue create NOME-DO-PROJETO OU vue ui
+
+RUN PROJECT: npm run serve
+
+--------------------------------------------------------
+
+VUETIFY (MATERIAL DESIGN)
+
+INSTAL VUETIFY CLI: vue add vuetify-cli
+
+INSTALL VUETIFY: vue add vuetify
+
+--------------------------------------------------------
+
+PROJECT BUILD PRODUCTION: npm run build
