@@ -5,7 +5,7 @@
             <nav class="color-darkblue" role="navigation">
                 <div class="nav-wrapper container">
                     <a href="#">
-                        <img src="../assets/image/logo_usj_white.png" class="logotipo" />
+                        <img src="../../assets/image/logo_usj_white.png" class="logotipo" />
                     </a>
                 </div>
             </nav>
@@ -16,7 +16,7 @@
                 <div class="container">
                     <h4 class="underline-white">Wiki</h4>
                 </div>
-                <img src="../assets/image/image_callcenter.png" class="image" />
+                <img src="../../assets/image/image_callcenter.png" class="image" />
             </div>
         </div>
         <!-- Navbar Search -->
@@ -154,7 +154,7 @@
                 <div class="footer-content">
                     <div class="footer-logo">
                         <a href="#">
-                            <img src="../assets/image/logo_usj_blue.png" class="logotipo" />
+                            <img src="../../assets/image/logo_usj_blue.png" class="logotipo" />
                         </a>
                     </div>
                     <div class="footer-copyright">

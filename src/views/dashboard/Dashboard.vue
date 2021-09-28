@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
     <v-navigation-drawer v-model="drawer" app>
       <v-list-item class="grey lighten-4">
         <v-list-item-content>
@@ -9,7 +9,7 @@
           <v-list-item-subtitle>
             Lista de Tarefas
           </v-list-item-subtitle> -->
-          <v-img src="./assets/image/logo_usj_blue.png" class="logo"></v-img>
+          <v-img src="../../assets/image/logo_usj_blue.png" contain height="40" />
         </v-list-item-content>
       </v-list-item>
 
@@ -57,7 +57,9 @@
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-web</v-icon>
+        <router-link :to="{ name: 'home' }" class="text-decoration-none">
+            <v-icon dark>mdi-web</v-icon>
+        </router-link>
       </v-btn>
 
       <v-btn icon>
@@ -66,27 +68,37 @@
     </v-app-bar>
 
     <v-main>
-      <router-view />
+        <router-view></router-view>
     </v-main>
+
+    <v-footer app>
+        &COPY; Todos os direitos reservados - Centro Universitário São José 2021
+    </v-footer>
   </v-app>
 </template>
 
 <script>
   export default {
-    name: 'App',
+    name: 'Dashboard',
     data: () => ({ 
       drawer: null,
       items: [
-        { title: 'Tarefas', icon: 'mdi-view-dashboard', to: '/' },
-        { title: 'Sobre', icon: 'mdi-help-box', to: '/sobre' },
+        { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/dashboard' },
+        { title: 'Tarefas', icon: 'mdi-playlist-check', to: '/dashboard/tarefas' },
+        { title: 'Sobre', icon: 'mdi-help-box', to: '/dashboard/sobre' },
       ]
     })
   }
 </script>
 
 <style>
-  .logo {
-    width: auto;
-    height: 40px;
+  .router-link-active {
+      color: #ffffff !important;
+  }
+
+  .v-footer {
+      z-index: 1;
+      padding: 15px !important;
+      border-top: 1px solid #dddddd !important;
   }
 </style>

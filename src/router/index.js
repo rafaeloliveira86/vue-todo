@@ -6,18 +6,25 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import('../views/dashboard/Dashboard.vue'),
+    children: [
+      {
+        path: '/dashboard/tarefas',
+        name: 'Tarefas',
+        component: Tarefas
+      },
+      {
+        path: '/dashboard/sobre',
+        name: 'Sobre',
+        component: () => import('../views/dashboard/Sobre.vue')
+      }
+    ]
+  },
+  {
     path: '/',
-    name: 'Tarefas',
-    component: Tarefas
-  },
-  {
-    path: '/sobre',
-    name: 'Sobre',
-    component: () => import('../views/dashboard/Sobre.vue')
-  },
-  {
-    path: '/site',
-    name: 'Home',
+    name: 'home',
     component: () => import('../views/site/Home.vue')
   }
 ]

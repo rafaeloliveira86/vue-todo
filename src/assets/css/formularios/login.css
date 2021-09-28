@@ -1,0 +1,122 @@
+@font-face {
+    font-family: Open Sans ExtraBold;
+    src: url('../../fonts/OpenSans-ExtraBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.logotipo {
+    margin-top: 5px;
+}
+
+
+/* Box */
+
+.box {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 0 20px 0;
+}
+
+.box-header {
+    padding: 3px 20px 10px 20px;
+    background: #90050b;
+    border: none;
+}
+
+.box-header h4 {
+    margin-left: 10px;
+    font: "Lato", sans-serif;
+    color: #fff;
+}
+
+.box-body {
+    display: block;
+    padding: 20px;
+    border-top: 0;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.content {
+    padding: 50px 20px;
+    font-weight: normal !important;
+}
+
+.content h2 {
+    line-height: 1;
+    letter-spacing: -1px;
+    font: 25px "Lato", sans-serif;
+}
+
+.content p {
+    color: #333;
+    line-height: 1;
+    font: 15px "Lato", sans-serif;
+}
+
+
+/* Footer */
+
+.footer {
+    padding: 25px 0;
+    color: #fff;
+    background: #494747;
+}
+
+.footer .footer-box {
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 15px;
+    border: 1px solid #595959;
+    border-radius: 6px;
+}
+
+.footer .footer-box h2 {
+    letter-spacing: -1px;
+    font: 25px "Lato", sans-serif;
+    color: #ffffff;
+}
+
+.footer .footer-box p {
+    text-align: left;
+    font: 15px "Lato", sans-serif;
+    color: #afafaf;
+}
+
+.footer-credits {
+    padding: 25px 15px 5px 15px;
+    background: #111111;
+}
+
+.footer-credits p {
+    font: 15px "Lato", sans-serif;
+    color: #afafaf;
+}
+
+@media only screen and (max-width: 992px) {
+    .logotipo {
+        width: 170px;
+        height: auto;
+    }
+    .content {
+        padding: 20px 0 !important;
+    }
+    .content h2 {
+        margin-top: 0;
+    }
+    .footer {
+        padding-bottom: 0;
+    }
+    .footer .footer-box:first-child {
+        margin-bottom: 15px;
+    }
+}

@@ -1,16 +1,15 @@
 <template>
-  <v-app id="inspire">
-    <Dashboard />
-  </v-app>
+  <div>
+    <v-app id="app">
+        <router-view></router-view>
+    </v-app>
+  </div>
 </template>
 
 <script>
-  import Dashboard from './components/dashboard/Dashboard.vue';
-
   export default {
     name: 'App',
     components: {
-      Dashboard
     }
   }
 </script>

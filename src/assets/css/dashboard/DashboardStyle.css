@@ -1,0 +1,131 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+}
+
+.brand-logo {
+    display: none !important;
+}
+
+.logo {
+    padding-top: 10px;
+}
+
+header,
+main,
+footer {
+    margin-left: 300px;
+}
+
+main {
+    padding: 15px;
+}
+
+.notification {
+    position: absolute;
+    right: 120px;
+}
+
+.notification-badge {
+    position: relative;
+    right: 2px;
+    top: -12px;
+    color: #111111;
+    background-color: #ffae00;
+    margin: 0 -.8em;
+    border-radius: 50%;
+    padding: 1px 6px;
+}
+
+
+/* Flex Container */
+
+.ds-container {
+    display: flex;
+}
+
+.ds-container>* {
+    flex-grow: 1;
+}
+
+.ds-container .col:first-child,
+.ds-container .ds-card,
+.ds-container ul.collapsible {
+    margin-right: 15px;
+}
+
+.ds-container .ds-card:last-child {
+    margin-right: 0;
+}
+
+
+/* Accordion Materialize Custom */
+
+.ds-container ul.collapsible li div.collapsible-body {
+    padding: 0 !important;
+}
+
+.ds-container ul.collapsible li div.collapsible-body div.card {
+    margin: 0 !important;
+}
+
+.ds-content {
+    display: table;
+    width: 100%;
+}
+
+.ds-page-head {
+    min-width: 100%;
+    height: auto;
+    margin: -15px -15px 10px -15px;
+    padding: 20px 15px 0 15px;
+    border-bottom: 1px solid #dddddd;
+    background-color: #ffffff;
+}
+
+.ds-menu-report {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+/* Collection Materialize */
+.collection.with-header .collection-item {
+    padding-left: 20px !important;
+}
+
+.page-footer {
+    padding-top: 5px !important;
+    border-top: 1px solid #e1e1e1;
+}
+
+.footer-copyright {
+    color: #111111 !important;
+    margin-left: 15px;
+}
+
+@media only screen and (max-width: 992px) {
+    .brand-logo {
+        display: block !important;
+    }
+    .logo {
+        width: 130px !important;
+        height: auto !important;
+    }
+    .ds-container {
+        flex-direction: column;
+    }
+    .ds-container .col:first-child,
+    .ds-container .ds-card,
+    .ds-container ul.collapsible:first-child {
+        margin-right: 0;
+    }
+    header,
+    main,
+    footer {
+        margin-left: 0;
+    }
+}

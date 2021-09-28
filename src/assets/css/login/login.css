@@ -1,0 +1,42 @@
+html,
+body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.login-content {
+    width: 500px;
+    height: 500px;
+    background-image: url('../../image/login_map.png');
+    background-repeat: no-repeat;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.login-align {
+    display: table;
+    width: 350px;
+    padding: 20px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 255) 0%, rgba(255, 255, 255, 0.5018382352941176) 30%, rgba(255, 255, 255, 0) 100%);
+}
+
+blockquote {
+    border-left: 5px solid #90050b !important;
+}
+
+h5 {
+    margin-bottom: 25px !important;
+}

@@ -1,0 +1,9 @@
+/* Category */
+
+.cat-disabled {
+    display: none;
+}
+
+.cat-notdisabled {
+    display: block;
+}
