@@ -39,3 +39,9 @@ INSTALL VUETIFY: vue add vuetify
 --------------------------------------------------------
 
 PROJECT BUILD PRODUCTION: npm run build
+
+--------------------------------------------------------
+
+CLONE PROJECT GITHUB / BITBUCKET: git clone URL
+
+INSTALL NODE MODULES: npm update

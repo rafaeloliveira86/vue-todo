@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import Tarefa from '../components/tarefas/Tarefa.vue';
+  import Tarefa from '../../components/dashboard/tarefas/Tarefa.vue';
 
   export default {
     name: 'Tarefas',
