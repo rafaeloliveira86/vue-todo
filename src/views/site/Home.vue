@@ -31,46 +31,53 @@
         </div>
 
         <v-container>
-            <!-- Pesquisar -->
-            <v-row>
-                <v-col cols="12">
-                    <v-text-field label="Pesquisar" filled rounded dense prepend-inner-icon="mdi-magnify" class="mt-5" background-color="#ffffff"></v-text-field>
-                </v-col>
-            </v-row>
+            <v-row no-gutters>
+                <v-col cols="12" md="8" offset-md="2">
+                    <v-row no-gutters>
+                        <!-- Pesquisar -->
+                        <v-col md="12">
+                            <v-text-field label="Pesquisar" filled rounded dense prepend-inner-icon="mdi-magnify" class="mt-5" background-color="#ffffff"></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <!-- Categorias -->
+                        <v-col cols="12" md="9">
+                            <h3 class="underline">
+                                <v-icon left size="30" color="#0D47A1">mdi-view-quilt</v-icon>Categorias
+                            </h3>
+                            <div class="wiki-grid">
+                                <div class="wiki-col" v-for="item, index in categorias" v-bind:key="index">
+                                    <v-hover>
+                                        <template v-slot:default="{ hover }">
+                                            <router-link :to="{ name: 'home' }" class="text-decoration-none">
+                                                <v-card :elevation="hover ? 24 : 6" class="mx-auto pa-6" tile>
+                                                    <v-icon dark>mdi-web</v-icon>{{ item.name }}
+                                                </v-card>
+                                            </router-link>
+                                        </template>
+                                    </v-hover>
+                                </div>
+                            </div>
+                        </v-col>
 
-            <!-- Categorias / Sidebar -->
-            <v-row>
-                <!-- Categorias -->
-                <v-col cols="8">
-                    <h6 class="underline">
-                        <v-icon left>mdi-checkbox-marked-circle</v-icon>Categorias
-                    </h6>
-                    <div class="wiki-grid">
-                        <div class="wiki-col">
-                            <v-card outlined v-for="item, index in categorias" v-bind:key="index" tile>
-                                <v-list-item two-line>
-                                    <v-list-item-content>
-                                        <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-card>
-                        </div>
-                    </div>
-                </v-col>
-                <!-- Sidebar -->
-                <v-col cols="4">
-                    <h6 class="underline">
-                        <v-icon left>mdi-checkbox-marked-circle</v-icon>Artigos mais acessados
-                    </h6>
-                    <v-card outlined tile class="indigo darken-4">
-                        <v-card outlined v-for="item, index in subcategorias" v-bind:key="index" tile>
-                            <v-list-item>
-                                <v-list-item-content>
-                                    <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-card>
-                    </v-card>
+                        <!-- Sidebar -->
+                        <v-col cols="12" md="3">
+                            <h3 class="underline">
+                                <v-icon left size="30" color="#0D47A1">mdi-cursor-default-click</v-icon>Artigos mais acessados
+                            </h3>
+                            <div class="wiki-grid">
+                                <div class="wiki-sidebar indigo darken-2">
+                                    <v-card v-for="item, index in subcategorias" v-bind:key="index" tile>
+                                        <v-list-item>
+                                            <v-list-item-content>
+                                                {{ item.name }}
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-card>
+                                </div>
+                            </div>
+                        </v-col>
+                    </v-row>
                 </v-col>
             </v-row>
         </v-container>
@@ -96,32 +103,30 @@
 <script>
     export default ({
         name: "Home",
-        data() {
-            return {
-                categorias: [
-                    { name: 'Sistema Unimestre'},
-                    { name: 'Sistema RM Totvs'},
-                    { name: 'Portal do Aluno'},
-                    { name: 'Sistema CRM'},
-                    { name: 'Biblioteca Virtual'},
-                    { name: 'Cursos'},
-                    { name: 'Emissão de Boleto'},
-                    { name: 'Login do Sistema'},
-                    { name: 'Emissão de Declarações'}
-                ],
-                subcategorias: [
-                    { name: 'Como gerar relatórios no sistema UniMestre?' },
-                    { name: 'Como gerar relatórios no sistema RM Totvs?' },
-                    { name: 'Como faço para acessar o portal do aluno?' },
-                    { name: 'Passo a passo do portal do aluno UniMestre.' },
-                    { name: 'Não consigo utilizar a bilbioteca virtual.' },
-                    { name: 'Onde encontro informações sobre meu curso?' },
-                    { name: 'Meu boleto está com data de vencimento errada.' },
-                    { name: 'Não consigo recuperar minha senha do portal.' },
-                    { name: 'Como excluir disciplina da minha grade?' },
-                ]
-            }
-        },
+        data: () => ({
+            categorias: [
+                { name: 'Sistema Unimestre'},
+                { name: 'Sistema RM Totvs'},
+                { name: 'Portal do Aluno'},
+                { name: 'Sistema CRM'},
+                { name: 'Biblioteca Virtual'},
+                { name: 'Cursos'},
+                { name: 'Emissão de Boleto'},
+                { name: 'Login do Sistema'},
+                { name: 'Emissão de Declarações'}
+            ],
+            subcategorias: [
+                { name: 'Como gerar relatórios no sistema UniMestre?' },
+                { name: 'Como gerar relatórios no sistema RM Totvs?' },
+                { name: 'Como faço para acessar o portal do aluno?' },
+                { name: 'Passo a passo do portal do aluno UniMestre.' },
+                { name: 'Não consigo utilizar a bilbioteca virtual.' },
+                { name: 'Onde encontro informações sobre meu curso?' },
+                { name: 'Meu boleto está com data de vencimento errada.' },
+                { name: 'Não consigo recuperar minha senha do portal.' },
+                { name: 'Como excluir disciplina da minha grade?' },
+            ]
+        })
     })
 </script>
 
@@ -170,7 +175,9 @@
     }
 
     .wiki-grid .wiki-sidebar {
-        margin-left: 25px;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
     }
 
     .wiki-margin-t {
