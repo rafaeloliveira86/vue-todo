@@ -6,6 +6,26 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'Página Inicial',
+    component: () => import('../views/site/Default.vue')
+  },
+  {
+    path: '/select',
+    name: 'select',
+    component: () => import('../views/site/Select.vue')
+  },
+  {
+    path: '/unisaojose',
+    name: 'home',
+    component: () => import('../views/site/unisaojose/Home.vue')
+  },
+  {
+    path: '/unisaojose/sobre',
+    name: 'sobre',
+    component: () => import('../views/site/unisaojose/Sobre.vue')
+  },
+  {
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('../views/dashboard/Dashboard.vue'),
@@ -21,16 +41,6 @@ const routes = [
         component: () => import('../views/dashboard/Sobre.vue')
       }
     ]
-  },
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('../views/site/Home.vue')
-  },
-  {
-    path: '/sobre',
-    name: 'sobre',
-    component: () => import('../views/site/Sobre.vue')
   }
 ]
 

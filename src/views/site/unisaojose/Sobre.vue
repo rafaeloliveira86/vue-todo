@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import Sobre from '../../components/site/Sobre.vue';
+    import Sobre from '../../../components/site/unisaojose/Sobre.vue';
 
     export default {
         name: "Sobre",

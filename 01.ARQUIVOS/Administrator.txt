@@ -38,6 +38,10 @@ INSTALL VUETIFY: vue add vuetify
 
 --------------------------------------------------------
 
+AXIOS: npm install --save axios
+
+--------------------------------------------------------
+
 PROJECT BUILD PRODUCTION: npm run build
 
 --------------------------------------------------------
