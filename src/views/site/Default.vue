@@ -1,7 +1,7 @@
 <template>
     <div class="wiki-body">
         <div class="grid grid-content">
-            <div class="grid-item">
+            <div class="grid-row">
                 <v-container>
                     <v-row>
                         <v-col cols="12" md="8" offset-md="2">
@@ -11,7 +11,7 @@
                 </v-container>
                 <v-img :src="require('../../assets/image/image_callcenter.png')" class="image" />
             </div>
-            <div class="grid-item">
+            <div class="grid-row">
                 <div class="grid-input">
                     <!-- <v-select :items="items" label="Selecione" class="select" solo outlined></v-select> -->
                     <select class="select">
@@ -22,10 +22,27 @@
                 <!-- Footer -->
                 <v-container fluid>
                     <v-row>
+                        <v-col cols="12" md="8" offset-md="2">
+                            <v-row>
+                                <div class="grid grid-body">
+                                    <div class="grid-col">
+                                        <v-img :src="require('../../assets/image/image_help.png')" contain width="500" />
+                                    </div>
+                                    <div class="grid-col">
+                                        <p>
+                                            Documentação Colaborativa dos sistemas institucionais UniSãoJosé, Colégio Realengo, Colégio Aplicação Taquara e Colégio Aplicação Vila Militar.<br><br>
+                                            Compartilhamos conhecimento!<br><br>
+                                            Estamos iniciando esta Wiki, você colaborador pode expandí-la.
+                                        </p>
+                                    </div>
+                                </div>
+                            </v-row>
+                        </v-col>
                         <v-col cols="12">
                             <v-row>
                                 <footer class="footer footer-content">
                                     <div class="footer-item" v-for="item, index in instituicoes" v-bind:key="index">
+                                        <div align="center"><v-img :src="require(`../../assets/image/${item.icon}`)" width="40" /></div>
                                         <span>{{ item.name }}</span>
                                     </div>
                                 </footer>
@@ -49,10 +66,10 @@
                 }
             ],
             instituicoes: [
-                { name: 'UniSãoJosé', link: 'http://localhost:8080/unisaojose' },
-                { name: 'Colégio Realengo', link: 'http://localhost:8080/colegiorealengo' },
-                { name: 'Colégio Aplicação Taquara', link: 'http://localhost:8080/colegioaplicacaotaquara' },
-                { name: 'Colégio Aplicação Vila Militar', link: 'http://localhost:8080/colegioaplicacaovilamilitar' }
+                { name: 'UniSãoJosé', icon: 'icon_usj.png', link: 'http://localhost:8080/unisaojose' },
+                { name: 'Colégio Realengo', icon: 'icon_cr.png', link: 'http://localhost:8080/colegiorealengo' },
+                { name: 'Colégio Aplicação Taquara', icon: 'icon_cca.png', link: 'http://localhost:8080/colegioaplicacaotaquara' },
+                { name: 'Colégio Aplicação Vila Militar', icon: 'icon_cca.png', link: 'http://localhost:8080/colegioaplicacaovilamilitar' }
             ],
             //items: ['UniSãoJosé', 'Colégio Realengo', 'Colégio Aplicação Taquara', 'Colégio Aplicação Vila Militar'],
             items: [
@@ -90,19 +107,26 @@
         flex-direction: column;
     }
 
-    .grid-item {
+    .grid-body {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 0;
+    }
+
+    .grid-row, .grid-col {
         margin: 0;
         padding: 0;
     }
 
-    .grid-item:first-child {
+    .grid-row:first-child {
         position: relative;
         width: 100%;
         height: 100%;
         background-image: linear-gradient(to right, #18335d, #2d4775, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df, #71b3ec, #62bbed, #57c2eb, #51c9e7, #53cfe1);
     }
 
-    .grid-item:first-child h4 {
+    .grid-row:first-child h4 {
         margin: 150px 0;
         font-size: 50px;
         font-weight: 900;
@@ -110,7 +134,7 @@
         padding: 0;
     }
 
-    .grid-item:first-child .image {
+    .grid-row:first-child .image {
         position: absolute;
         top: 0;
         right: 0;
@@ -118,7 +142,7 @@
         opacity: 0.8;
     }
 
-    .grid-item:last-child {
+    .grid-row:last-child {
         position: relative;
         width: 100%;
         height: 100%;
@@ -126,6 +150,29 @@
         -moz-box-shadow: 0 0 0.3em #595959;
         -webkit-box-shadow: 0 0 0.3em #595959;
         background: transparent;
+    }
+
+    .grid-col:first-child {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+    }
+
+    .grid-col:last-child {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background: transparent;
+    }
+
+    .grid-col .v-image {
+        margin: 0 auto;
+    }
+
+    .grid-col p {
+        font-size: 15px;
     }
 
     .grid-input {
@@ -170,7 +217,6 @@
     /* Footer */
 
     .footer {
-        position: absolute;
         display: flex;
         flex-wrap: wrap;
         width: 100%;
@@ -184,14 +230,35 @@
 
     .footer-item {
         flex: 1;
-        height: 60px;
+        height: 100%;
         text-align: center;
-        padding: 20px 0 0 0;
-        border-top: 1px solid #ebebeb;
-        background: #ffffff;
+        color: #ffffff;
+        padding: 20px 0;
+        border-top: 1px solid #ffffff;
+        /*background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df);*/
+        background: #415c8e;
+    }
+
+    .footer-item span {
+        font-size: 15px;
     }
 
     @media only screen and (max-width: 992px) {
-        
+        .grid-body {
+            flex-direction: column;
+        }
+
+        .grid-col .v-image {
+            margin-bottom: 30px;
+        }
+
+        .footer-item {
+            height: 100%;
+            padding: 15px 0;
+        }
+
+        .footer-item span {
+            font-size: 13px;
+        }
     }
 </style>

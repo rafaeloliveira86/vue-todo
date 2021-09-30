@@ -1,0 +1,30 @@
+INSTALL CODEIGNITER 4
+
+1. composer create-project codeigniter4/appstarter NOME DO APP
+
+2. cd abenoapp / composer update
+
+3. composer require codeigniter4/translations
+
+4. 
+
+5. Configurar Banco de Dados no arquivo .env OU app/Config/Database.php
+
+	- .env (localhost) - CI_ENVIRONMENT = development
+	- .env (remote) - CI_ENVIRONMENT = production
+
+6. php spark make:model NomeModel --suffix
+
+7. php spark make:controller NomeController
+
+8. php spark serve OU php spark serve --port 8081
+
+9. composer require twbs/bootstrap:5.0.0-beta2
+
+-----
+
+JWT CODEIGNITER 4
+
+https://onlinewebtutorblog.com/codeigniter-4-restful-apis-with-jwt-authentication/
+
+1. composer require firebase/php-jwt
