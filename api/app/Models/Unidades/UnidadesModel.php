@@ -15,6 +15,8 @@ class UnidadesModel extends Model {
     protected $allowedFields        = [
         'id',
 		'unidade',
+        'imagem',
+        'url',
 		'id_status',
 		'id_usuario_criado',
 		'id_usuario_atualizado',

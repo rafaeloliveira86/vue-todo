@@ -2,6 +2,8 @@
 namespace App\Models\Usuarios;
 
 use CodeIgniter\Model;
+use App\Entities\Usuarios\UsuariosEntity;
+use Exception;
 
 class UsuariosModel extends Model {
     protected $DBGroup = 'default';
@@ -9,7 +11,8 @@ class UsuariosModel extends Model {
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $insertID = 0;    
-    protected $returnType = 'array';
+    //protected $returnType = 'array';
+    protected $returnType = UsuariosEntity::class;
     protected $useSoftDelete = false;
     protected $protectFields = true;
     protected $allowedFields = [
@@ -62,7 +65,7 @@ class UsuariosModel extends Model {
             ]
         ],
         'email' => [
-            'rules' => 'required|min_length[3]|max_length[100]|valid_email|is_unique[users.email]',
+            'rules' => 'required|min_length[3]|max_length[100]|valid_email|is_unique[usuarios.email]',
             'errors' => [
                 'required' => 'O campo (E-mail) é obrigatório.',
                 'min_length' => 'O campo (E-mail) deve ter no mínimo 3 caracteres.',
@@ -108,23 +111,6 @@ class UsuariosModel extends Model {
 	protected $beforeDelete = [];
 	protected $afterDelete = [];
 
-    protected function beforeInsert(array $data) {
-        $data = $this->passwordHash($data);
-        return $data;
-    }
-
-    protected function beforeUpdate(array $data) {
-        $data = $this->passwordHash($data);
-        return $data;
-    }
-
-    protected function passwordHash(array $data) {
-        if (isset($data['data']['senha'])) {
-            $data['data']['senha'] = password_hash($data['data']['senha'], PASSWORD_DEFAULT);
-        }
-        return $data;
-    }
-
     /**
      * Set Validation Rules to Updates
      * 
@@ -135,7 +121,7 @@ class UsuariosModel extends Model {
 
         if (isset($data['nome'])) {
             $rules = [
-                'first_name' => [
+                'nome' => [
                     'rules' => 'min_length[3]|max_length[100]',
                     'errors' => [
                         'min_length' => 'O campo (Nome) deve ter no mínimo 3 caracteres.',
@@ -147,7 +133,7 @@ class UsuariosModel extends Model {
 
         if (isset($data['sobrenome'])) {
             $rules = [
-                'last_name' => [
+                'sobrenome' => [
                     'rules' => 'min_length[3]|max_length[100]',
                     'errors' => [
                         'min_length' => 'O campo (Sobrenome) deve ter no mínimo 3 caracteres.',
@@ -173,7 +159,7 @@ class UsuariosModel extends Model {
 
         if (isset($data['senha'])) {
             $rules = [
-                'password' => [
+                'senha' => [
                     'rules' => 'min_length[8]|max_length[14]',
                     'errors' => [
                         'min_length' => 'O campo (Senha) deve ter no mínimo 8 caracteres.',
@@ -185,7 +171,7 @@ class UsuariosModel extends Model {
 
         if (isset($data['confirmar_senha'])) {
             $rules = [
-                'password_confirm' => [
+                'confirmar_senha' => [
                     'rules' => 'matches[senha]',
                     'errors' => [
                         'required' => 'O campo (Confirmar Senha) é obrigatório.',
@@ -196,5 +182,52 @@ class UsuariosModel extends Model {
         }
 
         $this->validationRules = $rules;
+    }
+
+    protected function beforeInsert(array $data) {
+        $data = $this->passwordHash($data);
+        return $data;
+    }
+
+    protected function beforeUpdate(array $data) {
+        $data = $this->passwordHash($data);
+        return $data;
+    }
+
+    protected function passwordHash(array $data) {
+        if (isset($data['data']['senha'])) {
+            $data['data']['senha'] = password_hash($data['data']['senha'], PASSWORD_DEFAULT);
+        }
+        return $data;
+    }
+
+    protected $assignRole;
+
+    protected function addRole($data) {
+        $data['data']['id_role'] = $this->assignRole;
+        return $data;
+    }
+
+    public function withRole(string $role) {
+        $row = $this->db->table('permissoes')->where('role_name', $role)->get()->getFirstRow();
+
+        if ($row !== null) {
+            $this->assignRole = $row->id;
+        }
+    }
+
+    public function getUserBy(string $column, string $value) {
+        return $this->where($column, $value)->first();
+    }
+
+    public function recoveryUserID() {
+        try {
+            $this->select('id');
+            $this->orderBy('id', 'desc');
+            $this->limit(1);
+            return $this->asObject()->first();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
 }

@@ -20,6 +20,16 @@ class UnidadesMigrate extends Migration {
 				'constraint' => '150',
 				'null' => true
 			],
+			'imagem' => [
+				'type' => 'VARCHAR',
+				'constraint' => '50',
+				'null' => true
+			],
+			'url' => [
+				'type' => 'VARCHAR',
+				'constraint' => '150',
+				'null' => true
+			],
             'id_status' => [
 				'type' => 'INT',
 				'constraint' => 11,

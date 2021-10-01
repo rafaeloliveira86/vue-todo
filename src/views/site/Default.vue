@@ -13,11 +13,21 @@
             </div>
             <div class="grid-row">
                 <div class="grid-input">
-                    <!-- <v-select :items="items" label="Selecione" class="select" solo outlined></v-select> -->
-                    <select class="select">
-                        <option value="" selected>Selecione</option>
-                        <option v-for="item in instituicoes" :key="item" :value="item.link">{{ item.name }}</option>
-                    </select>
+                    <v-select
+                        :items="unidades"
+                        v-model="redirecionar"
+                        label="Selecione a Unidade"
+                        item-text="unidade"
+                        item-value="id"
+                        @change="selecionarUnidades()"
+                        solo
+                        height="55"
+                        class="select">
+                    </v-select>
+                    <!-- <select class="select">
+                        <option value="" selected>Selecione a Unidade</option>
+                        <option v-for="item in unidades" :key="item" :value="item.id">{{ item.unidade }}</option>
+                    </select> -->
                 </div>
                 <!-- Footer -->
                 <v-container fluid>
@@ -41,9 +51,9 @@
                         <v-col cols="12">
                             <v-row>
                                 <footer class="footer footer-content">
-                                    <div class="footer-item" v-for="item, index in instituicoes" v-bind:key="index">
-                                        <div align="center"><v-img :src="require(`../../assets/image/${item.icon}`)" width="40" /></div>
-                                        <span>{{ item.name }}</span>
+                                    <div class="footer-item" v-for="item, index in unidades" v-bind:key="index">
+                                        <div align="center"><v-img :src="require(`../../assets/image/${item.imagem}`)" width="40" /></div>
+                                        <a :href="item.url" target="_blank">{{ item.unidade }}</a>
                                     </div>
                                 </footer>
                             </v-row>
@@ -61,29 +71,45 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    const url = 'http://localhost/api/v1/unidades'
+
     export default ({
         name: "Default",
         data: () => ({
+            unidades: [],
+            redirecionar: null,
             wikiLinks: [
                 {
                     text: 'Página Inicial',
                     href: 'http://localhost:8080/unisaojose',
                 }
-            ],
-            instituicoes: [
-                { name: 'UniSãoJosé', icon: 'icon_usj.png', link: 'http://localhost:8080/unisaojose' },
-                { name: 'Colégio Realengo', icon: 'icon_cr.png', link: 'http://localhost:8080/colegiorealengo' },
-                { name: 'Colégio Aplicação Taquara', icon: 'icon_cca.png', link: 'http://localhost:8080/colegioaplicacaotaquara' },
-                { name: 'Colégio Aplicação Vila Militar', icon: 'icon_cca.png', link: 'http://localhost:8080/colegioaplicacaovilamilitar' }
-            ],
-            //items: ['UniSãoJosé', 'Colégio Realengo', 'Colégio Aplicação Taquara', 'Colégio Aplicação Vila Militar'],
-            items: [
-                { text: 'UniSãoJosé', value: 1, disabled: false },
-                { text: 'Colégio Realengo', value: 2, disabled: false },
-                { text: 'Colégio Aplicação Taquara', value: 3, disabled: false },
-                { text: 'Colégio Aplicação Vila Militar', value: 4, disabled: false }
             ]
-        })
+        }),
+        methods: {
+            async getUnidades () {
+                await axios.get(url)
+                .then(res => {
+                    console.log([...res.data.data])
+                    this.unidades = [...res.data.data]
+                })
+                .catch(err => {
+                    console.log(err)
+                    // M.toast({html: 'Houve um erro ao buscar contas.', classes: 'rounded red darken-1', outDuration: 1000})
+                })
+            },
+            selecionarUnidades() {
+                console.log(this.redirecionar);
+                switch (this.redirecionar) {
+                    case '1':
+                        window.location.href = 'http://localhost:8080/unisaojose';
+                        break;
+                }
+            }
+        },
+        created () {
+            this.getUnidades()
+        }
     })
 </script>
 
@@ -204,7 +230,7 @@
         appearance: none;
         font-family: "Font Awesome 5 Free", "Roboto";
         font-size: 15px;
-        background: #ffffff;
+        /*background: #ffffff;*/
     }
 
     .underline-white {
@@ -249,8 +275,14 @@
         background: #415c8e;
     }
 
-    .footer-item span {
+    .footer-item a {
         font-size: 15px;
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    .footer-item a:hover {
+        color: #e1e1e1;
     }
 
     @media only screen and (max-width: 992px) {
@@ -286,7 +318,7 @@
             padding: 25px 0;
         }
 
-        .footer-item span {
+        .footer-item a {
             font-size: 13px;
         }
     }

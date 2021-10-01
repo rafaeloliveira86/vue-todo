@@ -96,7 +96,7 @@
                                         </a>
                                     </div>
                                     <div class="footer-item">
-                                        <span>&copy; Todos os direito reservados - Centro Universitário São José (UniSãoJosé) - Departamento de Tecnologia da Informação</span>
+                                        <span>Departamento de Tecnologia da Informação</span>
                                     </div>
                                 </footer>
                             </v-row>
@@ -105,6 +105,11 @@
                 </v-container>
             </v-row>
         </v-container>
+        <v-footer dark tile elevation="24">
+            <v-col class="text-center" cols="12">
+                &COPY; Todos os direitos reservados - Centro Universitário São José - {{ new Date().getFullYear() }}
+            </v-col>
+        </v-footer>
     </div>
 </template>
 

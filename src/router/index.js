@@ -11,11 +11,6 @@ const routes = [
     component: () => import('../views/site/Default.vue')
   },
   {
-    path: '/select',
-    name: 'select',
-    component: () => import('../views/site/Select.vue')
-  },
-  {
     path: '/unisaojose',
     name: 'home',
     component: () => import('../views/site/unisaojose/Home.vue')

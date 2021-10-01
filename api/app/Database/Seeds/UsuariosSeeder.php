@@ -9,54 +9,62 @@ class UsuariosSeeder extends Seeder {
     protected $configs;
 
     public function __construct() {
-        $this->configs = config('CFMConfig');
+        $this->configs = config('WikiConfig');
     }
 
 	public function run() {
-		$userModel = new UsuariosModel();
+		$usuarioModel = new UsuariosModel();
 
 		$db = \CodeIgniter\Database\Config::connect();
 
-		$arrUsers = [];
+		$arrUsuarios = [];
 
-		$arrUsers = [
+		$arrUsuarios = [
 			[
 				'avatar' => '', 
-				'first_name' => 'Administrador', 
-				'last_name' => 'Sistema', 
-				'gender' => 'M', 
+				'nome' => 'Administrador', 
+				'sobrenome' => 'Sistema', 
+				'genero' => 'M', 
 				'email' => 'admin@admin.com.br', 
-				'password' => '12345678',
+				'senha' => '12345678',
+				'id_permissao' => 1, 
 				'id_status' => 1, 
-				'id_user_created' => 1,
-				'created_at' => date('Y-m-d H:i:s'),
-				'updated_at' => date('0000-00-00 00:00:00')
+				'id_usuario_criado' => 1,
+				'id_usuario_atualizado' => 0,
+				'id_usuario_excluido' => 0,
+				'criado_em' => date('Y-m-d H:i:s'),
+				'atualizado_em' => date('0000-00-00 00:00:00'),
+				'excluido_em' => date('0000-00-00 00:00:00')
 			]
 		];
 
-		foreach ($arrUsers as $value) {
+		foreach ($arrUsuarios as $value) {
 			if (is_array($value)) {
-				$users = [
+				$inputs = [
 					'avatar' => $value['avatar'],
-					'first_name' => $value['first_name'],
-					'last_name' => $value['last_name'],
-					'gender' => $value['gender'],
+					'nome' => $value['nome'],
+					'sobrenome' => $value['sobrenome'],
+					'genero' => $value['genero'],
 					'email' => $value['email'],
-					'password' => $value['password'],
+					'senha' => $value['senha'],
+					'id_permissao' => $value['id_permissao'],
 					'id_status' => $value['id_status'],
-					'id_user_created' => $value['id_user_created'],
-					'created_at' => $value['created_at'],
-					'updated_at' => $value['updated_at']
+					'id_usuario_criado' => $value['id_usuario_criado'],
+					'id_usuario_atualizado' => $value['id_usuario_atualizado'],
+					'id_usuario_excluido' => $value['id_usuario_excluido'],
+					'criado_em' => $value['criado_em'],
+					'atualizado_em' => $value['atualizado_em'],
+					'excluido_em' => $value['excluido_em']
 				];
 			}
 
 			$db->disableForeignKeyChecks();
 
-			$userEntity = new UserEntity($users);
+			$usuarioEntity = new UsuariosEntity($inputs);
 
-			$userModel->withRole('Administrador');
+			$usuarioModel->withRole('Administrador');
 
-			$userModel->save($userEntity);
+			$usuarioModel->save($usuarioEntity);
 			
 			$db->enableForeignKeyChecks();
 		}

@@ -7,14 +7,13 @@ $routes->group("api/v1", function ($routes) {
     $routes->post("login", "Login::auth");
     $routes->post("logout", "Login::noAuth");
 
-    $routes->resource('users'); //POST / GET / PUT / PATCH / DELETE
+    $routes->resource('usuarios'); //POST / GET / PUT / PATCH / DELETE
 
     $routes->resource('courses'); //POST / GET / PUT / PATCH / DELETE
 
     $routes->resource('coursesmodules'); //POST / GET / PUT / PATCH / DELETE
 
-    $routes->resource('students'); //POST / GET / PUT / PATCH / DELETE
-    $routes->get("student/course/(:num)/module/(:num)", "Students::showStudentsCourse/$1/$2");
+    $routes->resource('unidades', ['namespace' => 'App\Controllers\Unidades']); //POST / GET / PUT / PATCH / DELETE
     
     $routes->post("user/register", "Users::createUser");
     $routes->get("user/details", "Users::getUserDetail");
