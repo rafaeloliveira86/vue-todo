@@ -72,7 +72,7 @@
     </v-main>
 
     <v-footer app>
-        &COPY; Todos os direitos reservados - Centro Universitário São José 2021
+        &COPY; Todos os direitos reservados - Centro Universitário São José - {{ new Date().getFullYear() }}
     </v-footer>
   </v-app>
 </template>

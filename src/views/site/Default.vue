@@ -26,13 +26,13 @@
                             <v-row>
                                 <div class="grid grid-body">
                                     <div class="grid-col">
-                                        <v-img :src="require('../../assets/image/image_help.png')" contain width="500" />
+                                        <v-img :src="require('../../assets/image/image_help.png')" contain width="400" />
                                     </div>
                                     <div class="grid-col">
                                         <p>
                                             Documentação Colaborativa dos sistemas institucionais UniSãoJosé, Colégio Realengo, Colégio Aplicação Taquara e Colégio Aplicação Vila Militar.<br><br>
-                                            Compartilhamos conhecimento!<br><br>
-                                            Estamos iniciando esta Wiki, você colaborador pode expandí-la.
+                                            <strong>Compartilhamos conhecimento!</strong><br><br>
+                                            Estamos iniciando esta Wiki de ajuda e você colaborador pode expandí-la.
                                         </p>
                                     </div>
                                 </div>
@@ -52,6 +52,11 @@
                 </v-container>
             </div>
         </div>
+        <v-footer dark tile elevation="24">
+            <v-col class="text-center" cols="12">
+                &COPY; Todos os direitos reservados - Centro Universitário São José - {{ new Date().getFullYear() }}
+            </v-col>
+        </v-footer>
     </div>
 </template>
 
@@ -114,7 +119,7 @@
         padding: 50px 0;
     }
 
-    .grid-row, .grid-col {
+    .grid-row {
         margin: 0;
         padding: 0;
     }
@@ -126,15 +131,15 @@
         background-image: linear-gradient(to right, #18335d, #2d4775, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df, #71b3ec, #62bbed, #57c2eb, #51c9e7, #53cfe1);
     }
 
-    .grid-row:first-child h4 {
-        margin: 150px 0;
+    .grid-row h4 {
+        margin: 100px 12px 70px 12px;
         font-size: 50px;
         font-weight: 900;
         color: #ffffff;
         padding: 0;
     }
 
-    .grid-row:first-child .image {
+    .grid-row .image {
         position: absolute;
         top: 0;
         right: 0;
@@ -150,6 +155,11 @@
         -moz-box-shadow: 0 0 0.3em #595959;
         -webkit-box-shadow: 0 0 0.3em #595959;
         background: transparent;
+    }
+
+    .grid-col {
+        margin: 0;
+        padding: 50px 12px;
     }
 
     .grid-col:first-child {
@@ -233,7 +243,7 @@
         height: 100%;
         text-align: center;
         color: #ffffff;
-        padding: 20px 0;
+        padding: 25px 0;
         border-top: 1px solid #ffffff;
         /*background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df);*/
         background: #415c8e;
@@ -244,6 +254,10 @@
     }
 
     @media only screen and (max-width: 992px) {
+        /* .grid-content {
+            flex-direction: row;
+        } */
+
         .grid-body {
             flex-direction: column;
         }
@@ -252,9 +266,24 @@
             margin-bottom: 30px;
         }
 
+        .grid-col:first-child {
+            display: none;
+        }
+
+        .grid-col:last-child {
+            padding: 50px 12px;
+        }
+
+        .grid-input {
+            left: calc((100% - 250px) / 2); /* 250px = largura do select */
+        }
+
+        .select {
+            width: 250px;
+        }
+
         .footer-item {
-            height: 100%;
-            padding: 15px 0;
+            padding: 25px 0;
         }
 
         .footer-item span {
