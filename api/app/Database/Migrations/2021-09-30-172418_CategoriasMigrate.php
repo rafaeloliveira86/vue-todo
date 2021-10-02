@@ -20,13 +20,6 @@ class CategoriasMigrate extends Migration {
 				'constraint' => '150',
 				'null' => true
 			],
-			'id_unidade' => [
-				'type' => 'INT',
-				'constraint' => 11,
-				'unsigned' => true,
-				'null' => false,
-				'default' => 0
-			],
 			'id_status' => [
 				'type' => 'INT',
 				'constraint' => 11,
@@ -73,14 +66,13 @@ class CategoriasMigrate extends Migration {
 		]);
 
 		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('id_unidade', 'unidades', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->addForeignKey('id_status', 'status', 'id', 'CASCADE', 'NO_ACTION');
-		$this->forge->createTable('categorias');
+		$this->forge->addForeignKey('id_status', 'tbl_status', 'id', 'CASCADE', 'NO_ACTION');
+		$this->forge->createTable('tbl_categorias');
 
 		$this->db->enableForeignKeyChecks();
 	}
 
 	public function down() {
-		$this->forge->dropTable('categorias');
+		$this->forge->dropTable('tbl_categorias');
 	}
 }

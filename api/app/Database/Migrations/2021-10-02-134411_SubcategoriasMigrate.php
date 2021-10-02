@@ -3,11 +3,11 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class UsuariosMigrate extends Migration {
+class SubcategoriasMigrate extends Migration {
     public function up() {
         $this->db->disableForeignKeyChecks();
-
-        $this->forge->addField([
+		
+		$this->forge->addField([
 			'id' => [
 				'type' => 'INT',
 				'constraint' => 11,
@@ -15,45 +15,26 @@ class UsuariosMigrate extends Migration {
 				'auto_increment' => true,
 				'null' => false
 			],
-            'avatar' => [
+			'subcategoria' => [
 				'type' => 'VARCHAR',
 				'constraint' => '150',
 				'null' => true
 			],
-            'nome' => [
-				'type' => 'VARCHAR',
-				'constraint' => '150',
-				'null' => true
-			],
-			'sobrenome' => [
-				'type' => 'VARCHAR',
-				'constraint' => '150',
-				'null' => true
-			],
-            'genero' => [
-				'type' => 'CHAR',
-				'constraint' => '1',
-				'null' => true
-			],
-            'email' => [
-				'type' => 'VARCHAR',
-				'constraint' => '150',
-				'unique' => true,
-				'null' => true
-			],
-			'senha' => [
-				'type' => 'VARCHAR',
-				'constraint' => '150',
-				'null' => true
-			],
-            'id_permissao' => [
+			'id_unidade' => [
 				'type' => 'INT',
 				'constraint' => 11,
 				'unsigned' => true,
 				'null' => false,
 				'default' => 0
 			],
-            'id_status' => [
+            'id_categoria' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => true,
+				'null' => false,
+				'default' => 0
+			],
+			'id_status' => [
 				'type' => 'INT',
 				'constraint' => 11,
 				'unsigned' => true,
@@ -63,18 +44,21 @@ class UsuariosMigrate extends Migration {
 			'id_usuario_criado' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => false,
 				'null' => false,
 				'default' => 0
 			],
 			'id_usuario_atualizado' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => false,
 				'null' => false,
 				'default' => 0
 			],
 			'id_usuario_excluido' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => false,
 				'null' => false,
 				'default' => 0
 			],
@@ -96,14 +80,15 @@ class UsuariosMigrate extends Migration {
 		]);
 
 		$this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_permissao', 'tbl_permissoes', 'id', 'CASCADE', 'NO_ACTION');
-        $this->forge->addForeignKey('id_status', 'tbl_status', 'id', 'CASCADE', 'NO_ACTION');
-		$this->forge->createTable('tbl_usuarios');
+		$this->forge->addForeignKey('id_unidade', 'tbl_unidades', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_categoria', 'tbl_unidades', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('id_status', 'tbl_status', 'id', 'CASCADE', 'NO_ACTION');
+		$this->forge->createTable('tbl_subcategorias');
 
-        $this->db->enableForeignKeyChecks();
+		$this->db->enableForeignKeyChecks();
     }
 
     public function down() {
-        $this->forge->dropTable('tbl_usuarios');
+        $this->forge->dropTable('tbl_subcategorias');
     }
 }

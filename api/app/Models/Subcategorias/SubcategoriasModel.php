@@ -1,11 +1,11 @@
 <?php
-namespace App\Models\Unidades;
+namespace App\Models\Subcategorias;
 
 use CodeIgniter\Model;
 
-class UnidadesModel extends Model {
+class SubcategoriasModel extends Model {
     protected $DBGroup              = 'default';
-    protected $table                = 'tbl_unidades';
+    protected $table                = 'tbl_subcategorias';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -14,9 +14,9 @@ class UnidadesModel extends Model {
     protected $protectFields        = true;
     protected $allowedFields        = [
         'id',
-		'unidade',
-        'imagem',
-        'url',
+        'subcategoria',
+        'id_unidade',
+        'id_categoria',
 		'id_status',
 		'id_usuario_criado',
 		'id_usuario_atualizado',

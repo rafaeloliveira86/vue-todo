@@ -73,13 +73,13 @@ class UnidadesMigrate extends Migration {
 		]);
 
 		$this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id_status', 'status', 'id', 'CASCADE', 'NO_ACTION');
-		$this->forge->createTable('unidades');
+        $this->forge->addForeignKey('id_status', 'tbl_status', 'id', 'CASCADE', 'NO_ACTION');
+		$this->forge->createTable('tbl_unidades');
 
         $this->db->enableForeignKeyChecks();
     }
 
     public function down() {
-        $this->forge->dropTable('unidades');
+        $this->forge->dropTable('tbl_unidades');
     }
 }

@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 
 class LoginModel extends Model {
     protected $DBGroup = 'default';
-    protected $table = 'users';
+    protected $table = 'tbl_usuarios';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $insertID = 0;    

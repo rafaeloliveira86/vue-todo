@@ -2,10 +2,11 @@
 namespace App\Models\Categorias;
 
 use CodeIgniter\Model;
+use Exception;
 
 class CategoriasModel extends Model {
 	protected $DBGroup              = 'default';
-	protected $table                = 'categorias';
+	protected $table                = 'tbl_categorias';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
@@ -48,4 +49,20 @@ class CategoriasModel extends Model {
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function listarCategoriasPorUnidadeID($id_unidade) {
+        try {
+            $this->select('c.*');
+			$this->from('tbl_categorias AS c');
+            $this->join('tbl_categorias_unidades AS cu', 'cu.id_categoria = c.id');
+			$this->join('tbl_unidades AS u', 'cu.id_unidade = u.id');
+            $this->where('u.id', $id_unidade);
+			$this->where('c.id_status', 1);
+			$this->groupBy('c.categoria');
+			$this->orderBy('c.id', 'ASC');
+            return $this->asObject()->findAll();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

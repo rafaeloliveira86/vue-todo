@@ -71,9 +71,7 @@
         </div>
         <v-footer dark tile elevation="24">
             <v-col class="text-center" cols="12">
-                &COPY; Todos os direitos reservados - Centro Universitário São José - {{ new Date().getFullYear() }}
-                <br>
-                Departamento de Tecnologia da Informação
+                &COPY; Todos os direitos reservados - Departamento de Tecnologia da Informação - {{ new Date().getFullYear() }}
             </v-col>
         </v-footer>
     </div>
@@ -81,7 +79,9 @@
 
 <script>
     import axios from 'axios';
-    const url = 'http://localhost/api/v1/unidades';
+
+    const base_url = 'http://localhost:8080';
+    const base_url_api = 'http://localhost/api/v1';
 
     export default ({
         name: "Default",
@@ -91,24 +91,23 @@
             wikiLinks: [
                 {
                     text: 'Página Inicial',
-                    href: 'http://localhost:8080/unisaojose',
+                    href: base_url + '/unisaojose',
                 }
             ]
         }),
         beforeDestroy () {
-            clearInterval(this.interval)
+            clearInterval(this.interval);
         },
         created() {
-            this.getUnidades();
+            this.listarUnidades();
         },
         mounted() {
             document.querySelector('.loader').style.display = 'none';
         },
         methods: {
-            async getUnidades () {
-                await axios.get(url)
+            async listarUnidades () {
+                await axios.get(base_url_api + '/unidades')
                 .then(res => {
-                    console.log([...res.data.data]);
                     this.arrayUnidades = [...res.data.data];
                 })
                 .catch(err => {
@@ -116,11 +115,28 @@
                 })
             },
             selecionarUnidades() {
-                console.log(this.unidade);
+                document.querySelector('.loader').style.display = 'block';
+
                 switch (this.unidade) {
                     case '1':
-                        document.querySelector('.loader').style.display = 'block';
-                        this.carregar('http://localhost:8080/unisaojose');
+                        console.log('UniSãoJosé');                        
+                        localStorage.setItem("unidade", btoa(this.unidade)); //btoa (Base 64 encode) - atob (Base 64 decode)
+                        this.carregar(base_url + '/unisaojose');
+                        break;
+                    case '2':
+                        console.log('Colégio Realengo');
+                        localStorage.setItem("unidade", btoa(this.unidade)); //btoa (Base 64 encode) - atob (Base 64 decode)
+                        this.carregar(base_url + '/colegiorealengo');
+                        break;
+                    case '3':
+                        console.log('Colégio Aplicação Taquara');
+                        localStorage.setItem("unidade", btoa(this.unidade)); //btoa (Base 64 encode) - atob (Base 64 decode)
+                        //this.carregar(base_url + '/colegioaplicacaotaquara');
+                        break;
+                    case '4':
+                        console.log('Colégio Aplicação Vila Militar');
+                        localStorage.setItem("unidade", btoa(this.unidade)); //btoa (Base 64 encode) - atob (Base 64 decode)
+                        //this.carregar(base_url + '/colegioaplicacaovilamilitar');
                         break;
                 }
             },

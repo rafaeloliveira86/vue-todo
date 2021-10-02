@@ -1,30 +1,30 @@
 <?php
-namespace App\Controllers\Unidades;
+namespace App\Controllers\Subcategorias;
 
 use App\Controllers\BaseController;
 use App\Libraries\JWT\ValidateJWT;
+use App\Models\Subcategorias\SubcategoriasModel;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\Unidades\UnidadesModel;
 use Exception;
 
-class Unidades extends BaseController {
+class Subcategorias extends BaseController {
     use ResponseTrait;
 
     public function index() {
-        $this->response->setHeader('Access-Control-Allow-Origin', '*')
+		$this->response->setHeader('Access-Control-Allow-Origin', '*')
                        ->setHeader('Access-Control-Allow-Headers', '*')
                        ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
                        ->setStatusCode(200);
         $this->response->setContentType('application/json');
 
-        try {
+		try {
             //$jwt = new ValidateJWT();
-            $unidadeModel = new UnidadesModel();
+            $subcategoriaModel = new SubcategoriasModel();
 
-            $objUnidade = $unidadeModel->where('id_status <>', 3)->asObject()->findAll();
-            //return json_encode($objUnidade);die;
+            $objSubcategoria = $subcategoriaModel->where('id_status <>', 3)->asObject()->findAll();
+            //return json_encode($objSubcategoria);die;
 
-            if (!$objUnidade) {
+            if (!$objSubcategoria) {
                 return $this->fail('Nenhum usuário encontrado.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
@@ -33,8 +33,8 @@ class Unidades extends BaseController {
                     $response = [
                         'status' => 200,
                         'error' => FALSE,
-                        'messages' => 'Listagem de Unidades.',
-                        'data' => $objUnidade
+                        'messages' => 'Listagem de Categorias.',
+                        'data' => $objSubcategoria
                     ];
 
                     return $this->respond($response);
@@ -42,8 +42,8 @@ class Unidades extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Listagem de Unidades.',
-                    'data' => $objUnidade
+                    'messages' => 'Listagem de Categorias.',
+                    'data' => $objSubcategoria
                 ];
 
                 return $this->respond($response);
@@ -57,5 +57,5 @@ class Unidades extends BaseController {
 
             return $this->respond($response);
         }
-    }
+	}
 }

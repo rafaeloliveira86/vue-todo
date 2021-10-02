@@ -7,7 +7,7 @@ use Exception;
 
 class UsuariosModel extends Model {
     protected $DBGroup = 'default';
-    protected $table = 'usuarios';
+    protected $table = 'tbl_usuarios';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $insertID = 0;    

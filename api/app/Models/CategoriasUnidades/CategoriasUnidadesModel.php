@@ -1,11 +1,11 @@
 <?php
-namespace App\Models\Unidades;
+namespace App\Models\CategoriasUnidades;
 
 use CodeIgniter\Model;
 
-class UnidadesModel extends Model {
+class CategoriasUnidadesModel extends Model {
     protected $DBGroup              = 'default';
-    protected $table                = 'tbl_unidades';
+    protected $table                = 'tbl_categorias_unidades';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -14,24 +14,18 @@ class UnidadesModel extends Model {
     protected $protectFields        = true;
     protected $allowedFields        = [
         'id',
-		'unidade',
-        'imagem',
-        'url',
-		'id_status',
-		'id_usuario_criado',
-		'id_usuario_atualizado',
-		'id_usuario_excluido',
-		'criado_em',
-		'atualizado_em',
-		'excluido_em'
+        'id_categoria',
+        'id_unidade',
+        'id_usuario_criado',
+        'criado_em'
     ];
 
     // Dates
     protected $useTimestamps        = true;
     protected $dateFormat           = 'datetime';
     protected $createdField         = 'criado_em';
-    protected $updatedField         = 'atualizado_em';
-    protected $deletedField         = 'excluido_em';
+    protected $updatedField         = '';
+    protected $deletedField         = '';
 
     // Validation
     protected $validationRules      = [];

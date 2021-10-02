@@ -10,16 +10,33 @@ const routes = [
     name: 'Página Inicial',
     component: () => import('../views/site/Default.vue')
   },
+  //UniSãoJosé (Site)
   {
     path: '/unisaojose',
     name: 'home',
-    component: () => import('../views/site/unisaojose/Home.vue')
+    component: () => import('../views/site/unisaojose/Home.vue'),
+    children: [
+      {
+        path: '/unisaojose/sobre',
+        name: 'sobre',
+        component: () => import('../views/site/unisaojose/Sobre.vue')
+      },
+    ]
   },
+  //Colégio Realengo (Site)
   {
-    path: '/unisaojose/sobre',
-    name: 'sobre',
-    component: () => import('../views/site/unisaojose/Sobre.vue')
+    path: '/colegiorealengo',
+    name: 'home',
+    component: () => import('../views/site/colegiorealengo/Home.vue'),
+    children: [
+      {
+        path: '/colegiorealengo/sobre',
+        name: 'sobre',
+        component: () => import('../views/site/colegiorealengo/Sobre.vue')
+      },
+    ]
   },
+  //Dashboard (Admin)
   {
     path: '/dashboard',
     name: 'Dashboard',

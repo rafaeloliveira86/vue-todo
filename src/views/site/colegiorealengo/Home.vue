@@ -1,15 +1,15 @@
 <template>
     <div class="wiki-body">
         <!-- Navbar -->
-        <v-app-bar color="indigo darken-3" dark height="65">
-            <template v-slot:img="{ props }">
+        <v-app-bar color="red darken-4" dark height="65">
+            <!-- <template v-slot:img="{ props }">
                 <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(28,108,199,.8)"></v-img>
-            </template>
+            </template> -->
             <v-container>
                 <v-row no-gutters>
                     <v-col cols="12" md="8" offset-md="2">
                         <a v-for="(link, i) in wikiLinks" :key="i" :href="link.href">
-                            <v-img :src="require('../../../assets/image/logo_usj_white.png')" contain position="left" height="45" />
+                            <v-img :src="require('../../../assets/image/logo_cr_white.png')" contain position="left" height="45" />
                         </a>
                         <!-- <v-spacer></v-spacer>
                         <v-btn icon>
@@ -40,7 +40,7 @@
                 <section class="grid grid-content">
                     <div class="grid-item">
                         <h3 class="underline mb-5">
-                            <v-icon left size="30" color="#0D47A1">mdi-view-quilt</v-icon>Categorias
+                            <v-icon left size="30" color="#b20000">mdi-view-quilt</v-icon>Categorias
                         </h3>
                         <div class="wiki-grid">
                             <div class="wiki-col" v-for="item, index in arrayCategorias" v-bind:key="index">
@@ -48,7 +48,7 @@
                                     <template v-slot:default="{ hover }">
                                         <router-link :to="{ name: 'home' }" class="text-decoration-none">
                                             <v-card :elevation="hover ? 24 : 6" class="mx-auto pa-5" tile>
-                                                <v-icon left size="30" color="#0D47A1">mdi-view-quilt</v-icon> {{ item.categoria }}
+                                                <v-icon left size="30" color="#b20000">mdi-view-quilt</v-icon> {{ item.categoria }}
                                             </v-card>
                                         </router-link>
                                     </template>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="grid-item">
                         <h3 class="underline mb-5">
-                            <v-icon left size="30" color="#0D47A1">mdi-cursor-default-click</v-icon>Artigos mais acessados
+                            <v-icon left size="30" color="#b20000">mdi-cursor-default-click</v-icon>Artigos mais acessados
                         </h3>
                         <div class="wiki-grid">
                             <div class="wiki-sidebar">
@@ -86,7 +86,7 @@
                                 <footer class="footer footer-content">
                                     <div class="footer-item">
                                         <a v-for="(link, i) in wikiLinks" :key="i" :href="link.href">
-                                            <v-img :src="require('../../../assets/image/logo_usj_blue.png')" contain position="left" height="45" />
+                                            <v-img :src="require('../../../assets/image/logo_cr_red.png')" contain position="left" height="45" />
                                         </a>
                                     </div>
                                     <div class="footer-item">
@@ -101,7 +101,7 @@
         </v-container>
         <v-footer dark tile elevation="24">
             <v-col class="text-center" cols="12">
-                &COPY; Todos os direitos reservados - Centro Universitário São José - {{ new Date().getFullYear() }}
+                &COPY; Todos os direitos reservados - Colégio Realengo - {{ new Date().getFullYear() }}
             </v-col>
         </v-footer>
     </div>
@@ -121,7 +121,7 @@
             wikiLinks: [
                 {
                     text: 'Página Inicial',
-                    href: base_url + '/unisaojose',
+                    href: base_url + '/colegiorealengo',
                 }
             ],
             arraySubcategorias: [
@@ -266,7 +266,8 @@
         width: 100%;
         height: 100%;
         padding: 15px;
-        background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df);
+        /* background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df); */
+        background-image: linear-gradient(to right, #b20000, #b31814, #b42724, #b33331, #b23e3e);
     }
 
     .wiki-grid .wiki-sidebar a {
@@ -283,7 +284,7 @@
 
     .underline {
         margin: 0 0 15px 0;
-        border-bottom: 1px solid #6a89c3;
+        border-bottom: 1px solid #b20000;
         padding-bottom: 15px;
         position: relative;
     }
@@ -293,7 +294,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background-color: #6a89c3;
+        background-color: #b20000;
         width: 25%;
         height: 2px;
     }

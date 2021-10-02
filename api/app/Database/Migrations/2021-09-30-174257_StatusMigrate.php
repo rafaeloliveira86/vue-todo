@@ -70,10 +70,10 @@ class StatusMigrate extends Migration {
 		]);
 
 		$this->forge->addKey('id', true);
-		$this->forge->createTable('status');
+		$this->forge->createTable('tbl_status');
 	}
 
 	public function down() {
-		$this->forge->dropTable('status');
+		$this->forge->dropTable('tbl_status');
 	}
 }
