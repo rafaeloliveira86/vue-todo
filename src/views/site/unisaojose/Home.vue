@@ -314,7 +314,11 @@
 
     .footer-item span {
         font-size: 15px;
-        color: #afafaf;
+        color: #595959;
+    }
+
+    .v-footer {
+        font-size: 15px;
     }
 
     @media only screen and (max-width: 992px) {
@@ -342,6 +346,14 @@
             padding: 0;
             margin: 10px 0;
             text-align: center;
+        }
+
+        .footer-item span {
+            font-size: 13px;
+        }
+
+        .v-footer {
+            font-size: 13px;
         }
     }
 </style>

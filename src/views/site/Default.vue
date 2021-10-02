@@ -9,25 +9,32 @@
                         </v-col>
                     </v-row>
                 </v-container>
-                <v-img :src="require('../../assets/image/image_callcenter.png')" class="image" />
+                <v-img :src="require('../../assets/image/image_callcenter.png')" contain position="right" class="image" />
             </div>
             <div class="grid-row">
                 <div class="grid-input">
                     <v-select
-                        :items="unidades"
-                        v-model="redirecionar"
-                        label="Selecione a Unidade"
+                        :items="arrayUnidades"
+                        v-model="unidade"
+                        label="Selecionar Unidade"
                         item-text="unidade"
                         item-value="id"
+                        prepend-inner-icon="mdi-chevron-right"
                         @change="selecionarUnidades()"
                         solo
+                        dark
                         height="55"
                         class="select">
                     </v-select>
-                    <!-- <select class="select">
-                        <option value="" selected>Selecione a Unidade</option>
-                        <option v-for="item in unidades" :key="item" :value="item.id">{{ item.unidade }}</option>
-                    </select> -->
+
+                    <!-- Loading -->
+                    <div class="text-center loader">
+                        <v-progress-circular
+                            :size="50"
+                            color="primary"
+                            indeterminate>
+                        </v-progress-circular>
+                    </div>
                 </div>
                 <!-- Footer -->
                 <v-container fluid>
@@ -51,7 +58,7 @@
                         <v-col cols="12">
                             <v-row>
                                 <footer class="footer footer-content">
-                                    <div class="footer-item" v-for="item, index in unidades" v-bind:key="index">
+                                    <div class="footer-item" v-for="item, index in arrayUnidades" v-bind:key="index">
                                         <div align="center"><v-img :src="require(`../../assets/image/${item.imagem}`)" width="40" /></div>
                                         <a :href="item.url" target="_blank">{{ item.unidade }}</a>
                                     </div>
@@ -65,20 +72,22 @@
         <v-footer dark tile elevation="24">
             <v-col class="text-center" cols="12">
                 &COPY; Todos os direitos reservados - Centro Universitário São José - {{ new Date().getFullYear() }}
+                <br>
+                Departamento de Tecnologia da Informação
             </v-col>
         </v-footer>
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
-    const url = 'http://localhost/api/v1/unidades'
+    import axios from 'axios';
+    const url = 'http://localhost/api/v1/unidades';
 
     export default ({
         name: "Default",
         data: () => ({
-            unidades: [],
-            redirecionar: null,
+            arrayUnidades: [],
+            unidade: null,
             wikiLinks: [
                 {
                     text: 'Página Inicial',
@@ -86,29 +95,40 @@
                 }
             ]
         }),
+        beforeDestroy () {
+            clearInterval(this.interval)
+        },
+        created() {
+            this.getUnidades();
+        },
+        mounted() {
+            document.querySelector('.loader').style.display = 'none';
+        },
         methods: {
             async getUnidades () {
                 await axios.get(url)
                 .then(res => {
-                    console.log([...res.data.data])
-                    this.unidades = [...res.data.data]
+                    console.log([...res.data.data]);
+                    this.arrayUnidades = [...res.data.data];
                 })
                 .catch(err => {
-                    console.log(err)
-                    // M.toast({html: 'Houve um erro ao buscar contas.', classes: 'rounded red darken-1', outDuration: 1000})
+                    console.log(err);
                 })
             },
             selecionarUnidades() {
-                console.log(this.redirecionar);
-                switch (this.redirecionar) {
+                console.log(this.unidade);
+                switch (this.unidade) {
                     case '1':
-                        window.location.href = 'http://localhost:8080/unisaojose';
+                        document.querySelector('.loader').style.display = 'block';
+                        this.carregar('http://localhost:8080/unisaojose');
                         break;
                 }
+            },
+            carregar(url) {
+                setInterval(() => {
+                    window.location.href = url;
+                }, 1000)
             }
-        },
-        created () {
-            this.getUnidades()
         }
     })
 </script>
@@ -122,8 +142,12 @@
         min-height: 100%;
         margin: 0;
         padding: 0;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Roboto', sans-serif !important;
         background: #f0f2f5 !important;
+    }
+
+    .v-progress-circular {
+        margin: 1rem;
     }
 
     /* Grid */
@@ -169,6 +193,7 @@
         position: absolute;
         top: 0;
         right: 0;
+        width: auto;
         height: 100%;
         opacity: 0.8;
     }
@@ -270,7 +295,6 @@
         text-align: center;
         color: #ffffff;
         padding: 25px 0;
-        border-top: 1px solid #ffffff;
         /*background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df);*/
         background: #415c8e;
     }
@@ -285,10 +309,18 @@
         color: #e1e1e1;
     }
 
+    .v-footer {
+        font-size: 15px;
+    }
+
     @media only screen and (max-width: 992px) {
         /* .grid-content {
             flex-direction: row;
         } */
+
+        .grid-row .image {
+            opacity: unset;
+        }
 
         .grid-body {
             flex-direction: column;
@@ -303,7 +335,7 @@
         }
 
         .grid-col:last-child {
-            padding: 50px 12px;
+            padding: 75px 12px 50px 12px;
         }
 
         .grid-input {
@@ -319,6 +351,10 @@
         }
 
         .footer-item a {
+            font-size: 13px;
+        }
+
+        .v-footer {
             font-size: 13px;
         }
     }
