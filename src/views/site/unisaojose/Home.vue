@@ -40,14 +40,14 @@
                 <section class="grid grid-content">
                     <div class="grid-item">
                         <h3 class="underline mb-5">
-                            <v-icon left size="30" color="#0D47A1">mdi-view-quilt</v-icon>Categorias
+                            Categorias
                         </h3>
                         <div class="wiki-grid">
                             <div class="wiki-col" v-for="item, index in arrayCategorias" v-bind:key="index">
                                 <v-hover>
                                     <template v-slot:default="{ hover }">
                                         <router-link :to="{ name: 'home' }" class="text-decoration-none">
-                                            <v-card :elevation="hover ? 24 : 6" class="mx-auto pa-5" tile>
+                                            <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile>
                                                 <v-icon left size="30" color="#0D47A1">mdi-view-quilt</v-icon> {{ item.categoria }}
                                             </v-card>
                                         </router-link>
@@ -58,10 +58,10 @@
                     </div>
                     <div class="grid-item">
                         <h3 class="underline mb-5">
-                            <v-icon left size="30" color="#0D47A1">mdi-cursor-default-click</v-icon>Artigos mais acessados
+                            Artigos mais acessados
                         </h3>
                         <div class="wiki-grid">
-                            <div class="wiki-sidebar">
+                            <!-- <div class="wiki-sidebar">
                                 <v-card v-for="item, index in arraySubcategorias" v-bind:key="index" tile style="margin-bottom: 1px;">
                                     <v-list-item>
                                         <v-list-item-content>
@@ -69,6 +69,11 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-card>
+                            </div> -->
+                            <div class="wiki-sidebar">
+                                <div class="wiki-sidebar-card" v-for="item, index in arraySubcategorias" v-bind:key="index" tile>
+                                    <a :href="item.link">{{ item.name }}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -265,25 +270,36 @@
     .wiki-grid .wiki-sidebar {
         width: 100%;
         height: 100%;
-        padding: 15px;
-        background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df);
+        box-shadow: 0 0 0.3em #aaaaaa;
+        -moz-box-shadow: 0 0 0.3em #aaaaaa;
+        -webkit-box-shadow: 0 0 0.3em #aaaaaa;
+        background: #f0f2f5;
+    }
+
+    .wiki-grid .wiki-sidebar .wiki-sidebar-card {
+        padding: 10px;
+        border-left: 4px solid #415c8e;
+        margin-bottom: 1px;
+        line-height: 17px;
+        /* background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df); */
+        background: #ffffff; 
     }
 
     .wiki-grid .wiki-sidebar a {
-        font-size: 14px;
+        font-size: 13px;
         text-decoration: none;
-        color: #595959;
+        color: #333333;
     }
 
     .wiki-grid .wiki-sidebar a:hover {
-        color: #909090;
+        color: #999999;
     }
 
     /* Underline */
 
     .underline {
         margin: 0 0 15px 0;
-        border-bottom: 1px solid #6a89c3;
+        border-bottom: 1px solid #415c8e;
         padding-bottom: 15px;
         position: relative;
     }
@@ -293,9 +309,9 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background-color: #6a89c3;
+        background-color: #415c8e;
         width: 25%;
-        height: 2px;
+        height: 3px;
     }
 
     .underline-white {
@@ -312,7 +328,7 @@
         left: 0;
         background-color: #ffffff;
         width: 25%;
-        height: 2px;
+        height: 3px;
     }
 
 
