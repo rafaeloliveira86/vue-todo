@@ -11,10 +11,9 @@ const routes = [
     component: () => import('../views/site/Default.vue')
   },
   //UniSãoJosé (Site)
-  {
-    path: '/unisaojose',
+  { path: '/unisaojose',
     name: 'home',
-    component: () => import('../views/site/unisaojose/Home.vue'),
+    component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/unisaojose/sobre',
@@ -27,7 +26,7 @@ const routes = [
   {
     path: '/colegiorealengo',
     name: 'home',
-    component: () => import('../views/site/colegiorealengo/Home.vue'),
+    component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/colegiorealengo/sobre',
