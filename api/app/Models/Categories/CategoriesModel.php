@@ -51,7 +51,10 @@ class CategoriesModel extends Model {
 
 	public function getCategorieByUnitID($id_unidade) {
         try {
-            $this->select('c.*');
+            $this->select('
+				c.*,
+				u.class AS unit_class
+			');
 			$this->from('tbl_categories AS c');
             $this->join('tbl_categories_units AS cu', 'cu.id_categorie = c.id');
 			$this->join('tbl_units AS u', 'cu.id_unit = u.id');

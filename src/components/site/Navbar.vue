@@ -59,5 +59,7 @@
 </script>
 
 <style>
-
+    .v-app-bar {
+        z-index: 1;
+    }
 </style>

@@ -35,6 +35,32 @@ const routes = [
       },
     ]
   },
+  //Colégio Aplicação Taquara (Site)
+  {
+    path: '/colegioaplicacaotaquara',
+    name: 'home',
+    component: () => import('../views/site/Home.vue'),
+    children: [
+      {
+        path: '/colegioaplicacaotaquara/sobre',
+        name: 'sobre',
+        component: () => import('../views/site/colegioaplicacaotaquara/Sobre.vue')
+      },
+    ]
+  },
+  //Colégio Aplicação Vila Militar (Site)
+  {
+    path: '/colegioaplicacaovilamilitar',
+    name: 'home',
+    component: () => import('../views/site/Home.vue'),
+    children: [
+      {
+        path: '/colegioaplicacaovilamilitar/sobre',
+        name: 'sobre',
+        component: () => import('../views/site/colegioaplicacaovilamilitar/Sobre.vue')
+      },
+    ]
+  },
   //Dashboard (Admin)
   {
     path: '/dashboard',

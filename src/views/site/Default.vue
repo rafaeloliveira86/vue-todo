@@ -131,12 +131,12 @@
                     case '3':
                         console.log('Colégio Aplicação Taquara');
                         localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
-                        //this.carregar(base_url + '/colegioaplicacaotaquara');
+                        this.carregar(base_url + '/colegioaplicacaotaquara');
                         break;
                     case '4':
                         console.log('Colégio Aplicação Vila Militar');
                         localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
-                        //this.carregar(base_url + '/colegioaplicacaovilamilitar');
+                        this.carregar(base_url + '/colegioaplicacaovilamilitar');
                         break;
                 }
             },

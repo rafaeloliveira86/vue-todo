@@ -2,12 +2,12 @@
     <div>
         <h3 class="underline mb-5">Categorias</h3>
         <div class="wiki-cat">
-            <div class="wiki-cat-col" v-for="item, index in arrayCategories" v-bind:key="index">
+            <div class="wiki-cat-col" v-for="(item, index) in arrayCategories" :key="index">
                 <v-hover>
                     <template v-slot:default="{ hover }">
                         <router-link :to="{ name: 'home' }" class="text-decoration-none">
                             <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile>
-                                <v-icon left size="30" color="#0D47A1">mdi-view-quilt</v-icon> {{ item.categorie_name }}
+                                <v-icon left size="30" :color="item.unit_class">mdi-view-quilt</v-icon> {{ item.categorie_name }}
                             </v-card>
                         </router-link>
                     </template>
