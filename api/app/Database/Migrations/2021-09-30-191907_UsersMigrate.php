@@ -3,9 +3,11 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class StatusMigrate extends Migration {
-	public function up() {
-		$this->forge->addField([
+class UsersMigrate extends Migration {
+    public function up() {
+        $this->db->disableForeignKeyChecks();
+
+        $this->forge->addField([
 			'id' => [
 				'type' => 'INT',
 				'constraint' => 11,
@@ -13,24 +15,48 @@ class StatusMigrate extends Migration {
 				'auto_increment' => true,
 				'null' => false
 			],
-			'status_name' => [
+            'avatar' => [
 				'type' => 'VARCHAR',
 				'constraint' => '150',
 				'null' => true
 			],
-			'class' => [
+            'first_name' => [
 				'type' => 'VARCHAR',
-				'constraint' => '20',
+				'constraint' => '150',
 				'null' => true
 			],
-			'role_scope' => [
+			'last_name' => [
 				'type' => 'VARCHAR',
-				'constraint' => '255',
+				'constraint' => '150',
 				'null' => true
 			],
-			'order' => [
+            'gender' => [
+				'type' => 'CHAR',
+				'constraint' => '1',
+				'null' => true
+			],
+            'email' => [
+				'type' => 'VARCHAR',
+				'constraint' => '150',
+				'unique' => true,
+				'null' => true
+			],
+			'password' => [
+				'type' => 'VARCHAR',
+				'constraint' => '150',
+				'null' => true
+			],
+            'id_role' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => true,
+				'null' => false,
+				'default' => 0
+			],
+            'id_status' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => true,
 				'null' => false,
 				'default' => 0
 			],
@@ -70,10 +96,14 @@ class StatusMigrate extends Migration {
 		]);
 
 		$this->forge->addKey('id', true);
-		$this->forge->createTable('tbl_status');
-	}
+        $this->forge->addForeignKey('id_role', 'tbl_roles', 'id', 'CASCADE', 'NO_ACTION');
+        $this->forge->addForeignKey('id_status', 'tbl_status', 'id', 'CASCADE', 'NO_ACTION');
+		$this->forge->createTable('tbl_users');
 
-	public function down() {
-		$this->forge->dropTable('tbl_status');
-	}
+        $this->db->enableForeignKeyChecks();
+    }
+
+    public function down() {
+        $this->forge->dropTable('tbl_users');
+    }
 }

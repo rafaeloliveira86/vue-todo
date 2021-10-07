@@ -11,24 +11,24 @@ class StatusSeeder extends Seeder {
 		$arrStatus = [];
 
 		$arrStatus = [
-			['status' => 'Ativo', 'classe' => 'green darken-2', 'escopo' => 'role.admin role.ti', 'ordenacao' => 1, 'id_usuario_criado' => 1, 'id_usuario_atualizado' => 0, 'id_usuario_excluido' => 0, 'criado_em' => date('Y-m-d H:i:s'), 'atualizado_em' => date('0000-00-00 00:00:00'), 'excluido_em' => date('0000-00-00 00:00:00')],
-			['status' => 'Inativo', 'classe' => 'amber darken-2', 'escopo' => 'role.admin role.ti', 'ordenacao' => 1, 'id_usuario_criado' => 1, 'id_usuario_atualizado' => 0, 'id_usuario_excluido' => 0, 'criado_em' => date('Y-m-d H:i:s'), 'atualizado_em' => date('0000-00-00 00:00:00'), 'excluido_em' => date('0000-00-00 00:00:00')],
-			['status' => 'Excluído', 'classe' => 'red darken-2', 'escopo' => 'role.admin role.ti', 'ordenacao' => 1, 'id_usuario_criado' => 1, 'id_usuario_atualizado' => 0, 'id_usuario_excluido' => 0, 'criado_em' => date('Y-m-d H:i:s'), 'atualizado_em' => date('0000-00-00 00:00:00'), 'excluido_em' => date('0000-00-00 00:00:00')],
+			['status_name' => 'Ativo', 'class' => 'green darken-2', 'role_scope' => 'role.admin role.ti', 'order' => 1, 'id_user_created' => 1, 'id_user_updated' => 0, 'id_user_deleted' => 0, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('0000-00-00 00:00:00'), 'deleted_at' => date('0000-00-00 00:00:00')],
+			['status_name' => 'Inativo', 'class' => 'amber darken-2', 'role_scope' => 'role.admin role.ti', 'order' => 1, 'id_user_created' => 1, 'id_user_updated' => 0, 'id_user_deleted' => 0, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('0000-00-00 00:00:00'), 'deleted_at' => date('0000-00-00 00:00:00')],
+			['status_name' => 'Excluído', 'class' => 'red darken-2', 'role_scope' => 'role.admin role.ti', 'order' => 1, 'id_user_created' => 1, 'id_user_updated' => 0, 'id_user_deleted' => 0, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('0000-00-00 00:00:00'), 'deleted_at' => date('0000-00-00 00:00:00')],
 		];
 
 		foreach ($arrStatus as $value) {
 			if (is_array($value)) {
 				$inputs = [
-					'status' => $value['status'],
-					'classe' => $value['classe'],
-					'escopo' => $value['escopo'],
-					'ordenacao' => $value['ordenacao'],
-					'id_usuario_criado' => $value['id_usuario_criado'],
-					'id_usuario_atualizado' => $value['id_usuario_atualizado'],
-					'id_usuario_excluido' => $value['id_usuario_excluido'],
-					'criado_em' => $value['criado_em'],
-					'atualizado_em' => $value['atualizado_em'],
-					'excluido_em' => $value['excluido_em']
+					'status_name' => $value['status_name'],
+					'class' => $value['class'],
+					'role_scope' => $value['role_scope'],
+					'order' => $value['order'],
+					'id_user_created' => $value['id_user_created'],
+					'id_user_updated' => $value['id_user_updated'],
+					'id_user_deleted' => $value['id_user_deleted'],
+					'created_at' => $value['created_at'],
+					'updated_at' => $value['updated_at'],
+					'deleted_at' => $value['deleted_at']
 				];
 			}
 

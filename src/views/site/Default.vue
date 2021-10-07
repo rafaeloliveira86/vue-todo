@@ -14,10 +14,10 @@
             <div class="grid-row">
                 <div class="grid-input">
                     <v-select
-                        :items="arrayUnidades"
-                        v-model="unidade"
+                        :items="arrayUnits"
+                        v-model="unit"
                         label="Selecionar Unidade"
-                        item-text="unidade"
+                        item-text="unit_name"
                         item-value="id"
                         prepend-inner-icon="mdi-chevron-right"
                         @change="selecionarUnidades()"
@@ -58,9 +58,9 @@
                         <v-col cols="12">
                             <v-row>
                                 <footer class="footer footer-content">
-                                    <div class="footer-item" v-for="item, index in arrayUnidades" v-bind:key="index">
-                                        <div align="center"><v-img :src="require(`../../assets/image/${item.imagem}`)" width="40" /></div>
-                                        <a :href="item.url" target="_blank">{{ item.unidade }}</a>
+                                    <div class="footer-item" v-for="item, index in arrayUnits" v-bind:key="index">
+                                        <div align="center"><v-img :src="require(`../../assets/image/${item.icon_footer}`)" width="40" /></div>
+                                        <a :href="item.site" target="_blank">{{ item.unit_name }}</a>
                                     </div>
                                 </footer>
                             </v-row>
@@ -86,8 +86,8 @@
     export default ({
         name: "Default",
         data: () => ({
-            arrayUnidades: [],
-            unidade: null,
+            arrayUnits: [],
+            unit: null,
             wikiLinks: [
                 {
                     text: 'Página Inicial',
@@ -106,9 +106,9 @@
         },
         methods: {
             async listarUnidades () {
-                await axios.get(base_url_api + '/unidades')
+                await axios.get(base_url_api + '/units')
                 .then(res => {
-                    this.arrayUnidades = [...res.data.data];
+                    this.arrayUnits = [...res.data.data];
                 })
                 .catch(err => {
                     console.log(err);
@@ -117,25 +117,25 @@
             selecionarUnidades() {
                 document.querySelector('.loader').style.display = 'block';
 
-                switch (this.unidade) {
+                switch (this.unit) {
                     case '1':
                         console.log('UniSãoJosé');                        
-                        localStorage.setItem("unidade", btoa(this.unidade)); //btoa (Base 64 encode) - atob (Base 64 decode)
+                        localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
                         this.carregar(base_url + '/unisaojose');
                         break;
                     case '2':
                         console.log('Colégio Realengo');
-                        localStorage.setItem("unidade", btoa(this.unidade)); //btoa (Base 64 encode) - atob (Base 64 decode)
+                        localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
                         this.carregar(base_url + '/colegiorealengo');
                         break;
                     case '3':
                         console.log('Colégio Aplicação Taquara');
-                        localStorage.setItem("unidade", btoa(this.unidade)); //btoa (Base 64 encode) - atob (Base 64 decode)
+                        localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
                         //this.carregar(base_url + '/colegioaplicacaotaquara');
                         break;
                     case '4':
                         console.log('Colégio Aplicação Vila Militar');
-                        localStorage.setItem("unidade", btoa(this.unidade)); //btoa (Base 64 encode) - atob (Base 64 decode)
+                        localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
                         //this.carregar(base_url + '/colegioaplicacaovilamilitar');
                         break;
                 }

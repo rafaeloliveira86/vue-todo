@@ -1,11 +1,12 @@
 <?php
-namespace App\Models\Status;
+namespace App\Models\Categories;
 
 use CodeIgniter\Model;
+use Exception;
 
-class StatusModel extends Model {
+class CategoriesModel extends Model {
 	protected $DBGroup              = 'default';
-	protected $table                = 'tbl_status';
+	protected $table                = 'tbl_categories';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
@@ -14,10 +15,8 @@ class StatusModel extends Model {
 	protected $protectFields        = true;
 	protected $allowedFields        = [
 		'id',
-		'status_name',
-		'class',
-		'role_scope',
-		'order',
+		'categorie_name',
+		'id_status',
 		'id_user_created',
 		'id_user_updated',
 		'id_user_deleted',
@@ -49,4 +48,20 @@ class StatusModel extends Model {
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function getCategorieByUnitID($id_unidade) {
+        try {
+            $this->select('c.*');
+			$this->from('tbl_categories AS c');
+            $this->join('tbl_categories_units AS cu', 'cu.id_categorie = c.id');
+			$this->join('tbl_units AS u', 'cu.id_unit = u.id');
+            $this->where('u.id', $id_unidade);
+			$this->where('c.id_status', 1);
+			$this->groupBy('c.categorie_name');
+			$this->orderBy('c.id', 'ASC');
+            return $this->asObject()->findAll();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

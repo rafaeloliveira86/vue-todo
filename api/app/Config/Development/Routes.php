@@ -9,18 +9,19 @@ $routes->group("api/v1", function ($routes) {
     $routes->post("logout", "Login::noAuth");
 
     //Usuários
-    $routes->resource('usuarios'); //POST / GET / PUT / PATCH / DELETE
+    $routes->resource('users'); //POST / GET / PUT / PATCH / DELETE
 
     //Unidades
-    $routes->resource('unidades', ['namespace' => 'App\Controllers\Unidades']); //POST / GET / PUT / PATCH / DELETE
+    $routes->resource('units', ['namespace' => 'App\Controllers\Units']); //POST / GET / PUT / PATCH / DELETE
+    $routes->get("unit/(:num)", "Units::getUnitByID/$1", ['namespace' => 'App\Controllers\Units']);
 
     //Categorias
-    $routes->resource('categorias', ['namespace' => 'App\Controllers\Categorias']); //POST / GET / PUT / PATCH / DELETE
-    $routes->get("categoria/unidade/(:num)", "Categorias::categoriasPorUnidadeID/$1", ['namespace' => 'App\Controllers\Categorias']);
+    $routes->resource('categories', ['namespace' => 'App\Controllers\Categories']); //POST / GET / PUT / PATCH / DELETE
+    $routes->get("categorie/unit/(:num)", "Categories::categoriesByUnitID/$1", ['namespace' => 'App\Controllers\Categories']);
 
     //Subcategorias
-    $routes->resource('subcategorias', ['namespace' => 'App\Controllers\Subcategorias']); //POST / GET / PUT / PATCH / DELETE
-    $routes->get("subcategoria/categoria/(:num)/unidade/(:num)", "Subcategorias::subcategoriasPorCategoriaIDUnidadeID/$1/$2", ['namespace' => 'App\Controllers\Subcategorias']);
+    $routes->resource('subcategories', ['namespace' => 'App\Controllers\Subcategories']); //POST / GET / PUT / PATCH / DELETE
+    $routes->get("subcategorie/categorie/(:num)/unit/(:num)", "Subcategories::subcategoriasPorCategoriaIDUnidadeID/$1/$2", ['namespace' => 'App\Controllers\Subcategories']);
     
     $routes->post("user/register", "Users::createUser");
     $routes->get("user/details", "Users::getUserDetail");

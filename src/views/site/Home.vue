@@ -21,7 +21,7 @@
             <v-row no-gutters>
                 <section class="grid grid-content">
                     <div class="grid-item">
-                        <Categorias />
+                        <Categories />
                     </div>
                     <div class="grid-item">
                         <Sidebar />
@@ -63,7 +63,7 @@
 
 <script>
     import Navbar from '../../components/site/Navbar.vue';
-    import Categorias from '../../components/site/Categorias.vue';
+    import Categories from '../../components/site/Categories.vue';
     import Sidebar from '../../components/site/Sidebar.vue';
 
     const base_url = 'http://localhost:8080';
@@ -72,7 +72,7 @@
         name: "Home",
         components: {
             Navbar,
-            Categorias,
+            Categories,
             Sidebar
         },
         data: () => ({

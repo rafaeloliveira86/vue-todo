@@ -3,9 +3,11 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class StatusMigrate extends Migration {
-	public function up() {
-		$this->forge->addField([
+class UnitsMigrate extends Migration {
+    public function up() {
+        $this->db->disableForeignKeyChecks();
+
+        $this->forge->addField([
 			'id' => [
 				'type' => 'INT',
 				'constraint' => 11,
@@ -13,24 +15,40 @@ class StatusMigrate extends Migration {
 				'auto_increment' => true,
 				'null' => false
 			],
-			'status_name' => [
+			'unit_name' => [
 				'type' => 'VARCHAR',
 				'constraint' => '150',
 				'null' => true
 			],
 			'class' => [
 				'type' => 'VARCHAR',
-				'constraint' => '20',
+				'constraint' => '50',
 				'null' => true
 			],
-			'role_scope' => [
+			'logo_navbar' => [
 				'type' => 'VARCHAR',
-				'constraint' => '255',
+				'constraint' => '50',
 				'null' => true
 			],
-			'order' => [
+			'logo_footer' => [
+				'type' => 'VARCHAR',
+				'constraint' => '50',
+				'null' => true
+			],
+			'icon_footer' => [
+				'type' => 'VARCHAR',
+				'constraint' => '50',
+				'null' => true
+			],
+			'site' => [
+				'type' => 'VARCHAR',
+				'constraint' => '150',
+				'null' => true
+			],
+            'id_status' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => true,
 				'null' => false,
 				'default' => 0
 			],
@@ -70,10 +88,13 @@ class StatusMigrate extends Migration {
 		]);
 
 		$this->forge->addKey('id', true);
-		$this->forge->createTable('tbl_status');
-	}
+        $this->forge->addForeignKey('id_status', 'tbl_status', 'id', 'CASCADE', 'NO_ACTION');
+		$this->forge->createTable('tbl_units');
 
-	public function down() {
-		$this->forge->dropTable('tbl_status');
-	}
+        $this->db->enableForeignKeyChecks();
+    }
+
+    public function down() {
+        $this->forge->dropTable('tbl_units');
+    }
 }

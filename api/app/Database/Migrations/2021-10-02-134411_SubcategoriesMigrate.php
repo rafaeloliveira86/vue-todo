@@ -3,8 +3,10 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class StatusMigrate extends Migration {
-	public function up() {
+class SubcategoriesMigrate extends Migration {
+    public function up() {
+        $this->db->disableForeignKeyChecks();
+		
 		$this->forge->addField([
 			'id' => [
 				'type' => 'INT',
@@ -13,42 +15,50 @@ class StatusMigrate extends Migration {
 				'auto_increment' => true,
 				'null' => false
 			],
-			'status_name' => [
+			'subcategorie_name' => [
 				'type' => 'VARCHAR',
 				'constraint' => '150',
 				'null' => true
 			],
-			'class' => [
-				'type' => 'VARCHAR',
-				'constraint' => '20',
-				'null' => true
-			],
-			'role_scope' => [
-				'type' => 'VARCHAR',
-				'constraint' => '255',
-				'null' => true
-			],
-			'order' => [
+			'id_unit' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => true,
+				'null' => false,
+				'default' => 0
+			],
+            'id_categorie' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => true,
+				'null' => false,
+				'default' => 0
+			],
+			'id_status' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => true,
 				'null' => false,
 				'default' => 0
 			],
 			'id_user_created' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => false,
 				'null' => false,
 				'default' => 0
 			],
 			'id_user_updated' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => false,
 				'null' => false,
 				'default' => 0
 			],
 			'id_user_deleted' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'unsigned' => false,
 				'null' => false,
 				'default' => 0
 			],
@@ -70,10 +80,15 @@ class StatusMigrate extends Migration {
 		]);
 
 		$this->forge->addKey('id', true);
-		$this->forge->createTable('tbl_status');
-	}
+		$this->forge->addForeignKey('id_unit', 'tbl_units', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_categorie', 'tbl_categories', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('id_status', 'tbl_status', 'id', 'CASCADE', 'NO_ACTION');
+		$this->forge->createTable('tbl_subcategories');
 
-	public function down() {
-		$this->forge->dropTable('tbl_status');
-	}
+		$this->db->enableForeignKeyChecks();
+    }
+
+    public function down() {
+        $this->forge->dropTable('tbl_subcategories');
+    }
 }
