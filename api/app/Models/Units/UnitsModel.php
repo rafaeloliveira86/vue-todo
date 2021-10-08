@@ -14,6 +14,7 @@ class UnitsModel extends Model {
     protected $protectFields        = true;
     protected $allowedFields        = [
         'id',
+        'unit_nickname',
 		'unit_name',
         'class',
         'logo_navbar',

@@ -15,6 +15,11 @@ class UnitsMigrate extends Migration {
 				'auto_increment' => true,
 				'null' => false
 			],
+			'unit_nickname' => [
+				'type' => 'CHAR',
+				'constraint' => '6',
+				'null' => true
+			],
 			'unit_name' => [
 				'type' => 'VARCHAR',
 				'constraint' => '150',

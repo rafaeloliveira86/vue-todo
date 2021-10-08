@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar v-for="(item, i) in arrayUnit" :key="i" :color="item.class" dark height="65">
+        <v-app-bar v-for="(item, index) in arrayUnit" :key="index" :color="item.class" dark height="65">
             <!-- <template v-slot:img="{ props }">
                 <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(28,108,199,.8)"></v-img>
             </template> -->
@@ -8,7 +8,7 @@
                 <v-row no-gutters>
                     <v-col cols="12" md="8" offset-md="2">
                         <a v-for="(link, i) in wikiLinks" :key="i" :href="link.href">
-                            <v-img :src="require(`../../assets/image/${item.logo_navbar}`)" contain position="left" height="45" />
+                            <v-img :src="require(`../../assets/image/${item.logo_navbar}`)" contain position="left" height="50" />
                         </a>
                         <!-- <v-spacer></v-spacer>
                         <v-btn icon>

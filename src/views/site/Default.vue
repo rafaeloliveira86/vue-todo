@@ -1,12 +1,7 @@
 <template>
     <div class="wiki-body">
         <div class="wiki-col">
-            <div class="wiki-splash">
-                <div class="wiki-container">
-                    <h4 class="underline-white">Wiki</h4>
-                </div>
-                <v-img :src="require('../../assets/image/image_callcenter.png')" contain position="right" class="image" />
-            </div>
+            <Splash />
         </div>
         <div class="wiki-col">
             <div class="wiki-select-box">
@@ -63,12 +58,16 @@
 
 <script>
     import axios from 'axios';
+    import Splash from '../../components/site/Splash.vue';
 
     const base_url = 'http://localhost:8080';
     const base_url_api = 'http://localhost/api/v1';
 
     export default ({
         name: "Default",
+        components: {
+            Splash
+        },
         data: () => ({
             arrayUnits: [],
             unit: null,
@@ -84,6 +83,7 @@
         },
         created() {
             this.getUnitsAll();
+            this.removeItemLocalStorage();
         },
         mounted() {
             document.querySelector('.loader').style.display = 'none';
@@ -122,6 +122,9 @@
             },
             setItemLocalStorage(data) {
                 localStorage.setItem("unit", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
+            },
+            removeItemLocalStorage() {
+                localStorage.removeItem("unit");
             },
             redirectSite(data) {
                 setInterval(() => {
@@ -173,33 +176,6 @@
         height: auto;
         margin: 0 auto;
         padding: 0;
-    }
-
-    /* Splash */
-
-    .wiki-splash {
-        display: flex;
-        position: relative;
-        padding: 0;
-        width: 100%;
-        height: 300px;
-        background-image: linear-gradient(to right, #18335d, #2d4775, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df, #71b3ec, #62bbed, #57c2eb, #51c9e7, #53cfe1);
-        /* background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df); */
-    }
-
-    .wiki-splash h4 {
-        margin: 55px 0;
-        font-size: 50px;
-        font-weight: 900;
-        color: #ffffff;
-    }
-
-    .wiki-splash .image {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        opacity: 0.8;
     }
 
     /* Units Loading */
@@ -323,11 +299,6 @@
     }
 
     @media only screen and (max-width: 992px) {
-        /* Splash */
-        .wiki-splash .image {
-            opacity: unset;
-        }
-
         /* Container */
         .wiki-container {
             width: 100%;

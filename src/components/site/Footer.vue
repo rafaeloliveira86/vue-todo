@@ -6,7 +6,7 @@
                     <footer class="wiki-foot">
                         <div class="wiki-foot-col">
                             <a v-for="(link, i) in wikiLinks" :key="i" :href="link.href">
-                                <v-img :src="require(`../../assets/image/${item.logo_footer}`)" contain position="left" height="45" />
+                                <v-img :src="require(`../../assets/image/${item.logo_footer}`)" contain position="left" height="50" />
                             </a>
                         </div>
                         <div class="wiki-foot-col">
@@ -72,13 +72,10 @@
         justify-content: space-between;
         align-items: center;
         padding: 30px 0;
-        border: 1px solid #333;
     }
 
     .wiki-foot-col {
         margin: 0;
-        padding: 0 10px;
-        border: 1px solid #333;
     }
 
     .wiki-foot-col span {

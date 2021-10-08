@@ -1,0 +1,86 @@
+<template>
+    <div>
+        <div class="wiki-splash">
+            <div class="wiki-splash-content">
+                <h4 class="underline-white">Wiki</h4>
+            </div>
+            <v-img :src="require('../../assets/image/image_callcenter.png')" contain position="right" class="image" />
+        </div>
+    </div>
+</template>
+
+<script>
+    import axios from 'axios';
+
+    const base_url_api = 'http://localhost/api/v1';
+
+    export default {
+        name: "Splash",
+        data: () => ({
+            arrayUnit: [],
+            unit: false
+        }),
+        created() {
+            this.getUnitByID();
+        },
+        methods: {
+            async getUnitByID () {
+                let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
+
+                await axios.get(base_url_api + '/unit/' + id_unit)
+                .then(res => {
+                    this.arrayUnit = [...res.data.data];
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            },
+        }
+    }
+</script>
+
+<style>
+    .wiki-splash {
+        display: flex;
+        position: relative;
+        padding: 0;
+        width: 100%;
+        height: 300px;
+        /* background-image: linear-gradient(to right, #18335d, #2d4775, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df, #71b3ec, #62bbed, #57c2eb, #51c9e7, #53cfe1); */
+        background: linear-gradient(45deg, #18335d, #2d4775, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df, #71b3ec, #62bbed, #57c2eb, #51c9e7, #53cfe1);
+    }
+
+    .wiki-splash-content {
+        width: 900px;
+        min-width: 61.6%;
+        height: auto;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .wiki-splash h4 {
+        margin: 75px 0;
+        font-size: 50px;
+        font-weight: 900;
+        color: #ffffff;
+    }
+
+    .wiki-splash .image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        opacity: 0.8;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .wiki-splash-content {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .wiki-splash .image {
+            opacity: unset;
+        }
+    }
+</style>
