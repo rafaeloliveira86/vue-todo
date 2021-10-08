@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h3 class="underline mb-5">Categorias</h3>
+        <h3 class="underline mb-5 wiki-cat-title">Categorias</h3>
         <div class="wiki-cat">
             <div class="wiki-cat-col" v-for="(item, index) in arrayCategories" :key="index">
                 <v-hover>
                     <template v-slot:default="{ hover }">
                         <router-link :to="{ name: 'home' }" class="text-decoration-none">
                             <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile>
-                                <v-icon left size="30" :color="item.unit_class">mdi-view-quilt</v-icon> {{ item.categorie_name }}
+                                <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ item.categorie_name }}
                             </v-card>
                         </router-link>
                     </template>
@@ -31,7 +31,7 @@
             this.getCategoriesByUnitID();
         },
         methods: {
-            async getCategoriesByUnitID () {
+            async getCategoriesByUnitID() {
                 let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
 
                 await axios.get(base_url_api + '/categorie/unit/' + id_unit)
@@ -47,6 +47,13 @@
 </script>
 
 <style>
+    .wiki-cat-title {
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: normal;
+        color: #222222;
+    }
+
     .wiki-cat {
         display: flex;
         flex-wrap: wrap;

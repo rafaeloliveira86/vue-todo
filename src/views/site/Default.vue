@@ -20,7 +20,7 @@
                         item-text="unit_name"
                         item-value="id"
                         prepend-inner-icon="mdi-chevron-right"
-                        @change="selecionarUnidades()"
+                        @change="selectUnit()"
                         solo
                         dark
                         height="55"
@@ -99,13 +99,13 @@
             clearInterval(this.interval);
         },
         created() {
-            this.listarUnidades();
+            this.getUnitsAll();
         },
         mounted() {
             document.querySelector('.loader').style.display = 'none';
         },
         methods: {
-            async listarUnidades () {
+            async getUnitsAll () {
                 await axios.get(base_url_api + '/units')
                 .then(res => {
                     this.arrayUnits = [...res.data.data];
@@ -114,36 +114,37 @@
                     console.log(err);
                 })
             },
-            selecionarUnidades() {
+            selectUnit() {
                 document.querySelector('.loader').style.display = 'block';
 
                 switch (this.unit) {
                     case '1':
-                        console.log('UniSãoJosé');                        
-                        localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
-                        this.carregar(base_url + '/unisaojose');
+                        this.setItemLocalStorage(this.unit);
+                        this.redirectSite('/unisaojose');
                         break;
                     case '2':
-                        console.log('Colégio Realengo');
-                        localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
-                        this.carregar(base_url + '/colegiorealengo');
+                        this.setItemLocalStorage(this.unit);
+                        this.redirectSite('/colegiorealengo');
                         break;
                     case '3':
-                        console.log('Colégio Aplicação Taquara');
-                        localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
-                        this.carregar(base_url + '/colegioaplicacaotaquara');
+                        this.setItemLocalStorage(this.unit);
+                        this.redirectSite('/colegioaplicacaotaquara');
                         break;
                     case '4':
-                        console.log('Colégio Aplicação Vila Militar');
-                        localStorage.setItem("unit", btoa(this.unit)); //btoa (Base 64 encode) - atob (Base 64 decode)
-                        this.carregar(base_url + '/colegioaplicacaovilamilitar');
+                        this.setItemLocalStorage(this.unit);
+                        this.redirectSite('/colegioaplicacaovilamilitar');
                         break;
                 }
             },
-            carregar(url) {
+            setItemLocalStorage(data) {
+                localStorage.setItem("unit", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
+            },
+            redirectSite(data) {
                 setInterval(() => {
-                    window.location.href = url;
-                }, 1000)
+                    window.location.href = data;
+                    //this.$router.push(url);
+                    //this.$router.push({ path: url });
+                }, 1000);
             }
         }
     })
@@ -218,9 +219,9 @@
         position: relative;
         width: 100%;
         height: 100%;
-        box-shadow: 0 0 0.3em #595959;
-        -moz-box-shadow: 0 0 0.3em #595959;
-        -webkit-box-shadow: 0 0 0.3em #595959;
+        box-shadow: 0 -10px 5px -10px #595959;
+        -moz-box-shadow: 0 -10px 5px -10px #595959;
+        -webkit-box-shadow: 0 -10px 5px -10px #595959;
         background: transparent;
     }
 

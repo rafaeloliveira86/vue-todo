@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="underline mb-5">Artigos mais acessados</h3>
+        <h3 class="underline mb-5 wiki-side-title">Artigos mais acessados</h3>
         <div class="wiki-side">
             <div class="wiki-side-col">
                 <div class="wiki-side-card" v-for="item, index in arraySubcategories" v-bind:key="index" tile>
@@ -35,6 +35,13 @@
 </script>
 
 <style>
+    .wiki-side-title {
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: normal;
+        color: #222222;
+    }
+
     .wiki-side {
         display: flex;
         flex-wrap: wrap;
@@ -51,7 +58,7 @@
 
     .wiki-side .wiki-side-col .wiki-side-card {
         padding: 10px;
-        border-left: 4px solid #415c8e;
+        border-left: 4px solid #555555;
         margin-bottom: 1px;
         line-height: 17px;
         /* background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df); */

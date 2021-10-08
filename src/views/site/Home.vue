@@ -2,7 +2,6 @@
     <div class="wiki-body">
         <Navbar />
         
-        <!-- splash -->
         <div class="wiki-splash">
             <v-container>
                 <v-row no-gutters>
@@ -15,19 +14,17 @@
         </div>
 
         <div class="wiki-container">
-            <v-row no-gutters>
-                <v-text-field label="Pesquisar" filled rounded prepend-inner-icon="mdi-magnify" class="mt-5" background-color="#ffffff"></v-text-field>
-            </v-row>
-            <v-row no-gutters>
-                <section class="grid grid-content">
+            <div class="wiki-content mt-10 mb-10">
+                <v-text-field label="Pesquisar" filled rounded prepend-inner-icon="mdi-magnify" background-color="#ffffff"></v-text-field>
+                <div class="grid grid-content">
                     <div class="grid-item">
                         <Categories />
                     </div>
                     <div class="grid-item">
                         <Sidebar />
                     </div>
-                </section>
-            </v-row>
+                </div>
+            </div>
         </div>
 
         <Footer />
@@ -65,17 +62,13 @@
     }
 
     .wiki-splash {
-        z-index: 0;
         display: flex;
         position: relative;
         padding: 0 20px;
         width: 100%;
         height: 300px;
-        box-shadow: 0 0 0.3em #595959;
-        -moz-box-shadow: 0 0 0.3em #595959;
-        -webkit-box-shadow: 0 0 0.3em #595959;
-        /*background-image: linear-gradient(to right, #18335d, #2d4775, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df, #71b3ec, #62bbed, #57c2eb, #51c9e7, #53cfe1);*/
-        background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df);
+        background-image: linear-gradient(to right, #18335d, #2d4775, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df, #71b3ec, #62bbed, #57c2eb, #51c9e7, #53cfe1);
+        /* background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df); */
     }
 
     .wiki-splash h4 {
@@ -94,15 +87,27 @@
     }
 
     .wiki-container {
+        position: relative;
+        z-index: 1;
         display: flex;
         display: -webkit-flex;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        box-shadow: 0 -10px 5px -10px #595959;
+        -moz-box-shadow: 0 -10px 5px -10px #595959;
+        -webkit-box-shadow: 0 -10px 5px -10px #595959;
+    }
+
+    .wiki-content {
         flex-wrap: wrap;
         flex-direction: column;
         width: 900px;
         min-width: 61.6%;
         height: auto;
         margin: 0 auto;
-        padding: 20px 0;
+        padding: 0;
     }
     
     /* Grid */
@@ -145,10 +150,9 @@
     }
 
     /* Underline */
-
     .underline {
         margin: 0 0 15px 0;
-        border-bottom: 1px solid #415c8e;
+        border-bottom: 1px solid #555555;
         padding-bottom: 15px;
         position: relative;
     }
@@ -158,7 +162,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background-color: #415c8e;
+        background-color: #555555;
         width: 25%;
         height: 3px;
     }
@@ -180,34 +184,6 @@
         height: 3px;
     }
 
-
-    /* Footer */
-
-    .footer {
-        display: flex;
-        flex: 1;
-        padding: 30px 0;
-    }
-
-    .footer-content {
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .footer-item {
-        margin: 0;
-        padding: 0 10px;
-    }
-
-    .footer-item span {
-        font-size: 15px;
-        color: #595959;
-    }
-
-    .v-footer {
-        font-size: 15px;
-    }
-
     @media only screen and (max-width: 992px) {
         .wiki-splash-content .image {
             opacity: unset;
@@ -215,25 +191,7 @@
 
         .wiki-container {
             width: 100%;
-            padding: 20px;
-        }
-
-        .footer-content {
-            flex-direction: column;
-        }
-
-        .footer-item {
-            padding: 0;
-            margin: 10px 0;
-            text-align: center;
-        }
-
-        .footer-item span {
-            font-size: 13px;
-        }
-
-        .v-footer {
-            font-size: 13px;
+            padding: 0 15px;
         }
     }
 </style>

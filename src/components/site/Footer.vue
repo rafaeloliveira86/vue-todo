@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-for="(item, index) in arrayUnit" :key="index">
-            <v-container fluid class="white mt-5">
+            <v-container fluid class="white">
                 <v-row>
                     <v-container>
                         <v-row>
@@ -69,5 +69,48 @@
 </script>
 
 <style>
+    .footer {
+        display: flex;
+        flex: 1;
+        padding: 30px 0;
+    }
 
+    .footer-content {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-item {
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    .footer-item span {
+        font-size: 15px;
+        color: #595959;
+    }
+
+    .v-footer {
+        font-size: 15px;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .footer-content {
+            flex-direction: column;
+        }
+
+        .footer-item {
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .footer-item span {
+            font-size: 13px;
+        }
+
+        .v-footer {
+            font-size: 13px;
+        }
+    }
 </style>
