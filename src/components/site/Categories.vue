@@ -1,6 +1,7 @@
 <template>
     <div>
         <h3 class="underline mb-5 wiki-cat-title">Categorias</h3>
+        
         <div class="wiki-cat">
             <div class="wiki-cat-col" v-for="(item, index) in arrayCategories" :key="index">
                 <v-hover>

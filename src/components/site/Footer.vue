@@ -1,27 +1,19 @@
 <template>
     <div>
         <div v-for="(item, index) in arrayUnit" :key="index">
-            <v-container fluid class="white">
-                <v-row>
-                    <v-container>
-                        <v-row>
-                            <v-col cols="12" md="8" offset-md="2">
-                                <v-row>
-                                    <footer class="footer footer-content">
-                                        <div class="footer-item">
-                                            <a v-for="(link, i) in wikiLinks" :key="i" :href="link.href">
-                                                <v-img :src="require(`../../assets/image/${item.logo_footer}`)" contain position="left" height="45" />
-                                            </a>
-                                        </div>
-                                        <div class="footer-item">
-                                            <span>Departamento de Tecnologia da Informação</span>
-                                        </div>
-                                    </footer>
-                                </v-row>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-row>
+            <v-container fluid>
+                <div class="wiki-container">
+                    <footer class="wiki-foot">
+                        <div class="wiki-foot-col">
+                            <a v-for="(link, i) in wikiLinks" :key="i" :href="link.href">
+                                <v-img :src="require(`../../assets/image/${item.logo_footer}`)" contain position="left" height="45" />
+                            </a>
+                        </div>
+                        <div class="wiki-foot-col">
+                            <span>Departamento de Tecnologia da Informação</span>
+                        </div>
+                    </footer>
+                </div>
             </v-container>
             <v-footer dark tile elevation="24">
                 <v-col class="text-center" cols="12">
@@ -69,23 +61,27 @@
 </script>
 
 <style>
-    .footer {
-        display: flex;
-        flex: 1;
-        padding: 30px 0;
+    .container--fluid {
+        padding: 0;
+        background: #ffffff;
     }
 
-    .footer-content {
+    .wiki-foot {
+        display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        padding: 30px 0;
+        border: 1px solid #333;
     }
 
-    .footer-item {
+    .wiki-foot-col {
         margin: 0;
         padding: 0 10px;
+        border: 1px solid #333;
     }
 
-    .footer-item span {
+    .wiki-foot-col span {
         font-size: 15px;
         color: #595959;
     }
@@ -95,17 +91,17 @@
     }
 
     @media only screen and (max-width: 992px) {
-        .footer-content {
+        .wiki-foot {
             flex-direction: column;
         }
 
-        .footer-item {
+        .wiki-foot-col {
             padding: 0;
             margin: 10px 0;
             text-align: center;
         }
 
-        .footer-item span {
+        .wiki-foot-col span {
             font-size: 13px;
         }
 

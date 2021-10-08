@@ -1,79 +1,63 @@
 <template>
     <div class="wiki-body">
-        <div class="grid grid-content">
-            <div class="grid-row">
-                <v-container>
-                    <v-row>
-                        <v-col cols="12" md="8" offset-md="2">
-                            <h4 class="underline-white">Wiki</h4>
-                        </v-col>
-                    </v-row>
-                </v-container>
+        <div class="wiki-col">
+            <div class="wiki-splash">
+                <div class="wiki-container">
+                    <h4 class="underline-white">Wiki</h4>
+                </div>
                 <v-img :src="require('../../assets/image/image_callcenter.png')" contain position="right" class="image" />
             </div>
-            <div class="grid-row">
-                <div class="grid-input">
-                    <v-select
-                        :items="arrayUnits"
-                        v-model="unit"
-                        label="Selecionar Unidade"
-                        item-text="unit_name"
-                        item-value="id"
-                        prepend-inner-icon="mdi-chevron-right"
-                        @change="selectUnit()"
-                        solo
-                        dark
-                        height="55"
-                        class="select">
-                    </v-select>
+        </div>
+        <div class="wiki-col">
+            <div class="wiki-select-box">
+                <v-select
+                    :items="arrayUnits"
+                    v-model="unit"
+                    label="Selecionar Unidade"
+                    item-text="unit_name"
+                    item-value="id"
+                    prepend-inner-icon="mdi-chevron-right"
+                    @change="selectUnit()"
+                    solo
+                    dark
+                    height="55"
+                    class="wiki-select-input">
+                </v-select>
 
-                    <!-- Loading -->
-                    <div class="text-center loader">
-                        <v-progress-circular
-                            :size="50"
-                            color="primary"
-                            indeterminate>
-                        </v-progress-circular>
+                <div class="text-center loader">
+                    <v-progress-circular
+                        :size="50"
+                        color="primary"
+                        indeterminate>
+                    </v-progress-circular>
+                </div>
+            </div>
+            <div class="wiki-container">
+                <div class="wiki-box">
+                    <div class="wiki-box-col">
+                        <v-img :src="require('../../assets/image/image_help.png')" contain width="400" />
+                    </div>
+                    <div class="wiki-box-col">
+                        <p>
+                            Documentação Colaborativa dos sistemas institucionais UniSãoJosé, Colégio Realengo, Colégio Aplicação Taquara e Colégio Aplicação Vila Militar.<br><br>
+                            <strong>Compartilhamos conhecimento!</strong><br><br>
+                            Estamos iniciando esta Wiki de ajuda e você colaborador pode expandí-la.
+                        </p>
                     </div>
                 </div>
-                <!-- Footer -->
-                <v-container fluid>
-                    <v-row>
-                        <v-col cols="12" md="8" offset-md="2">
-                            <v-row>
-                                <div class="grid grid-body">
-                                    <div class="grid-col">
-                                        <v-img :src="require('../../assets/image/image_help.png')" contain width="400" />
-                                    </div>
-                                    <div class="grid-col">
-                                        <p>
-                                            Documentação Colaborativa dos sistemas institucionais UniSãoJosé, Colégio Realengo, Colégio Aplicação Taquara e Colégio Aplicação Vila Militar.<br><br>
-                                            <strong>Compartilhamos conhecimento!</strong><br><br>
-                                            Estamos iniciando esta Wiki de ajuda e você colaborador pode expandí-la.
-                                        </p>
-                                    </div>
-                                </div>
-                            </v-row>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-row>
-                                <footer class="footer footer-content">
-                                    <div class="footer-item" v-for="item, index in arrayUnits" v-bind:key="index">
-                                        <div align="center"><v-img :src="require(`../../assets/image/${item.icon_footer}`)" width="40" /></div>
-                                        <a :href="item.site" target="_blank">{{ item.unit_name }}</a>
-                                    </div>
-                                </footer>
-                            </v-row>
-                        </v-col>
-                    </v-row>
-                </v-container>
             </div>
+            <footer class="wiki-foot wiki-foot-content">
+                <div class="wiki-foot-item" v-for="item, index in arrayUnits" v-bind:key="index">
+                    <div align="center"><v-img :src="require(`../../assets/image/${item.icon_footer}`)" width="40" /></div>
+                    <a :href="item.site" target="_blank">{{ item.unit_name }}</a>
+                </div>
+            </footer>
+            <v-footer dark tile elevation="24">
+                <v-col class="text-center" cols="12">
+                    &COPY; Todos os direitos reservados - Departamento de Tecnologia da Informação - {{ new Date().getFullYear() }}
+                </v-col>
+            </v-footer>
         </div>
-        <v-footer dark tile elevation="24">
-            <v-col class="text-center" cols="12">
-                &COPY; Todos os direitos reservados - Departamento de Tecnologia da Informação - {{ new Date().getFullYear() }}
-            </v-col>
-        </v-footer>
     </div>
 </template>
 
@@ -151,116 +135,123 @@
 </script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;900&display=swap');
-
+    /* Body */
     .wiki-body {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
         width: 100%;
         height: 100%;
         min-height: 100%;
         margin: 0;
         padding: 0;
-        font-family: 'Roboto', sans-serif !important;
-        background: #f0f2f5 !important;
+        background: #f0f2f5;
+        /* background-image: linear-gradient(to right, #333333, #555555); */
     }
 
-    .v-progress-circular {
-        margin: 1rem;
-    }
-
-    /* Grid */
-    .grid {
-        display: flex;
-        display: -webkit-flex;
+    /* Cols */
+    .wiki-col {
         width: 100%;
-        height: 100%;
+        height: auto;
     }
 
-    .grid-content {
-        flex-direction: column;
+    .wiki-col:first-child {
+        z-index: 0;
     }
 
-    .grid-body {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 50px 0;
+    .wiki-col:last-child {
+        z-index: 1;
+        box-shadow: 0 -10px 5px -10px #595959;
+        -moz-box-shadow: 0 -10px 5px -10px #595959;
+        -webkit-box-shadow: 0 -10px 5px -10px #595959;
     }
 
-    .grid-row {
-        margin: 0;
+    /* Container */
+    .wiki-container {
+        width: 900px;
+        min-width: 61.6%;
+        height: auto;
+        margin: 0 auto;
         padding: 0;
     }
 
-    .grid-row:first-child {
+    /* Splash */
+
+    .wiki-splash {
+        display: flex;
         position: relative;
+        padding: 0;
         width: 100%;
-        height: 100%;
+        height: 300px;
         background-image: linear-gradient(to right, #18335d, #2d4775, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df, #71b3ec, #62bbed, #57c2eb, #51c9e7, #53cfe1);
+        /* background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df); */
     }
 
-    .grid-row h4 {
-        margin: 100px 12px 70px 12px;
+    .wiki-splash h4 {
+        margin: 55px 0;
         font-size: 50px;
         font-weight: 900;
         color: #ffffff;
-        padding: 0;
     }
 
-    .grid-row .image {
+    .wiki-splash .image {
         position: absolute;
         top: 0;
         right: 0;
-        width: auto;
         height: 100%;
         opacity: 0.8;
     }
 
-    .grid-row:last-child {
-        position: relative;
+    /* Units Loading */
+    .v-progress-circular {
+        margin: 1rem;
+    }
+
+    /* Box */
+    .wiki-box {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        margin: 77px 0;
+    }
+
+    .wiki-box-col {
         width: 100%;
         height: 100%;
-        box-shadow: 0 -10px 5px -10px #595959;
-        -moz-box-shadow: 0 -10px 5px -10px #595959;
-        -webkit-box-shadow: 0 -10px 5px -10px #595959;
+    }
+
+    .wiki-box-col:first-child {
         background: transparent;
     }
 
-    .grid-col {
-        margin: 0;
-        padding: 50px 12px;
-    }
-
-    .grid-col:first-child {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background: transparent;
-    }
-
-    .grid-col:last-child {
-        position: relative;
-        width: 100%;
-        height: 100%;
+    .wiki-box-col:last-child {
         text-align: center;
         background: transparent;
     }
 
-    .grid-col .v-image {
+    .wiki-box-col .v-image {
         margin: 0 auto;
     }
 
-    .grid-col p {
+    .wiki-box-col p {
         font-size: 15px;
+        color: #595959;
     }
 
-    .grid-input {
+    /* Select Box */
+
+    .wiki-select-box {
         z-index: 1;
         position: absolute;
-        top: -27px;
+        top: 273px;
         left: calc((100% - 400px) / 2); /* 400px = largura do select */
     }
 
-    .select {
+    .wiki-select-input {
         width: 400px;
         height: 55px;
         border: none;
@@ -274,6 +265,8 @@
         font-size: 15px;
         /*background: #ffffff;*/
     }
+
+    /* Underline */
 
     .underline-white {
         margin: 0 0 15px 0;
@@ -294,35 +287,34 @@
 
     /* Footer */
 
-    .footer {
+    .wiki-foot {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        min-height: 100%;
+        height: auto;
     }
 
-    .footer-content {
+    .wiki-foot-content {
         align-content: flex-end;
         align-items: center;
     }
 
-    .footer-item {
+    .wiki-foot-item {
         flex: 1;
         height: 100%;
         text-align: center;
-        color: #ffffff;
         padding: 25px 0;
         /*background-image: linear-gradient(to right, #415c8e, #5572a8, #6a89c3, #6c97d1, #6fa5df);*/
         background: #415c8e;
     }
 
-    .footer-item a {
+    .wiki-foot-item a {
         font-size: 15px;
         text-decoration: none;
         color: #ffffff;
     }
 
-    .footer-item a:hover {
+    .wiki-foot-item a:hover {
         color: #e1e1e1;
     }
 
@@ -331,43 +323,43 @@
     }
 
     @media only screen and (max-width: 992px) {
-        /* .grid-content {
-            flex-direction: row;
-        } */
-
-        .grid-row .image {
+        /* Splash */
+        .wiki-splash .image {
             opacity: unset;
         }
 
-        .grid-body {
+        /* Container */
+        .wiki-container {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        /* Box */
+        .wiki-box {
             flex-direction: column;
+            margin: 70px 0 20px 0;
         }
 
-        .grid-col .v-image {
-            margin-bottom: 30px;
+        .wiki-box-col {
+            padding: 20px 0;
         }
 
-        .grid-col:first-child {
-            display: none;
+        /* Select Box */
+
+        .wiki-select-box {
+            left: calc((100% - 270px) / 2); /* 400px = largura do select */
         }
 
-        .grid-col:last-child {
-            padding: 75px 12px 50px 12px;
+        .wiki-select-input {
+            width: 270px;
         }
 
-        .grid-input {
-            left: calc((100% - 250px) / 2); /* 250px = largura do select */
+        /* Footer */
+        .wiki-foot-item {
+            height: 130px;
         }
 
-        .select {
-            width: 250px;
-        }
-
-        .footer-item {
-            padding: 25px 0;
-        }
-
-        .footer-item a {
+        .wiki-foot-item a {
             font-size: 13px;
         }
 
