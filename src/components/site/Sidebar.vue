@@ -65,6 +65,11 @@
         background: #ffffff; 
     }
 
+    .wiki-side .wiki-side-col .wiki-side-card:hover {
+        border-left: 4px solid #999999;
+        background: transparent;
+    }
+
     .wiki-side .wiki-side-col a {
         font-size: 13px;
         text-decoration: none;
@@ -72,7 +77,7 @@
     }
 
     .wiki-side .wiki-side-col a:hover {
-        color: #999999;
+        color: #01579B;
     }
 
     @media only screen and (max-width: 992px) {

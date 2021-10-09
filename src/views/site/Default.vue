@@ -36,7 +36,7 @@
                         <p>
                             Documentação Colaborativa dos sistemas institucionais UniSãoJosé, Colégio Realengo, Colégio Aplicação Taquara e Colégio Aplicação Vila Militar.<br><br>
                             <strong>Compartilhamos conhecimento!</strong><br><br>
-                            Estamos iniciando esta Wiki de ajuda e você colaborador pode expandí-la.
+                            Estamos iniciando esta <strong>Wiki</strong> de ajuda e você colaborador pode expandí-la.
                         </p>
                     </div>
                 </div>

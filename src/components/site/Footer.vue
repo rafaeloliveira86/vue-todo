@@ -6,7 +6,7 @@
                     <footer class="wiki-foot">
                         <div class="wiki-foot-col">
                             <a v-for="(link, i) in wikiLinks" :key="i" :href="link.href">
-                                <v-img :src="require(`../../assets/image/${item.logo_footer}`)" contain position="left" height="50" />
+                                <v-img :src="require(`../../assets/image/${item.logo_footer}`)" position="left" content-class="logo" />
                             </a>
                         </div>
                         <div class="wiki-foot-col">
@@ -61,6 +61,11 @@
 </script>
 
 <style>
+    .logo {
+        width: 150px !important;
+        height: auto;
+    }
+
     .container--fluid {
         padding: 0;
         background: #ffffff;

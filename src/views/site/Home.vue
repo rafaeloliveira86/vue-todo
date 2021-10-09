@@ -6,9 +6,12 @@
             <Splash />
         </div>
         <div class="wiki-col">
-            <div class="wiki-container mt-10 mb-10">
-                <v-text-field label="Pesquisar" filled rounded prepend-inner-icon="mdi-magnify" background-color="#ffffff"></v-text-field>
-
+            <v-container fluid>
+                <div class="wiki-container pt-7">
+                    <v-text-field label="Pesquisar" filled solo rounded prepend-inner-icon="mdi-magnify" class="wiki-search" background-color="#f0f2f5"></v-text-field>
+                </div>
+            </v-container>
+            <div class="wiki-container mt-8 mb-8">
                 <div class="wiki-box">
                     <div class="wiki-box-col">
                         <Categories />
@@ -55,7 +58,6 @@
         margin: 0;
         padding: 0;
         background: #f0f2f5;
-        /* background-image: linear-gradient(to right, #333333, #555555); */
     }
 
     /* Cols */
@@ -84,15 +86,9 @@
         padding: 0;
     }
 
-    .wiki-container-fluid {
-        position: absolute;
-        display: flex;
-        display: -webkit-flex;
-        width: 100%;
-        height: auto;
-        margin: 0 auto;
-        padding: 0;
-        border: 1px solid #333;
+    .container--fluid {
+        border-top: 1px solid #ebebeb;
+        border-bottom: 1px solid #ebebeb;
     }
 
     /* Box */
