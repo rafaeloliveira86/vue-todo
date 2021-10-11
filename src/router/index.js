@@ -1,6 +1,6 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Tarefas from '../views/dashboard/Tarefas.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Tarefas from '../views/dashboard/Tarefas.vue';
 
 Vue.use(VueRouter)
 
@@ -11,10 +11,16 @@ const routes = [
     component: () => import('../views/site/Default.vue')
   },
   //UniSãoJosé (Site)
-  { path: '/unisaojose',
+  { 
+    path: '/unisaojose',
     name: 'home',
     component: () => import('../views/site/Home.vue'),
     children: [
+      {
+        path: '/unisaojose/subcategorie/:id_categorie',
+        name: 'subcategorie',
+        component: () => import('../views/site/Subcategorie.vue')
+      },
       {
         path: '/unisaojose/sobre',
         name: 'sobre',
