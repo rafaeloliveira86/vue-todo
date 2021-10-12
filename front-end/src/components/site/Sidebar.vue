@@ -3,8 +3,12 @@
         <h3 class="underline mb-5 wiki-side-title">Artigos mais acessados</h3>
         <div class="wiki-side">
             <div class="wiki-side-col">
-                <div class="wiki-side-card" v-for="(item, index) in arraySubcategories" :key="index" tile>
-                    <a :href="item.link">{{ item.name }}</a>
+                <div v-for="(item, index) in arraySubcategories" :key="index">
+                    <a :href="item.link">
+                        <div class="wiki-side-card" tile>
+                            {{ item.name }}
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

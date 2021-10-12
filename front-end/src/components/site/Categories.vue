@@ -66,7 +66,13 @@
     }
 
     .wiki-cat .wiki-cat-col .v-card {
-        font-size: 15px;       
+        font-size: 13px;
+        text-decoration: none;
+        color: #333333;
+    }
+
+    .wiki-cat .wiki-cat-col .v-card:hover {
+        color: #01579B;      
     }
 
     @media only screen and (max-width: 992px) {

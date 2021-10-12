@@ -17,7 +17,7 @@ importScripts(
   "/precache-manifest.a128fdf9705ca58d9bb1eb02b1429e6c.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "vue-todo"});
+workbox.core.setCacheNameDetails({prefix: "wiki"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
