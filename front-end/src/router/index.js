@@ -13,7 +13,7 @@ const routes = [
   //UniSãoJosé (Site)
   { 
     path: '/unisaojose',
-    name: 'home',
+    name: 'unisaojose/home',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
@@ -23,7 +23,7 @@ const routes = [
       },
       {
         path: '/unisaojose/sobre',
-        name: 'sobre',
+        name: 'unisaojose/sobre',
         component: () => import('../views/site/unisaojose/Sobre.vue')
       },
     ]
@@ -31,12 +31,12 @@ const routes = [
   //Colégio Realengo (Site)
   {
     path: '/colegiorealengo',
-    name: 'home',
+    name: 'colegiorealengo/home',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/colegiorealengo/sobre',
-        name: 'sobre',
+        name: 'colegiorealengo/sobre',
         component: () => import('../views/site/colegiorealengo/Sobre.vue')
       },
     ]
@@ -44,12 +44,12 @@ const routes = [
   //Colégio Aplicação Taquara (Site)
   {
     path: '/colegioaplicacaotaquara',
-    name: 'home',
+    name: 'colegioaplicacaotaquara/home',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/colegioaplicacaotaquara/sobre',
-        name: 'sobre',
+        name: 'colegioaplicacaotaquara/sobre',
         component: () => import('../views/site/colegioaplicacaotaquara/Sobre.vue')
       },
     ]
@@ -57,12 +57,12 @@ const routes = [
   //Colégio Aplicação Vila Militar (Site)
   {
     path: '/colegioaplicacaovilamilitar',
-    name: 'home',
+    name: 'colegioaplicacaovilamilitar/home',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/colegioaplicacaovilamilitar/sobre',
-        name: 'sobre',
+        name: 'colegioaplicacaovilamilitar/sobre',
         component: () => import('../views/site/colegioaplicacaovilamilitar/Sobre.vue')
       },
     ]

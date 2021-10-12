@@ -14,6 +14,7 @@
             <div class="wiki-container mt-8 mb-8">
                 <div class="wiki-box">
                     <div class="wiki-box-col">
+                        <router-view></router-view>
                         <Categories />
                     </div>
                     <div class="wiki-box-col">

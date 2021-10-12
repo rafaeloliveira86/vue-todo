@@ -1,6 +1,6 @@
 <template>
     <div>
-        <subcategorie-component />
+        <SubcategorieComponent />
     </div>
 </template>
 

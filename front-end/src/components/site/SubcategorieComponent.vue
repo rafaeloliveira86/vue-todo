@@ -33,10 +33,22 @@
 <script>
     export default {
         name: "SubcategorieComponent",
-        /*data: () => ({
+        data: () => ({
             benched: 0,
+            items: [
+                { subcategorie_name: 'Relatórios' },
+                { subcategorie_name: 'Boletos' },
+                { subcategorie_name: 'Portal do Aluno' },
+                { subcategorie_name: 'Estágios' },
+                { subcategorie_name: 'Leads' },
+                { subcategorie_name: 'Financeiro' },
+                { subcategorie_name: 'MLS EAD' },
+                { subcategorie_name: 'Visualizar Notas' },
+                { subcategorie_name: 'Requerimentos' },
+                { subcategorie_name: 'Bolsas' }
+            ]
         }),
-        computed: {
+        /*computed: {
             items () {
                 return Array.from({ length: this.length }, (k, v) => v + 1)
             },

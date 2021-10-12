@@ -57,7 +57,7 @@
       </v-btn>
 
       <v-btn icon>
-        <router-link :to="{ name: 'home' }" class="text-decoration-none">
+        <router-link :to="{ name: 'unisaojose/home' }" class="text-decoration-none">
             <v-icon dark>mdi-web</v-icon>
         </router-link>
       </v-btn>
