@@ -6,7 +6,7 @@
             <div class="wiki-cat-col" v-for="(item, index) in arrayCategories" :key="index">
                 <v-hover>
                     <template v-slot:default="{ hover }">
-                        <router-link :to="{ name: 'unisaojose/home' }" class="text-decoration-none">
+                        <router-link :to="`/unisaojose/subcategorie/${item.id}`" class="text-decoration-none">
                             <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile>
                                 <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ item.categorie_name }}
                             </v-card>

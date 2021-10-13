@@ -19,13 +19,13 @@
                     class="wiki-select-input">
                 </v-select>
 
-                <div class="text-center loader">
+                <!-- <div class="text-center loader">
                     <v-progress-circular
                         :size="50"
                         color="primary"
                         indeterminate>
                     </v-progress-circular>
-                </div>
+                </div> -->
             </div>
             <div class="wiki-container">
                 <div class="wiki-box">
@@ -86,7 +86,7 @@
             this.removeItemLocalStorage();
         },
         mounted() {
-            document.querySelector('.loader').style.display = 'none';
+            //document.querySelector('.loader').style.display = 'none';
         },
         methods: {
             async getUnitsAll () {
@@ -99,7 +99,7 @@
                 })
             },
             selectUnit() {
-                document.querySelector('.loader').style.display = 'block';
+                //document.querySelector('.loader').style.display = 'block';
 
                 switch (this.unit) {
                     case '1':
@@ -127,11 +127,12 @@
                 localStorage.removeItem("unit");
             },
             redirectSite(data) {
-                setInterval(() => {
+                window.location.href = data;
+                /*setInterval(() => {
                     window.location.href = data;
-                    //this.$router.push(url);
-                    //this.$router.push({ path: url });
-                }, 1000);
+                    this.$router.push(url);
+                    this.$router.push({ path: url });
+                }, 1000);*/
             }
         }
     })

@@ -24,7 +24,7 @@
         }),
         created() {
             this.getUnitByID();
-            console.log(this.$refs);
+            //console.log(this.$refs);
         },
         methods: {
             async getUnitByID () {

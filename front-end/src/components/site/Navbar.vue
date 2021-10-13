@@ -99,11 +99,9 @@
                 localStorage.removeItem("unit");
             },
             redirectSite(data) {
-                setInterval(() => {
-                    window.location.href = data;
-                    //this.$router.push(url);
-                    //this.$router.push({ path: url });
-                }, 1000);
+                window.location.href = data;
+                //this.$router.push(data);
+                //this.$router.push({ path: data });
             }
         }
     }
