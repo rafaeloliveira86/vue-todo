@@ -16,7 +16,6 @@
                 <div class="wiki-box">
                     <div class="wiki-box-col">
                         <router-view></router-view>
-                        <Categories />
                     </div>
                     <div class="wiki-box-col">
                         <Sidebar />
@@ -33,7 +32,6 @@
     import LoaderComponent from '../../components/LoaderComponent.vue';
     import Navbar from '../../components/site/Navbar.vue';
     import Splash from '../../components/site/Splash.vue';
-    import Categories from '../../components/site/Categories.vue';
     import Sidebar from '../../components/site/Sidebar.vue';
     import Footer from '../../components/site/Footer.vue';
 
@@ -43,7 +41,6 @@
             LoaderComponent,
             Navbar,
             Splash,
-            Categories,
             Sidebar,
             Footer
         }

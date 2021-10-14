@@ -2,7 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Tarefas from '../views/dashboard/Tarefas.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
+
+const CategoriesComponent = () => import("../components/site/Categories.vue");
+const SubcategorieComponent = () => import("../components/site/SubcategorieComponent.vue");
 
 const routes = [
   {
@@ -13,13 +16,18 @@ const routes = [
   //UniSãoJosé (Site)
   { 
     path: '/unisaojose',
-    name: 'unisaojose/home',
+    name: 'unisaojose',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
+        path: '/',
+        name: 'home',
+        component: CategoriesComponent
+      },
+      {
         path: '/unisaojose/subcategorie/:id_categorie',
-        name: 'subcategorie',
-        component: () => import('../views/site/Subcategorie.vue')
+        name: 'unisaojose/subcategorie',
+        component: SubcategorieComponent
       },
       {
         path: '/unisaojose/sobre',
@@ -31,9 +39,19 @@ const routes = [
   //Colégio Realengo (Site)
   {
     path: '/colegiorealengo',
-    name: 'colegiorealengo/home',
+    name: 'colegiorealengo',
     component: () => import('../views/site/Home.vue'),
     children: [
+      {
+        path: '/',
+        name: 'home',
+        component: CategoriesComponent
+      },
+      {
+        path: '/colegiorealengo/subcategorie/:id_categorie',
+        name: 'colegiorealengo/subcategorie',
+        component: SubcategorieComponent
+      },
       {
         path: '/colegiorealengo/sobre',
         name: 'colegiorealengo/sobre',
@@ -44,9 +62,19 @@ const routes = [
   //Colégio Aplicação Taquara (Site)
   {
     path: '/colegioaplicacaotaquara',
-    name: 'colegioaplicacaotaquara/home',
+    name: 'colegioaplicacaotaquara',
     component: () => import('../views/site/Home.vue'),
     children: [
+      {
+        path: '/',
+        name: 'home',
+        component: CategoriesComponent
+      },
+      {
+        path: '/colegioaplicacaotaquara/subcategorie/:id_categorie',
+        name: 'colegioaplicacaotaquara/subcategorie',
+        component: SubcategorieComponent
+      },
       {
         path: '/colegioaplicacaotaquara/sobre',
         name: 'colegioaplicacaotaquara/sobre',
@@ -57,9 +85,19 @@ const routes = [
   //Colégio Aplicação Vila Militar (Site)
   {
     path: '/colegioaplicacaovilamilitar',
-    name: 'colegioaplicacaovilamilitar/home',
+    name: 'colegioaplicacaovilamilitar',
     component: () => import('../views/site/Home.vue'),
     children: [
+      {
+        path: '/',
+        name: 'home',
+        component: CategoriesComponent
+      },
+      {
+        path: '/colegioaplicacaovilamilitar/subcategorie/:id_categorie',
+        name: 'colegioaplicacaovilamilitar/subcategorie',
+        component: SubcategorieComponent
+      },
       {
         path: '/colegioaplicacaovilamilitar/sobre',
         name: 'colegioaplicacaovilamilitar/sobre',

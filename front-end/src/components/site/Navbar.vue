@@ -14,6 +14,9 @@
                         </div>
                         <div class="wiki-app-bar-col">
                             <v-spacer></v-spacer>
+                            <v-btn icon :to="{ name: 'home' }">
+                                <v-icon>mdi-home</v-icon>
+                            </v-btn>
                             <v-menu left bottom>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn icon v-bind="attrs" v-on="on">
@@ -113,6 +116,8 @@
         box-shadow: 0 0 0.2em #000000 !important;
         -moz-box-shadow: 0 0 0.2em #000000 !important;
         -webkit-box-shadow: 0 0 0.2em #000000 !important;
+        height: auto !important;
+        padding: 5px 0 !important;
     }
 
     .v-toolbar__content, .v-toolbar__extension {
@@ -150,10 +155,6 @@
     }
 
     @media only screen and (max-width: 992px) {
-        .v-app-bar {
-            height: 55px !important;
-        }
-
         .wiki-app-bar-col {
             margin: 0 15px;
         }
