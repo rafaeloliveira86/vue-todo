@@ -14,7 +14,7 @@
                         </div>
                         <div class="wiki-app-bar-col">
                             <v-spacer></v-spacer>
-                            <v-btn icon :to="{ name: 'home' }">
+                            <v-btn icon :to="`/${item.slug}`">
                                 <v-icon>mdi-home</v-icon>
                             </v-btn>
                             <v-menu left bottom>
@@ -44,7 +44,7 @@
     const base_url_api = 'http://localhost/api/v1';
 
     export default {
-        name: "Navbar",
+        name: "NavbarComponent",
         data: () => ({
             arrayUnits: [],
             arrayUnit: [],

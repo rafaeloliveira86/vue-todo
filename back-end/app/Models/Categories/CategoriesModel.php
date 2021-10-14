@@ -16,6 +16,7 @@ class CategoriesModel extends Model {
 	protected $allowedFields        = [
 		'id',
 		'categorie_name',
+		'slug',
 		'id_status',
 		'id_user_created',
 		'id_user_updated',

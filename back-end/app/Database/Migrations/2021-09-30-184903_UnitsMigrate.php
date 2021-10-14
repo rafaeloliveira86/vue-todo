@@ -25,6 +25,11 @@ class UnitsMigrate extends Migration {
 				'constraint' => '150',
 				'null' => true
 			],
+			'slug' => [
+				'type' => 'VARCHAR',
+				'constraint' => '30',
+				'null' => true
+			],
 			'class' => [
 				'type' => 'VARCHAR',
 				'constraint' => '50',

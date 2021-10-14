@@ -1,10 +1,10 @@
 <template>
     <div class="wiki-body">
         <LoaderComponent />
-        <Navbar />
+        <NavbarComponent />
 
         <div class="wiki-col">
-            <Splash />
+            <SplashComponent />
         </div>
         <div class="wiki-col">
             <v-container fluid>
@@ -18,31 +18,31 @@
                         <router-view></router-view>
                     </div>
                     <div class="wiki-box-col">
-                        <Sidebar />
+                        <SidebarComponent />
                     </div>
                 </div>
             </div>
             
-            <Footer />
+            <FooterComponent />
         </div>
     </div>
 </template>
 
 <script>
     import LoaderComponent from '../../components/LoaderComponent.vue';
-    import Navbar from '../../components/site/Navbar.vue';
-    import Splash from '../../components/site/Splash.vue';
-    import Sidebar from '../../components/site/Sidebar.vue';
-    import Footer from '../../components/site/Footer.vue';
+    import NavbarComponent from '../../components/site/NavbarComponent.vue';
+    import SplashComponent from '../../components/site/SplashComponent.vue';
+    import SidebarComponent from '../../components/site/SidebarComponent.vue';
+    import FooterComponent from '../../components/site/FooterComponent.vue';
 
     export default ({
         name: "Home",
         components: {
             LoaderComponent,
-            Navbar,
-            Splash,
-            Sidebar,
-            Footer
+            NavbarComponent,
+            SplashComponent,
+            SidebarComponent,
+            FooterComponent
         }
     })
 </script>

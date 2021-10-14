@@ -20,6 +20,11 @@ class CategoriesMigrate extends Migration {
 				'constraint' => '150',
 				'null' => true
 			],
+			'slug' => [
+				'type' => 'VARCHAR',
+				'constraint' => '50',
+				'null' => true
+			],
 			'id_status' => [
 				'type' => 'INT',
 				'constraint' => 11,

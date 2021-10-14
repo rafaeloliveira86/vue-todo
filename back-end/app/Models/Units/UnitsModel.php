@@ -16,6 +16,7 @@ class UnitsModel extends Model {
         'id',
         'unit_nickname',
 		'unit_name',
+        'slug',
         'class',
         'logo_navbar',
         'logo_footer',

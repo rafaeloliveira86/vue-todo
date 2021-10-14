@@ -1,14 +1,12 @@
 <template>
-    <Sobre />
+    <div>Sobre</div>
 </template>
 
 <script>
-    import Sobre from '../../../components/site/unisaojose/Sobre.vue';
-
     export default {
         name: "Sobre",
         components: {
-            Sobre
+            
         }
     }
 </script>

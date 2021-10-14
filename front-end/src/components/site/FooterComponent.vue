@@ -31,7 +31,7 @@
     const base_url_api = 'http://localhost/api/v1';
 
     export default {
-        name: "Footer",
+        name: "FooterComponent",
         data: () => ({
             arrayUnit: [],
             wikiLinks: [

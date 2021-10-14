@@ -18,7 +18,7 @@
     const base_url_api = 'http://localhost/api/v1';
 
     export default {
-        name: "Splash",
+        name: "SplashComponent",
         data: () => ({
             arrayUnit: []
         }),

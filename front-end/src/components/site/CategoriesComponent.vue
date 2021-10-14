@@ -1,14 +1,19 @@
 <template>
     <div>
         <h3 class="underline mb-5 wiki-cat-title">Categorias</h3>
-        
+
         <div class="wiki-cat">
-            <div class="wiki-cat-col" v-for="(item, index) in arrayCategories" :key="index">
+            <div class="wiki-cat-col" v-for="(categorie, index) in arrayCategories" :key="index">
                 <v-hover>
                     <template v-slot:default="{ hover }">
-                        <router-link :to="`/unisaojose/subcategorie/${item.id}`" class="text-decoration-none">
-                            <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile>
-                                <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ item.categorie_name }}
+                        <!-- <router-link :to="`${$route.path}/subcategorias`" class="text-decoration-none">
+                            <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile @click="selectCategorie(categorie.id)">
+                                <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ categorie.categorie_name }}
+                            </v-card>
+                        </router-link> -->
+                        <router-link :to="`${$route.path}/subcategorias/${categorie.slug}`" class="text-decoration-none">
+                            <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile @click="selectCategorie(categorie.id)">
+                                <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ categorie.categorie_name }}
                             </v-card>
                         </router-link>
                     </template>
@@ -24,7 +29,7 @@
     const base_url_api = 'http://localhost/api/v1';
 
     export default {
-        name: "Categories",
+        name: "CategoriesComponent",
         data: () => ({
             arrayCategories: []
         }),
@@ -43,6 +48,12 @@
                     console.log(err);
                 })
             },
+            selectCategorie(data) {
+                this.setItemLocalStorage(data);
+            },
+            setItemLocalStorage(data) {
+                localStorage.setItem("categorie", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
+            }
         }
     }
 </script>

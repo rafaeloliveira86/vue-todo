@@ -4,8 +4,9 @@ import Tarefas from '../views/dashboard/Tarefas.vue';
 
 Vue.use(VueRouter);
 
-const CategoriesComponent = () => import("../components/site/Categories.vue");
+const CategoriesComponent = () => import("../components/site/CategoriesComponent.vue");
 const SubcategorieComponent = () => import("../components/site/SubcategorieComponent.vue");
+const ArticleComponent = () => import("../components/site/ArticleComponent.vue");
 
 const routes = [
   {
@@ -25,14 +26,19 @@ const routes = [
         component: CategoriesComponent
       },
       {
-        path: '/unisaojose/subcategorie/:id_categorie',
-        name: 'unisaojose/subcategorie',
+        path: '/unisaojose/subcategorias/:slug',
+        name: 'unisaojose/subcategorias',
         component: SubcategorieComponent
       },
       {
-        path: '/unisaojose/sobre',
-        name: 'unisaojose/sobre',
-        component: () => import('../views/site/unisaojose/Sobre.vue')
+        path: '/unisaojose/subcategorias2',
+        name: 'unisaojose/subcategorias2',
+        component: SubcategorieComponent
+      },
+      {
+        path: '/unisaojose/subcategorias/artigos',
+        name: 'unisaojose/subcategorias/artigos',
+        component: ArticleComponent
       },
     ]
   },
@@ -48,14 +54,14 @@ const routes = [
         component: CategoriesComponent
       },
       {
-        path: '/colegiorealengo/subcategorie/:id_categorie',
+        path: '/colegiorealengo/subcategorias',
         name: 'colegiorealengo/subcategorie',
         component: SubcategorieComponent
       },
       {
-        path: '/colegiorealengo/sobre',
-        name: 'colegiorealengo/sobre',
-        component: () => import('../views/site/colegiorealengo/Sobre.vue')
+        path: '/colegiorealengo/subcategorias/artigos',
+        name: 'colegiorealengo/subcategorias/artigos',
+        component: ArticleComponent
       },
     ]
   },
@@ -71,14 +77,14 @@ const routes = [
         component: CategoriesComponent
       },
       {
-        path: '/colegioaplicacaotaquara/subcategorie/:id_categorie',
+        path: '/colegioaplicacaotaquara/subcategorias',
         name: 'colegioaplicacaotaquara/subcategorie',
         component: SubcategorieComponent
       },
       {
-        path: '/colegioaplicacaotaquara/sobre',
-        name: 'colegioaplicacaotaquara/sobre',
-        component: () => import('../views/site/colegioaplicacaotaquara/Sobre.vue')
+        path: '/colegioaplicacaotaquara/subcategorias/artigos',
+        name: 'colegioaplicacaotaquara/subcategorias/artigos',
+        component: ArticleComponent
       },
     ]
   },
@@ -94,14 +100,14 @@ const routes = [
         component: CategoriesComponent
       },
       {
-        path: '/colegioaplicacaovilamilitar/subcategorie/:id_categorie',
+        path: '/colegioaplicacaovilamilitar/subcategorias',
         name: 'colegioaplicacaovilamilitar/subcategorie',
         component: SubcategorieComponent
       },
       {
-        path: '/colegioaplicacaovilamilitar/sobre',
-        name: 'colegioaplicacaovilamilitar/sobre',
-        component: () => import('../views/site/colegioaplicacaovilamilitar/Sobre.vue')
+        path: '/colegioaplicacaovilamilitar/subcategorias/artigos',
+        name: 'colegioaplicacaovilamilitar/subcategorias/artigos',
+        component: ArticleComponent
       },
     ]
   },

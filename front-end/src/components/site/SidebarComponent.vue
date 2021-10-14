@@ -21,7 +21,7 @@
     //const base_url = 'http://localhost:8080';
 
     export default {
-        name: "Sidebar",
+        name: "SidebarComponent",
         data: () => ({
             arraySubcategories: [
                 { name: 'Como gerar relatórios no sistema UniMestre?', link: 'https://google.com' },

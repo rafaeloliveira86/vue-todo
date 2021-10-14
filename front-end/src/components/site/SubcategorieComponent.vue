@@ -6,7 +6,7 @@
             <div class="wiki-subcat-col" v-for="(item, index) in arraySubcategories" :key="index">
                 <v-hover>
                     <template v-slot:default="{ hover }">
-                        <router-link :to="`/unisaojose/subcategorie/${item.id}`" class="text-decoration-none">
+                        <router-link :to="`${$route.path}/artigos`" class="text-decoration-none">
                             <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile>
                                 <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ item.subcategorie_name }}
                             </v-card>
@@ -34,7 +34,10 @@
                 { id: 9, subcategorie_name: 'Requerimentos' },
                 { id: 10, subcategorie_name: 'Bolsas' }
             ]
-        })
+        }),
+        mounted() {
+            console.log(this.$route.params.slug);
+        }
     }
 </script>
 

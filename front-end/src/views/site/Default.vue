@@ -1,7 +1,7 @@
 <template>
     <div class="wiki-body">
         <div class="wiki-col">
-            <Splash />
+            <SplashComponent />
         </div>
         <div class="wiki-col">
             <div class="wiki-select-box">
@@ -58,7 +58,7 @@
 
 <script>
     import axios from 'axios';
-    import Splash from '../../components/site/Splash.vue';
+    import SplashComponent from '../../components/site/SplashComponent.vue';
 
     const base_url = 'http://localhost:8080';
     const base_url_api = 'http://localhost/api/v1';
@@ -66,7 +66,7 @@
     export default ({
         name: "Default",
         components: {
-            Splash
+            SplashComponent
         },
         data: () => ({
             arrayUnits: [],
@@ -124,7 +124,13 @@
                 localStorage.setItem("unit", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
             },
             removeItemLocalStorage() {
-                localStorage.removeItem("unit");
+                if (localStorage.getItem("unit")) {
+                    localStorage.removeItem("unit");
+                }
+
+                if (localStorage.getItem("categorie")) {
+                    localStorage.removeItem("categorie");
+                }
             },
             redirectSite(data) {
                 window.location.href = data;
