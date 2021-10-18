@@ -3,7 +3,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class SubcategoriesMigrate extends Migration {
+class CategoriesSubcategoriesMigrate extends Migration {
     public function up() {
         $this->db->disableForeignKeyChecks();
 		
@@ -15,17 +15,21 @@ class SubcategoriesMigrate extends Migration {
 				'auto_increment' => true,
 				'null' => false
 			],
-			'subcategorie_name' => [
-				'type' => 'VARCHAR',
-				'constraint' => '150',
-				'null' => true
+			'id_categorie' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => true,
+				'null' => false,
+				'default' => 0
 			],
-			'slug' => [
-				'type' => 'VARCHAR',
-				'constraint' => '50',
-				'null' => true
+			'id_subcategorie' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => true,
+				'null' => false,
+				'default' => 0
 			],
-			'id_status' => [
+			'id_unit' => [
 				'type' => 'INT',
 				'constraint' => 11,
 				'unsigned' => true,
@@ -39,31 +43,7 @@ class SubcategoriesMigrate extends Migration {
 				'null' => false,
 				'default' => 0
 			],
-			'id_user_updated' => [
-				'type' => 'INT',
-				'constraint' => 11,
-				'unsigned' => false,
-				'null' => false,
-				'default' => 0
-			],
-			'id_user_deleted' => [
-				'type' => 'INT',
-				'constraint' => 11,
-				'unsigned' => false,
-				'null' => false,
-				'default' => 0
-			],
 			'created_at' => [
-				'type' => 'DATETIME',
-				'null' => false,
-				'default' => date('0000-00-00 00:00:00')
-			],
-			'updated_at' => [
-				'type' => 'TIMESTAMP',
-				'null' => false,
-				'default' => date('0000-00-00 00:00:00')
-			],
-			'deleted_at' => [
 				'type' => 'DATETIME',
 				'null' => false,
 				'default' => date('0000-00-00 00:00:00')
@@ -71,13 +51,15 @@ class SubcategoriesMigrate extends Migration {
 		]);
 
 		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('id_status', 'tbl_status', 'id', 'CASCADE', 'NO_ACTION');
-		$this->forge->createTable('tbl_subcategories');
+        $this->forge->addForeignKey('id_categorie', 'tbl_categories', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('id_subcategorie', 'tbl_subcategories', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('id_unit', 'tbl_units', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->createTable('tbl_categories_subcategories');
 
 		$this->db->enableForeignKeyChecks();
     }
 
     public function down() {
-        $this->forge->dropTable('tbl_subcategories');
+        $this->forge->dropTable('tbl_categories_subcategories');
     }
 }

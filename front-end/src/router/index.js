@@ -54,7 +54,7 @@ const routes = [
         component: CategoriesComponent
       },
       {
-        path: '/colegiorealengo/subcategorias',
+        path: '/colegiorealengo/subcategorias/:slug',
         name: 'colegiorealengo/subcategorie',
         component: SubcategorieComponent
       },
@@ -77,7 +77,7 @@ const routes = [
         component: CategoriesComponent
       },
       {
-        path: '/colegioaplicacaotaquara/subcategorias',
+        path: '/colegioaplicacaotaquara/subcategorias/:slug',
         name: 'colegioaplicacaotaquara/subcategorie',
         component: SubcategorieComponent
       },
@@ -100,7 +100,7 @@ const routes = [
         component: CategoriesComponent
       },
       {
-        path: '/colegioaplicacaovilamilitar/subcategorias',
+        path: '/colegioaplicacaovilamilitar/subcategorias/:slug',
         name: 'colegioaplicacaovilamilitar/subcategorie',
         component: SubcategorieComponent
       },

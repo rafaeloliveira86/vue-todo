@@ -6,6 +6,7 @@ use CodeIgniter\Database\Seeder;
 class InitSeeder extends Seeder {
     public function run() {
         $this->call('CategoriesSeeder');
+        $this->call('CategoriesSubcategoriesSeeder');
         $this->call('CategoriesUnitsSeeder');
 		$this->call('StatusSeeder');
         $this->call('SubcategoriesSeeder');

@@ -50,7 +50,7 @@ class CategoriesModel extends Model {
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	public function getCategorieByUnitID($id_unidade) {
+	public function getCategorieByUnitID(int $id_unit) {
         try {
             $this->select('
 				c.*,
@@ -59,7 +59,7 @@ class CategoriesModel extends Model {
 			$this->from('tbl_categories AS c');
             $this->join('tbl_categories_units AS cu', 'cu.id_categorie = c.id');
 			$this->join('tbl_units AS u', 'cu.id_unit = u.id');
-            $this->where('u.id', $id_unidade);
+            $this->where('u.id', $id_unit);
 			$this->where('c.id_status', 1);
 			$this->groupBy('c.categorie_name');
 			$this->orderBy('c.id', 'ASC');

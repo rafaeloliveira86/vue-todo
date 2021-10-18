@@ -2,6 +2,7 @@
 namespace App\Models\Subcategories;
 
 use CodeIgniter\Model;
+use Exception;
 
 class SubcategoriesModel extends Model {
     protected $DBGroup              = 'default';
@@ -15,8 +16,7 @@ class SubcategoriesModel extends Model {
     protected $allowedFields        = [
         'id',
         'subcategorie_name',
-        'id_unit',
-        'id_categorie',
+        'slug',
 		'id_status',
 		'id_user_created',
 		'id_user_updated',
@@ -49,4 +49,30 @@ class SubcategoriesModel extends Model {
     protected $afterFind            = [];
     protected $beforeDelete         = [];
     protected $afterDelete          = [];
+
+    public function getSubcategorieByCategorieAndUnitID(int $id_categorie, int $id_unit) {
+        try {
+            $this->select('
+                c.id AS id_categorie,
+                c.categorie_name,
+                s.id AS id_subcategorie,
+                s.subcategorie_name,
+                s.slug,
+                s.id_status,
+                u.unit_name
+			');
+			$this->from('tbl_subcategories AS s');
+            $this->join('tbl_categories_subcategories AS cs', 'cs.id_subcategorie = s.id');
+			$this->join('tbl_categories AS c', 'cs.id_categorie = c.id');
+			$this->join('tbl_units AS u', 'cs.id_unit = u.id');
+            $this->where('cs.id_categorie', $id_categorie);
+            $this->where('cs.id_unit', $id_unit);
+			$this->where('s.id_status', 1);
+			$this->groupBy('s.subcategorie_name');
+			$this->orderBy('s.id', 'ASC');
+            return $this->asObject()->findAll();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3 class="underline mb-5 wiki-subcat-title">Subcategorias</h3>
-
+        <p>{{ teste }} &raquo;</p>
         <div class="wiki-subcat">
             <div class="wiki-subcat-col" v-for="(item, index) in arraySubcategories" :key="index">
                 <v-hover>
@@ -19,24 +19,42 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
+    const base_url_api = 'http://localhost/api/v1';
+
     export default {
         name: "SubcategorieComponent",
         data: () => ({
-            arraySubcategories: [
-                { id: 1, subcategorie_name: 'Relatórios' },
-                { id: 2, subcategorie_name: 'Boletos' },
-                { id: 3, subcategorie_name: 'Portal do Aluno' },
-                { id: 4, subcategorie_name: 'Estágios' },
-                { id: 5, subcategorie_name: 'Leads' },
-                { id: 6, subcategorie_name: 'Financeiro' },
-                { id: 7, subcategorie_name: 'MLS EAD' },
-                { id: 8, subcategorie_name: 'Visualizar Notas' },
-                { id: 9, subcategorie_name: 'Requerimentos' },
-                { id: 10, subcategorie_name: 'Bolsas' }
-            ]
+            arraySubcategories: [],
+            teste: null
         }),
         mounted() {
             console.log(this.$route.params.slug);
+            this.teste = this.$route.path;
+        },
+        created() {
+            this.getSubcategoriesByCategorieAndUnitID();
+        },
+        methods: {
+            async getSubcategoriesByCategorieAndUnitID() {
+                let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
+                let id_categorie = atob(localStorage.getItem("categorie")); //btoa (Base 64 encode) - atob (Base 64 decode)
+
+                await axios.get(base_url_api + '/subcategorie/categorie/' + id_categorie + '/unit/' + id_unit)
+                .then(res => {
+                    this.arraySubcategories = [...res.data.data];
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            },
+            selectCategorie(data) {
+                this.setItemLocalStorage(data);
+            },
+            setItemLocalStorage(data) {
+                localStorage.setItem("categorie", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
+            }
         }
     }
 </script>
