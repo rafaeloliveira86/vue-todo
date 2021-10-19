@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-for="(item, index) in arrayUnit" :key="index">
-            <v-container fluid>
+            <v-container fluid class="white">
                 <div class="wiki-container">
                     <footer class="wiki-foot">
                         <div class="wiki-foot-col">
@@ -64,11 +64,6 @@
     .logo {
         width: 150px !important;
         height: auto;
-    }
-
-    .container--fluid {
-        padding: 0;
-        background: #ffffff;
     }
 
     .wiki-foot {

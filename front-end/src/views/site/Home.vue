@@ -7,12 +7,17 @@
             <SplashComponent />
         </div>
         <div class="wiki-col">
-            <v-container fluid>
+            <v-container fluid class="white">
                 <div class="wiki-container pt-7">
                     <v-text-field label="Pesquisar" filled solo rounded prepend-inner-icon="mdi-magnify" class="wiki-search" background-color="#f0f2f5"></v-text-field>
                 </div>
             </v-container>
-            <div class="wiki-container mt-8 mb-8">
+            <v-container fluid>
+                <div class="wiki-container">
+                    <BreadcrumbComponent />
+                </div>
+            </v-container>
+            <div class="wiki-container mt-6 mb-6">
                 <div class="wiki-box">
                     <div class="wiki-box-col">
                         <router-view></router-view>
@@ -32,6 +37,7 @@
     import LoaderComponent from '../../components/LoaderComponent.vue';
     import NavbarComponent from '../../components/site/NavbarComponent.vue';
     import SplashComponent from '../../components/site/SplashComponent.vue';
+    import BreadcrumbComponent from '../../components/site/BreadcrumbComponent.vue';
     import SidebarComponent from '../../components/site/SidebarComponent.vue';
     import FooterComponent from '../../components/site/FooterComponent.vue';
 
@@ -41,6 +47,7 @@
             LoaderComponent,
             NavbarComponent,
             SplashComponent,
+            BreadcrumbComponent,
             SidebarComponent,
             FooterComponent
         }
@@ -87,9 +94,11 @@
         padding: 0;
     }
 
+    /* Container Vuetify */
     .container--fluid {
         border-top: 1px solid #ebebeb;
         border-bottom: 1px solid #ebebeb;
+        padding: 0;
     }
 
     /* Box */

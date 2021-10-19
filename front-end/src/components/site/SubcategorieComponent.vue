@@ -1,18 +1,27 @@
 <template>
     <div>
         <h3 class="underline mb-5 wiki-subcat-title">Subcategorias</h3>
-        <p>{{ teste }} &raquo;</p>
+
         <div class="wiki-subcat">
-            <div class="wiki-subcat-col" v-for="(item, index) in arraySubcategories" :key="index">
-                <v-hover>
-                    <template v-slot:default="{ hover }">
-                        <router-link :to="`${$route.path}/artigos`" class="text-decoration-none">
-                            <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile>
-                                <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ item.subcategorie_name }}
-                            </v-card>
-                        </router-link>
-                    </template>
-                </v-hover>
+            <div class="wiki-subcat-col">
+                <v-expansion-panels accordion tile>
+                    <v-expansion-panel v-for="(item, index) in arraySubcategories" :key="index">
+                        <v-expansion-panel-header>
+                            <template v-slot:actions>
+                                <v-icon size="30" color="#999999">mdi-forum</v-icon>
+                            </template>
+                            <strong>{{ item.subcategorie_name }}</strong>
+                        </v-expansion-panel-header>
+
+                        <v-expansion-panel-content>
+                            <v-divider></v-divider>
+                            <br>
+                            <router-link :to="`${$route.path}/artigos`" class="text-decoration-none">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </router-link>
+                        </v-expansion-panel-content>
+                    </v-expansion-panel>
+                </v-expansion-panels>
             </div>
         </div>
     </div>
@@ -26,12 +35,10 @@
     export default {
         name: "SubcategorieComponent",
         data: () => ({
-            arraySubcategories: [],
-            teste: null
+            arraySubcategories: []
         }),
         mounted() {
             console.log(this.$route.params.slug);
-            this.teste = this.$route.path;
         },
         created() {
             this.getSubcategoriesByCategorieAndUnitID();

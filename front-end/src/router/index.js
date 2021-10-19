@@ -9,6 +9,13 @@ const SubcategorieComponent = () => import("../components/site/SubcategorieCompo
 const ArticleComponent = () => import("../components/site/ArticleComponent.vue");
 
 const routes = [
+  //Página não encontrada
+  { 
+    path: '*',
+    name: 'NotFound',
+    component: () => import('../views/site/PageNotFound.vue')
+  },
+  //Página Inicial Unidades
   {
     path: '/',
     name: 'Página Inicial',
@@ -23,22 +30,39 @@ const routes = [
       {
         path: '/',
         name: 'home',
-        component: CategoriesComponent
+        component: CategoriesComponent,
+        meta: {
+          breadcrumb: [
+            { text: 'Home', href: '/unisaojose' },
+            { text: 'Categorias', href: '/unisaojose' },
+          ]
+        }
       },
       {
         path: '/unisaojose/subcategorias/:slug',
         name: 'unisaojose/subcategorias',
-        component: SubcategorieComponent
+        component: SubcategorieComponent,
+        meta: {
+          breadcrumb: [
+            { text: 'Home', href: '/unisaojose' },
+            { text: 'Categorias', href: '/unisaojose'  },
+            // { text: 'Subcategorias', href: '/unisaojose/subcategorias' }
+            { text: 'Subcategorias', href: [{path: '/unisaojose/subcategorias/:slug'}] }
+          ]
+        }
       },
       {
-        path: '/unisaojose/subcategorias2',
-        name: 'unisaojose/subcategorias2',
-        component: SubcategorieComponent
-      },
-      {
-        path: '/unisaojose/subcategorias/artigos',
+        path: '/unisaojose/subcategorias/:slug/artigos',
         name: 'unisaojose/subcategorias/artigos',
-        component: ArticleComponent
+        component: ArticleComponent,
+        meta: {
+          breadcrumb: [
+            { text: 'Home', href: '/unisaojose' },
+            { text: 'Categorias', href: '/unisaojose'  },
+            { text: 'Subcategorias', href: '/unisaojose/subcategorias' },
+            { text: 'Artigos' }
+          ]
+        }
       },
     ]
   },
@@ -51,17 +75,38 @@ const routes = [
       {
         path: '/',
         name: 'home',
-        component: CategoriesComponent
+        component: CategoriesComponent,
+        meta: {
+          breadcrumb: [
+            { text: 'Home', href: '/colegiorealengo' },
+            { text: 'Categorias', href: '/colegiorealengo' },
+          ]
+        }
       },
       {
         path: '/colegiorealengo/subcategorias/:slug',
         name: 'colegiorealengo/subcategorie',
-        component: SubcategorieComponent
+        component: SubcategorieComponent,
+        meta: {
+          breadcrumb: [
+            { text: 'Home', href: '/colegiorealengo' },
+            { text: 'Categorias', href: '/colegiorealengo'  },
+            { text: 'Subcategorias', href: '/colegiorealengo/subcategorias' }
+          ]
+        }
       },
       {
-        path: '/colegiorealengo/subcategorias/artigos',
+        path: '/colegiorealengo/subcategorias/:slug/artigos',
         name: 'colegiorealengo/subcategorias/artigos',
-        component: ArticleComponent
+        component: ArticleComponent,
+        meta: {
+          breadcrumb: [
+            { text: 'Home', href: '/colegiorealengo' },
+            { text: 'Categorias', href: '/colegiorealengo'  },
+            { text: 'Subcategorias', href: '/colegiorealengo/subcategorias' },
+            { text: 'Artigos' }
+          ]
+        }
       },
     ]
   },
@@ -82,7 +127,7 @@ const routes = [
         component: SubcategorieComponent
       },
       {
-        path: '/colegioaplicacaotaquara/subcategorias/artigos',
+        path: '/colegioaplicacaotaquara/subcategorias/:slug/artigos',
         name: 'colegioaplicacaotaquara/subcategorias/artigos',
         component: ArticleComponent
       },
@@ -105,7 +150,7 @@ const routes = [
         component: SubcategorieComponent
       },
       {
-        path: '/colegioaplicacaovilamilitar/subcategorias/artigos',
+        path: '/colegioaplicacaovilamilitar/subcategorias/:slug/artigos',
         name: 'colegioaplicacaovilamilitar/subcategorias/artigos',
         component: ArticleComponent
       },

@@ -23,6 +23,9 @@ $routes->group("api/v1", function ($routes) {
     $routes->resource('subcategories', ['namespace' => 'App\Controllers\Subcategories']); //POST / GET / PUT / PATCH / DELETE
     $routes->get("subcategorie/categorie/(:num)/unit/(:num)", "Subcategories::subcategoriesByCategoriesAndUnitID/$1/$2", ['namespace' => 'App\Controllers\Subcategories']);
     
+    //Artigos
+    $routes->resource('articles', ['namespace' => 'App\Controllers\Articles']);
+
     $routes->post("user/register", "Users::createUser");
     $routes->get("user/details", "Users::getUserDetail");
     $routes->delete("user/delete/(:num)", "Users::deleteUser/$1");

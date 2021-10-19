@@ -4,40 +4,20 @@
             <SplashComponent />
         </div>
         <div class="wiki-col">
-            <div class="wiki-select-box">
-                <v-select
-                    :items="arrayUnits"
-                    v-model="unit"
-                    label="Selecionar Unidade"
-                    item-text="unit_name"
-                    item-value="id"
-                    prepend-inner-icon="mdi-chevron-right"
-                    @change="selectUnit()"
-                    solo
-                    dark
-                    height="55"
-                    class="wiki-select-input">
-                </v-select>
-
-                <!-- <div class="text-center loader">
-                    <v-progress-circular
-                        :size="50"
-                        color="primary"
-                        indeterminate>
-                    </v-progress-circular>
-                </div> -->
-            </div>
             <div class="wiki-container">
                 <div class="wiki-box">
                     <div class="wiki-box-col">
-                        <v-img :src="require('../../assets/image/image_help.png')" contain width="400" />
+                        <v-img :src="require('../../assets/image/image_page_not_found.png')" contain width="500" />
                     </div>
                     <div class="wiki-box-col">
-                        <p>
-                            Documentação Colaborativa dos sistemas institucionais UniSãoJosé, Colégio Realengo, Colégio Aplicação Taquara e Colégio Aplicação Vila Militar.<br><br>
-                            <strong>Compartilhamos conhecimento!</strong><br><br>
-                            Estamos iniciando esta <strong>Wiki</strong> de ajuda e você colaborador pode expandí-la.
-                        </p>
+                        <h5>Erro 404</h5>
+                        <p>Oops! Página não encontrada!</p>
+                        <small>Desculpe, não podemos encontrar a página que você está procurando.</small>
+                        <div class="text-center">
+                            <v-btn rounded :loading="loading" :disabled="loading" color="primary" @click="loader = 'loading'" class="ma-5">
+                                Página Inicial
+                            </v-btn>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,7 +40,6 @@
     import axios from 'axios';
     import SplashComponent from '../../components/site/SplashComponent.vue';
 
-    const base_url = 'http://localhost:8080';
     const base_url_api = 'http://localhost/api/v1';
 
     export default ({
@@ -70,23 +49,28 @@
         },
         data: () => ({
             arrayUnits: [],
-            unit: null,
-            wikiLinks: [
-                {
-                    text: 'Página Inicial',
-                    href: base_url + '/unisaojose',
-                }
-            ]
+            loader: null,
+            loading: false,
+            loading2: false,
+            loading3: false,
+            loading4: false,
+            loading5: false
         }),
-        beforeDestroy () {
-            clearInterval(this.interval);
-        },
         created() {
             this.getUnitsAll();
-            this.removeItemLocalStorage();
         },
-        mounted() {
-            //document.querySelector('.loader').style.display = 'none';
+        watch: {
+            loader () {
+                const l = this.loader;
+                this[l] = !this[l];
+
+                setTimeout(() => {
+                    (this[l] = false);
+                    this.redirectSite();
+                }, 3000);
+
+                this.loader = null;
+            }
         },
         methods: {
             async getUnitsAll () {
@@ -98,47 +82,8 @@
                     console.log(err);
                 })
             },
-            selectUnit() {
-                //document.querySelector('.loader').style.display = 'block';
-
-                switch (this.unit) {
-                    case '1':
-                        this.setItemLocalStorage(this.unit);
-                        this.redirectSite('/unisaojose');
-                        break;
-                    case '2':
-                        this.setItemLocalStorage(this.unit);
-                        this.redirectSite('/colegiorealengo');
-                        break;
-                    case '3':
-                        this.setItemLocalStorage(this.unit);
-                        this.redirectSite('/colegioaplicacaotaquara');
-                        break;
-                    case '4':
-                        this.setItemLocalStorage(this.unit);
-                        this.redirectSite('/colegioaplicacaovilamilitar');
-                        break;
-                }
-            },
-            setItemLocalStorage(data) {
-                localStorage.setItem("unit", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
-            },
-            removeItemLocalStorage() {
-                if (localStorage.getItem("unit")) {
-                    localStorage.removeItem("unit");
-                }
-
-                if (localStorage.getItem("categorie")) {
-                    localStorage.removeItem("categorie");
-                }
-            },
-            redirectSite(data) {
-                window.location.href = data;
-                /*setInterval(() => {
-                    window.location.href = data;
-                    this.$router.push(url);
-                    this.$router.push({ path: url });
-                }, 1000);*/
+            redirectSite() {
+                window.location.href = '/';
             }
         }
     })
@@ -185,11 +130,6 @@
         padding: 0;
     }
 
-    /* Units Loading */
-    .v-progress-circular {
-        margin: 1rem;
-    }
-
     /* Box */
     .wiki-box {
         display: flex;
@@ -199,7 +139,7 @@
         align-items: center;
         width: 100%;
         height: auto;
-        margin: 77px 0;
+        margin: 50px 0;
     }
 
     .wiki-box-col {
@@ -220,33 +160,65 @@
         margin: 0 auto;
     }
 
+    .wiki-box-col h5 {
+        font-size: 30px;
+        color: #b20000;
+    }
+
     .wiki-box-col p {
+        font-size: 25px;
+        color: #333333;
+    }
+
+    .wiki-box-col small {
         font-size: 17px;
-        color: #595959;
+        color: #333333;
     }
 
-    /* Select Box */
-
-    .wiki-select-box {
-        z-index: 1;
-        position: absolute;
-        top: 273px;
-        left: calc((100% - 400px) / 2); /* 400px = largura do select */
+    /* Button Loader */
+    .custom-loader {
+        animation: loader 1s infinite;
+        display: flex;
     }
 
-    .wiki-select-input {
-        width: 400px;
-        height: 55px;
-        border: none;
-        border-radius: 35px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        -o-appearance: none;
-        -ms-appearance: none;
-        appearance: none;
-        font-family: "Font Awesome 5 Free", "Roboto";
-        font-size: 15px;
-        /*background: #ffffff;*/
+    @-moz-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    @-webkit-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    @-o-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    @keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
     }
 
     /* Footer */
@@ -296,7 +268,7 @@
         /* Box */
         .wiki-box {
             flex-direction: column;
-            margin: 70px 0 20px 0;
+            margin: 20px 0;
         }
 
         .wiki-box-col {

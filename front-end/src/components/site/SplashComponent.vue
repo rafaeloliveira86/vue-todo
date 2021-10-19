@@ -4,7 +4,7 @@
             <div id="wiki_background"></div>
             <div class="wiki-splash-content">
                 <h4 class="underline-white">
-                    Wiki.<small v-for="(item, index) in arrayUnit" :key="index" v-show="item.unit_nickname">{{ item.unit_nickname }}</small>
+                    Wiki<small v-for="(item, index) in arrayUnit" :key="index" v-show="item.unit_nickname">.{{ item.unit_nickname }}</small>
                 </h4>
             </div>
             <v-img :src="require('../../assets/image/image_callcenter.png')" contain position="right" class="image" />
@@ -87,6 +87,25 @@
         right: 0;
         height: 100%;
         opacity: 0.8;
+    }
+
+    /* Underline */
+
+    .underline-white {
+        margin: 0 0 15px 0;
+        border-bottom: 1px solid #ffffff;
+        padding-bottom: 15px;
+        position: relative;
+    }
+
+    .underline-white:after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: #ffffff;
+        width: 25%;
+        height: 2px;
     }
 
     @media only screen and (max-width: 992px) {
