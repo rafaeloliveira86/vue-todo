@@ -25,6 +25,7 @@ $routes->group("api/v1", function ($routes) {
     
     //Artigos
     $routes->resource('articles', ['namespace' => 'App\Controllers\Articles']);
+    $routes->get("article/subcategorie/(:num)", "Articles::getArticlesBySubcategorieID/$1", ['namespace' => 'App\Controllers\Articles']);
 
     $routes->post("user/register", "Users::createUser");
     $routes->get("user/details", "Users::getUserDetail");
