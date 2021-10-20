@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers\Subcategories;
+namespace App\Controllers\Wiki\Subcategories;
 
 use App\Controllers\BaseController;
 use App\Libraries\JWT\ValidateJWT;
@@ -25,7 +25,7 @@ class Subcategories extends BaseController {
             //return json_encode($objSubcategorie);die;
 
             if (!$objSubcategorie) {
-                return $this->fail('Nenhum usuário encontrado.', 404);
+                return $this->fail('Oops! Desculpe, nenhuma subcategoria encontrada.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -42,7 +42,7 @@ class Subcategories extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Listagem de Categorias.',
+                    'messages' => 'Listagem de Subcategorias.',
                     'data' => $objSubcategorie
                 ];
 
@@ -75,7 +75,7 @@ class Subcategories extends BaseController {
             //return json_encode($objCategories);die;
 
             if (!$objCategories) {
-                return $this->fail('Nenhuma subcategoria encontrada para a categoria e unidade selecionada.', 404);
+                return $this->fail('Oops! Desculpe, nenhuma subcategoria encontrada.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -92,7 +92,7 @@ class Subcategories extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Listagem de subcategorias por categoria e unidade.',
+                    'messages' => 'Listagem de subcategorias.',
                     'data' => $objCategories
                 ];
 

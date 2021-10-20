@@ -7,7 +7,7 @@
             <div class="wiki-select-box">
                 <v-select
                     :items="arrayUnits"
-                    v-model="unit"
+                    v-model="id_unit"
                     label="Selecionar Unidade"
                     item-text="unit_name"
                     item-value="id"
@@ -60,8 +60,7 @@
     import axios from 'axios';
     import SplashComponent from '../../components/site/SplashComponent.vue';
 
-    const base_url = 'http://localhost:8080';
-    const base_url_api = 'http://localhost/api/v1';
+    const base_url_api = 'http://localhost/wiki/api/v1';
 
     export default ({
         name: "Default",
@@ -70,27 +69,21 @@
         },
         data: () => ({
             arrayUnits: [],
-            unit: null,
-            wikiLinks: [
-                {
-                    text: 'Página Inicial',
-                    href: base_url + '/unisaojose',
-                }
-            ]
+            id_unit: null
         }),
         beforeDestroy () {
             clearInterval(this.interval);
         },
         created() {
             this.getUnitsAll();
-            this.removeItemLocalStorage();
         },
         mounted() {
             //document.querySelector('.loader').style.display = 'none';
+            this.removeItemLocalStorage();
         },
         methods: {
             async getUnitsAll () {
-                await axios.get(base_url_api + '/units')
+                await axios.get(base_url_api + '/unidades')
                 .then(res => {
                     this.arrayUnits = [...res.data.data];
                 })
@@ -101,21 +94,21 @@
             selectUnit() {
                 //document.querySelector('.loader').style.display = 'block';
 
-                switch (this.unit) {
+                switch (this.id_unit) {
                     case '1':
-                        this.setItemLocalStorage(this.unit);
+                        this.setItemLocalStorage(this.id_unit);
                         this.redirectSite('/unisaojose');
                         break;
                     case '2':
-                        this.setItemLocalStorage(this.unit);
+                        this.setItemLocalStorage(this.id_unit);
                         this.redirectSite('/colegiorealengo');
                         break;
                     case '3':
-                        this.setItemLocalStorage(this.unit);
+                        this.setItemLocalStorage(this.id_unit);
                         this.redirectSite('/colegioaplicacaotaquara');
                         break;
                     case '4':
-                        this.setItemLocalStorage(this.unit);
+                        this.setItemLocalStorage(this.id_unit);
                         this.redirectSite('/colegioaplicacaovilamilitar');
                         break;
                 }

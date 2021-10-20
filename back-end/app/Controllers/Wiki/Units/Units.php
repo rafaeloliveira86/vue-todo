@@ -1,13 +1,13 @@
 <?php
-namespace App\Controllers\Articles;
+namespace App\Controllers\Wiki\Units;
 
 use App\Controllers\BaseController;
 use App\Libraries\JWT\ValidateJWT;
-use App\Models\Articles\ArticlesModel;
 use CodeIgniter\API\ResponseTrait;
+use App\Models\Units\UnitsModel;
 use Exception;
 
-class Articles extends BaseController {
+class Units extends BaseController {
     use ResponseTrait;
 
     public function index() {
@@ -17,15 +17,15 @@ class Articles extends BaseController {
                        ->setStatusCode(200);
         $this->response->setContentType('application/json');
 
-		try {
+        try {
             //$jwt = new ValidateJWT();
-            $articleModel = new ArticlesModel();
+            $unitModel = new UnitsModel();
 
-            $objArticles = $articleModel->where('id_status <>', 3)->asObject()->findAll();
-            //return json_encode($objArticles);die;
+            $objUnit = $unitModel->where('id_status <>', 3)->asObject()->findAll();
+            //return json_encode($objUnit);die;
 
-            if (!$objArticles) {
-                return $this->fail('Nenhum artigo encontrado.', 404);
+            if (!$objUnit) {
+                return $this->fail('Nenhum usuário encontrado.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -33,8 +33,8 @@ class Articles extends BaseController {
                     $response = [
                         'status' => 200,
                         'error' => FALSE,
-                        'messages' => 'Listagem de Categorias.',
-                        'data' => $objArticles
+                        'messages' => 'Listagem de Unidades.',
+                        'data' => $objUnit
                     ];
 
                     return $this->respond($response);
@@ -42,8 +42,8 @@ class Articles extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Listagem de Artigos.',
-                    'data' => $objArticles
+                    'messages' => 'Listagem de Unidades.',
+                    'data' => $objUnit
                 ];
 
                 return $this->respond($response);
@@ -59,22 +59,22 @@ class Articles extends BaseController {
         }
     }
 
-    public function getArticlesBySubcategorieID(int $id_subcategorie) {
+    public function getUnitByID($id_unit) {
         $this->response->setHeader('Access-Control-Allow-Origin', '*')
                        ->setHeader('Access-Control-Allow-Headers', '*')
                        ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
                        ->setStatusCode(200);
         $this->response->setContentType('application/json');
 
-		try {
+        try {
             //$jwt = new ValidateJWT();
-            $articleModel = new ArticlesModel();
+            $unitModel = new UnitsModel();
 
-            $objArticles = $articleModel->where('id_subcategorie', $id_subcategorie)->where('id_status <>', 3)->asObject()->findAll();
-            //return json_encode($objArticles);die;
+            $objUnit = $unitModel->where('id', $id_unit)->where('id_status <>', 3)->asObject()->find();
+            //return json_encode($objUnit);die;
 
-            if (!$objArticles) {
-                return $this->fail('Nenhum artigo encontrado para a subcategoria informada.', 404);
+            if (!$objUnit) {
+                return $this->fail('Nenhum registro encontrado.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -82,8 +82,8 @@ class Articles extends BaseController {
                     $response = [
                         'status' => 200,
                         'error' => FALSE,
-                        'messages' => 'Listagem de Categorias.',
-                        'data' => $objArticles
+                        'messages' => 'Listagem de Unidades.',
+                        'data' => $objUnit
                     ];
 
                     return $this->respond($response);
@@ -91,8 +91,8 @@ class Articles extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Listagem de Artigos por subcategoria.',
-                    'data' => $objArticles
+                    'messages' => 'Unidade',
+                    'data' => $objUnit
                 ];
 
                 return $this->respond($response);

@@ -28,7 +28,7 @@
     import axios from 'axios';
 
     const base_url = 'http://localhost:8080';
-    const base_url_api = 'http://localhost/api/v1';
+    const base_url_api = 'http://localhost/wiki/api/v1';
 
     export default {
         name: "FooterComponent",
@@ -48,7 +48,7 @@
             async getUnitByID () {
                 let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
 
-                await axios.get(base_url_api + '/unit/' + id_unit)
+                await axios.get(base_url_api + '/unidade/' + id_unit)
                 .then(res => {
                     this.arrayUnit = [...res.data.data];
                 })

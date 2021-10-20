@@ -1,18 +1,17 @@
 <?php
-namespace App\Controllers\Categories;
+namespace App\Controllers\Wiki\Articles;
 
 use App\Controllers\BaseController;
 use App\Libraries\JWT\ValidateJWT;
-use App\Models\Categories\CategoriesModel;
-use App\Models\CategoriesUnits\CategoriesUnitsModel;
+use App\Models\Articles\ArticlesModel;
 use CodeIgniter\API\ResponseTrait;
 use Exception;
 
-class Categories extends BaseController {
-	use ResponseTrait;
+class Articles extends BaseController {
+    use ResponseTrait;
 
-	public function index() {
-		$this->response->setHeader('Access-Control-Allow-Origin', '*')
+    public function index() {
+        $this->response->setHeader('Access-Control-Allow-Origin', '*')
                        ->setHeader('Access-Control-Allow-Headers', '*')
                        ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
                        ->setStatusCode(200);
@@ -20,13 +19,13 @@ class Categories extends BaseController {
 
 		try {
             //$jwt = new ValidateJWT();
-            $categoriesModel = new CategoriesModel();
+            $articleModel = new ArticlesModel();
 
-            $objCategories = $categoriesModel->where('id_status <>', 3)->asObject()->findAll();
-            //return json_encode($objCategories);die;
+            $objArticles = $articleModel->where('id_status <>', 3)->asObject()->findAll();
+            //return json_encode($objArticles);die;
 
-            if (!$objCategories) {
-                return $this->fail('Nenhum usuário encontrado.', 404);
+            if (!$objArticles) {
+                return $this->fail('Nenhum artigo encontrado.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -35,7 +34,7 @@ class Categories extends BaseController {
                         'status' => 200,
                         'error' => FALSE,
                         'messages' => 'Listagem de Categorias.',
-                        'data' => $objCategories
+                        'data' => $objArticles
                     ];
 
                     return $this->respond($response);
@@ -43,8 +42,8 @@ class Categories extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Listagem de Categorias.',
-                    'data' => $objCategories
+                    'messages' => 'Listagem de Artigos.',
+                    'data' => $objArticles
                 ];
 
                 return $this->respond($response);
@@ -58,10 +57,10 @@ class Categories extends BaseController {
 
             return $this->respond($response);
         }
-	}
+    }
 
-	public function categoriesByUnitID($id_unidade) {
-		$this->response->setHeader('Access-Control-Allow-Origin', '*')
+    public function getArticlesBySubcategorieID(int $id_subcategorie) {
+        $this->response->setHeader('Access-Control-Allow-Origin', '*')
                        ->setHeader('Access-Control-Allow-Headers', '*')
                        ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
                        ->setStatusCode(200);
@@ -69,15 +68,13 @@ class Categories extends BaseController {
 
 		try {
             //$jwt = new ValidateJWT();
-            $categoriesUnitsModel = new CategoriesUnitsModel();
-            $categoriesModel = new CategoriesModel();
+            $articleModel = new ArticlesModel();
 
-            //$objUnidade = $categoriesModel->where('id_unidade', $id_unidade)->where('id_status <>', 3)->asObject()->findAll();
-            $objCategories = $categoriesModel->getCategorieByUnitID($id_unidade);
-            //return json_encode($objCategories);die;
+            $objArticles = $articleModel->where('id_subcategorie', $id_subcategorie)->where('id_status <>', 3)->asObject()->findAll();
+            //return json_encode($objArticles);die;
 
-            if (!$objCategories) {
-                return $this->fail('Nenhum usuário encontrado.', 404);
+            if (!$objArticles) {
+                return $this->fail('Nenhum artigo encontrado para a subcategoria informada.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -85,8 +82,8 @@ class Categories extends BaseController {
                     $response = [
                         'status' => 200,
                         'error' => FALSE,
-                        'messages' => 'Listagem de categorias por unidade.',
-                        'data' => $objCategories
+                        'messages' => 'Listagem de Categorias.',
+                        'data' => $objArticles
                     ];
 
                     return $this->respond($response);
@@ -94,8 +91,8 @@ class Categories extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Listagem de categorias por unidade.',
-                    'data' => $objCategories
+                    'messages' => 'Listagem de Artigos por subcategoria.',
+                    'data' => $objArticles
                 ];
 
                 return $this->respond($response);
@@ -109,5 +106,5 @@ class Categories extends BaseController {
 
             return $this->respond($response);
         }
-	}
+    }
 }

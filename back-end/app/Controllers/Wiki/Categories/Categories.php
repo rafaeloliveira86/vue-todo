@@ -1,31 +1,32 @@
 <?php
-namespace App\Controllers\Units;
+namespace App\Controllers\Wiki\Categories;
 
 use App\Controllers\BaseController;
 use App\Libraries\JWT\ValidateJWT;
+use App\Models\Categories\CategoriesModel;
+use App\Models\CategoriesUnits\CategoriesUnitsModel;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\Units\UnitsModel;
 use Exception;
 
-class Units extends BaseController {
-    use ResponseTrait;
+class Categories extends BaseController {
+	use ResponseTrait;
 
-    public function index() {
-        $this->response->setHeader('Access-Control-Allow-Origin', '*')
+	public function index() {
+		$this->response->setHeader('Access-Control-Allow-Origin', '*')
                        ->setHeader('Access-Control-Allow-Headers', '*')
                        ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
                        ->setStatusCode(200);
         $this->response->setContentType('application/json');
 
-        try {
+		try {
             //$jwt = new ValidateJWT();
-            $unitModel = new UnitsModel();
+            $categoriesModel = new CategoriesModel();
 
-            $objUnit = $unitModel->where('id_status <>', 3)->asObject()->findAll();
-            //return json_encode($objUnit);die;
+            $objCategories = $categoriesModel->where('id_status <>', 3)->asObject()->findAll();
+            //return json_encode($objCategories);die;
 
-            if (!$objUnit) {
-                return $this->fail('Nenhum usuário encontrado.', 404);
+            if (!$objCategories) {
+                return $this->fail('Oops! Desculpe, nenhuma categoria encontrado.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -33,8 +34,8 @@ class Units extends BaseController {
                     $response = [
                         'status' => 200,
                         'error' => FALSE,
-                        'messages' => 'Listagem de Unidades.',
-                        'data' => $objUnit
+                        'messages' => 'Listagem de Categorias.',
+                        'data' => $objCategories
                     ];
 
                     return $this->respond($response);
@@ -42,8 +43,8 @@ class Units extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Listagem de Unidades.',
-                    'data' => $objUnit
+                    'messages' => 'Listagem de Categorias.',
+                    'data' => $objCategories
                 ];
 
                 return $this->respond($response);
@@ -57,24 +58,26 @@ class Units extends BaseController {
 
             return $this->respond($response);
         }
-    }
+	}
 
-    public function getUnitByID($id_unit) {
-        $this->response->setHeader('Access-Control-Allow-Origin', '*')
+	public function categoriesByUnitID($id_unidade) {
+		$this->response->setHeader('Access-Control-Allow-Origin', '*')
                        ->setHeader('Access-Control-Allow-Headers', '*')
                        ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
                        ->setStatusCode(200);
         $this->response->setContentType('application/json');
 
-        try {
+		try {
             //$jwt = new ValidateJWT();
-            $unitModel = new UnitsModel();
+            $categoriesUnitsModel = new CategoriesUnitsModel();
+            $categoriesModel = new CategoriesModel();
 
-            $objUnit = $unitModel->where('id', $id_unit)->where('id_status <>', 3)->asObject()->find();
-            //return json_encode($objUnit);die;
+            //$objUnidade = $categoriesModel->where('id_unidade', $id_unidade)->where('id_status <>', 3)->asObject()->findAll();
+            $objCategories = $categoriesModel->getCategorieByUnitID($id_unidade);
+            //return json_encode($objCategories);die;
 
-            if (!$objUnit) {
-                return $this->fail('Nenhum registro encontrado.', 404);
+            if (!$objCategories) {
+                return $this->fail('Oops! Desculpe, nenhuma categoria encontrada.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -82,8 +85,8 @@ class Units extends BaseController {
                     $response = [
                         'status' => 200,
                         'error' => FALSE,
-                        'messages' => 'Listagem de Unidades.',
-                        'data' => $objUnit
+                        'messages' => 'Listagem de categorias por unidade.',
+                        'data' => $objCategories
                     ];
 
                     return $this->respond($response);
@@ -91,8 +94,8 @@ class Units extends BaseController {
                 $response = [
                     'status' => 200,
                     'error' => FALSE,
-                    'messages' => 'Unidade',
-                    'data' => $objUnit
+                    'messages' => 'Listagem de categorias por unidade.',
+                    'data' => $objCategories
                 ];
 
                 return $this->respond($response);
@@ -106,5 +109,5 @@ class Units extends BaseController {
 
             return $this->respond($response);
         }
-    }
+	}
 }
