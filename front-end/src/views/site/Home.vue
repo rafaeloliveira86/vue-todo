@@ -1,6 +1,7 @@
 <template>
     <div class="wiki-body">
         <LoaderComponent />
+
         <NavbarComponent />
 
         <div class="wiki-col">
@@ -12,11 +13,9 @@
                     <v-text-field label="Pesquisar" filled solo rounded prepend-inner-icon="mdi-magnify" class="wiki-search" background-color="#f0f2f5"></v-text-field>
                 </div>
             </v-container>
-            <v-container fluid>
-                <div class="wiki-container">
-                    <BreadcrumbComponent />
-                </div>
-            </v-container>
+
+            <BreadcrumbComponent />
+
             <div class="wiki-container mt-6 mb-6">
                 <div class="wiki-box">
                     <div class="wiki-box-col">
@@ -85,19 +84,19 @@
         -webkit-box-shadow: 0 -10px 5px -10px #595959;
     }
 
+    /* Container Vuetify */
+    .container--fluid {
+        border-top: 1px solid #ebebeb;
+        border-bottom: 1px solid #ebebeb;
+        padding: 0;
+    }
+
     /* Container */
     .wiki-container {
         width: 900px;
         min-width: 61.6%;
         height: auto;
         margin: 0 auto;
-        padding: 0;
-    }
-
-    /* Container Vuetify */
-    .container--fluid {
-        border-top: 1px solid #ebebeb;
-        border-bottom: 1px solid #ebebeb;
         padding: 0;
     }
 

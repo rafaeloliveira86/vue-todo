@@ -54,9 +54,9 @@
     .wiki-side .wiki-side-col {
         width: 100%;
         height: 100%;
-        box-shadow: 0 0 0.3em #aaaaaa;
-        -moz-box-shadow: 0 0 0.3em #aaaaaa;
-        -webkit-box-shadow: 0 0 0.3em #aaaaaa;
+        box-shadow: 0 0 0.2em #aaaaaa;
+        -moz-box-shadow: 0 0 0.2em #aaaaaa;
+        -webkit-box-shadow: 0 0 0.2em #aaaaaa;
         background: #f0f2f5;
     }
 
