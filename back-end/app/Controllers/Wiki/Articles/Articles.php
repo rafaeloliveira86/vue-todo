@@ -25,7 +25,7 @@ class Articles extends BaseController {
             //return json_encode($objArticles);die;
 
             if (!$objArticles) {
-                return $this->fail('Nenhum artigo encontrado.', 404);
+                return $this->fail('Oops! Desculpe, nenhum artigo encontrado.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -74,7 +74,7 @@ class Articles extends BaseController {
             //return json_encode($objArticles);die;
 
             if (!$objArticles) {
-                return $this->fail('Nenhum artigo encontrado para a subcategoria informada.', 404);
+                return $this->fail('Oops! Desculpe, nenhum artigo encontrado.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 

@@ -28,28 +28,49 @@
                 </div>
             </div>
 
-            <div class="wiki-subcat" v-else>
-                <div class="wiki-subcat-col">
-                    <v-expansion-panels accordion tile>
-                        <v-expansion-panel v-for="(subcategorie, index) in arraySubcategories" :key="index" @click="selectSubcategorie(subcategorie.id_subcategorie)">
-                            <v-expansion-panel-header>
-                                <template v-slot:actions>
-                                    <v-icon size="30" color="#999999">mdi-forum</v-icon>
-                                </template>
-                                <strong>{{ subcategorie.subcategorie_name }}</strong>
-                            </v-expansion-panel-header>
+            <div v-else>
+                <div class="wiki-subcat">
+                    <div class="wiki-subcat-col">
+                        <v-expansion-panels accordion tile mandatory>
+                            <v-expansion-panel v-for="(subcategorie, index) in arraySubcategories" :key="index" @click="selectSubcategorie(subcategorie.id_subcategorie)">
+                                <v-expansion-panel-header>
+                                    <template v-slot:actions>
+                                        <v-icon size="30" color="#999999">mdi-forum</v-icon>
+                                    </template>
+                                    <strong>{{ subcategorie.subcategorie_name }}</strong>
+                                </v-expansion-panel-header>
 
-                            <v-expansion-panel-content>
-                                <v-divider></v-divider>
-                                <br>
-                                <div v-for="(articles, index) in arrayArticles" :key="index">
-                                    <router-link :to="`${$route.path}/artigos`" class="text-decoration-none">
-                                        {{ articles.article_name }}
-                                    </router-link>
-                                </div>
-                            </v-expansion-panel-content>
-                        </v-expansion-panel>
-                    </v-expansion-panels>
+                                <section v-if="article_error">
+                                    <v-expansion-panel-content v-show="showArticles">
+                                        <v-divider></v-divider>
+                                        <br>
+                                        <v-alert text prominent icon="mdi-alert-circle" outlined type="error" v-if="(article_status_error != null) && (article_message_error != null)">
+                                            <v-row align="center" no-gutters>
+                                                <v-col class="grow">
+                                                    {{ article_message_error }}
+                                                </v-col>
+                                            </v-row>
+                                        </v-alert>
+                                    </v-expansion-panel-content>
+                                </section>
+
+                                <section v-else>
+                                    <v-expansion-panel-content v-show="showArticles">
+                                        <div v-if="article_loading">Carregando...</div>
+                                        <div v-else>
+                                            <v-divider></v-divider>
+                                            <br>
+                                            <div v-for="(article, index) in arrayArticles" :key="index">
+                                                <div class="wiki-sub-link">
+                                                    <router-link :to="`${$route.path}/artigos`" v-model="id_article" :value="article.id" @click="selectArticle()" class="text-decoration-none" style="margin-bottom: 10px;">{{ article.article_name }}</router-link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </v-expansion-panel-content>
+                                </section>
+                            </v-expansion-panel>
+                        </v-expansion-panels>
+                    </div>
                 </div>
             </div>
         </section>
@@ -70,18 +91,23 @@
         },
         data: () => ({
             loading: true,
+            article_loading: true,
             error: false,
             status_error: null,
             message_error: null,
+            article_error: false,
+            article_status_error: null,
+            article_message_error: null,
             arraySubcategories: [],
-            arrayArticles: []
+            arrayArticles: [],
+            showArticles: false
         }),
         mounted() {
             console.log(this.$route.params.slug);
         },
         created() {
             this.getSubcategoriesByCategorieAndUnitID();
-            this.getArticleBySubategorieID();
+            //this.getArticleBySubategorieID();
         },
         methods: {
             async getSubcategoriesByCategorieAndUnitID() {
@@ -110,39 +136,54 @@
                 })
                 .finally(() => this.loading = false)
             },
-            async getArticleBySubategorieID() {
-                let id_subcategorie = atob(localStorage.getItem("subcategorie")); //btoa (Base 64 encode) - atob (Base 64 decode)
-
+            async getArticleBySubategorieID(id_subcategorie) {
                 await axios.get(base_url_api + '/artigo/subcategoria/' + id_subcategorie)
                 .then(res => {
                     this.arrayArticles = [...res.data.data];
-                    console.log(this.arrayArticles);
+                    this.article_error = false;
                 })
                 .catch(err => {
-                    this.error = true;
+                    this.article_error = true;
 
                     if (err.response) { //Solicitação feita e resposta do servidor                        
                         console.log(err.response.data);
                         console.log(err.response.status);
                         console.log(err.response.headers);
 
-                        this.status_error = err.response.data.error;
-                        this.message_error = err.response.data.messages.error;
+                        this.article_status_error = err.response.data.error;
+                        this.article_message_error = err.response.data.messages.error;
                     } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
                         console.log(err.request);
                     } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
                         console.log('Error', err.message);
                     }
                 })
-                .finally(() => this.loading = false)
+                .finally(() => this.article_loading = false)
             },
             selectSubcategorie(data) {
-                //console.log(data);
-                this.setItemLocalStorage(data);
+                this.article_loading = true;
+
+                this.removeItemLocalStorage();
+
+                this.setItemLocalStorage("subcategorie", data);
+
+                this.showArticles = true;
+
+                let id_subcategorie = atob(localStorage.getItem("subcategorie")); //btoa (Base 64 encode) - atob (Base 64 decode)
+
+                this.getArticleBySubategorieID(id_subcategorie);
             },
-            setItemLocalStorage(data) {
-                localStorage.setItem("subcategorie", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
-            }
+            selectArticle(data) {
+                this.setItemLocalStorage("article", data);
+            },
+            setItemLocalStorage(key, value) {
+                localStorage.setItem(key, btoa(value)); //btoa (Base 64 encode) - atob (Base 64 decode)
+            },
+            removeItemLocalStorage() {
+                if (localStorage.getItem("subcategorie")) {
+                    localStorage.removeItem("subcategorie");
+                }
+            },
         }
     }
 </script>
@@ -150,6 +191,15 @@
 <style>
     .wiki-error {
         color: #b20000 !important;
+    }
+
+    .wiki-sub-link {
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    .wiki-sub-link a:hover {
+        color: #595959;
     }
 
     .wiki-subcat-title {

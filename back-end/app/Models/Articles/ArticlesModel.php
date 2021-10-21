@@ -14,7 +14,10 @@ class ArticlesModel extends Model {
     protected $protectFields        = true;
     protected $allowedFields        = [
         'id',
+        'image',
 		'article_name',
+        'text',
+        'total_access',
 		'id_subcategorie',
 		'id_status',
 		'id_user_created',

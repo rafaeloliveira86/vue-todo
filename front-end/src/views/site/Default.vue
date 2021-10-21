@@ -124,6 +124,10 @@
                 if (localStorage.getItem("categorie")) {
                     localStorage.removeItem("categorie");
                 }
+
+                if (localStorage.getItem("subcategorie")) {
+                    localStorage.removeItem("subcategorie");
+                }
             },
             redirectSite(data) {
                 window.location.href = data;

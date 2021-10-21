@@ -15,10 +15,26 @@ class ArticlesMigrate extends Migration {
 				'auto_increment' => true,
 				'null' => false
 			],
+			'image' => [
+				'type' => 'VARCHAR',
+				'constraint' => '150',
+				'null' => true
+			],
 			'article_name' => [
 				'type' => 'VARCHAR',
 				'constraint' => '150',
 				'null' => true
+			],
+			'text' => [
+				'type' => 'TEXT',
+				'null' => true
+			],
+			'total_access' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => false,
+				'null' => false,
+				'default' => 0
 			],
 			'id_subcategorie' => [
 				'type' => 'INT',
