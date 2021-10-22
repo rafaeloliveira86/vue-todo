@@ -32,6 +32,7 @@ $routes->group("wiki/api/v1", function ($routes) {
     
     //Artigos
     $routes->resource('artigos', ['namespace' => 'App\Controllers\Wiki\Articles', 'controller' => 'Articles']);
+    $routes->get("artigo/(:num)", "Articles::getArticleByID/$1", ['namespace' => 'App\Controllers\Wiki\Articles']);
     $routes->get("artigo/subcategoria/(:num)", "Articles::getArticlesBySubcategorieID/$1", ['namespace' => 'App\Controllers\Wiki\Articles']);
 });
 ?>

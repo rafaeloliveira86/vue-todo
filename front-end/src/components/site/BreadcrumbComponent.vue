@@ -1,20 +1,18 @@
 <template>
     <div>
-        <v-container fluid>
-        <!-- <v-container fluid class="wiki-breadcrumb-background"> -->
+        <v-container fluid><!-- class="wiki-breadcrumb-background"> -->
             <div class="wiki-breadcrumb-container">
                 <v-breadcrumbs :items="breadcrumbList" light>
                     <template v-slot:divider>
                         <v-icon>mdi-chevron-right</v-icon>
                     </template>
+                    <template v-slot:item="{ item }">
+                        <v-breadcrumbs-item :href="item.href" :disabled="item.disabled">
+                            <!-- {{ item.text.toUpperCase() }} -->
+                            {{ item.text }}
+                        </v-breadcrumbs-item>
+                    </template>
                 </v-breadcrumbs>
-                <!-- <div class="breadcrumb">
-                    <ul>
-                        <li v-for="(breadcrumb, idx) in breadcrumbList" :key="idx" @click="routeTo(idx)" :class="{ 'linked': !!breadcrumb.link }">
-                            {{ breadcrumb.name }}
-                        </li>
-                    </ul>
-                </div> -->
             </div>
         </v-container>
     </div>
@@ -35,10 +33,6 @@ export default {
         }
     },
     methods: {
-        // routeTo(pRouteTo) {
-        //     if (this.breadcrumbList[pRouteTo].link)
-        //         this.$router.push(this.breadcrumbList[pRouteTo].link);
-        // },
         updateList() {
             this.breadcrumbList = this.$route.meta.breadcrumb;
         }

@@ -25,6 +25,11 @@ class ArticlesMigrate extends Migration {
 				'constraint' => '150',
 				'null' => true
 			],
+			'slug' => [
+				'type' => 'VARCHAR',
+				'constraint' => '250',
+				'null' => true
+			],
 			'text' => [
 				'type' => 'TEXT',
 				'null' => true

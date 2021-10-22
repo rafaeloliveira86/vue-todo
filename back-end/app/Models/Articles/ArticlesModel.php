@@ -16,6 +16,7 @@ class ArticlesModel extends Model {
         'id',
         'image',
 		'article_name',
+        'slug',
         'text',
         'total_access',
 		'id_subcategorie',

@@ -24,36 +24,35 @@ const routes = [
   //UniSãoJosé (Site)
   { 
     path: '/unisaojose',
-    name: 'unisaojose',
+    //name: 'unisaojose',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/',
-        name: 'home',
+        name: 'unisaojose/categorias',
         component: CategoriesComponent,
         meta: {
           breadcrumb: [
-            { text: 'Home', href: '/unisaojose' },
-            { text: 'Categorias', href: '/unisaojose' },
+            { text: 'Home', href: '/unisaojose', disabled: false },
+            { text: 'Categorias', href: '/unisaojose', disabled: false },
           ]
         }
       },
       {
-        path: '/unisaojose/subcategorias/:slug',
+        path: '/unisaojose/:any',
         name: 'unisaojose/subcategorias',
         component: SubcategorieComponent,
         meta: {
           breadcrumb: [
             { text: 'Home', href: '/unisaojose' },
             { text: 'Categorias', href: '/unisaojose'  },
-            // { text: 'Subcategorias', href: '/unisaojose/subcategorias' }
-            { text: 'Subcategorias', href: [{path: '/unisaojose/subcategorias/:slug'}] }
+            { text: 'Subcategorias', href: '/unisaojose/subcategorias' }
           ]
         }
       },
       {
-        path: '/unisaojose/subcategorias/:slug/artigos',
-        name: 'unisaojose/subcategorias/artigos',
+        path: '/unisaojose/:categories/:subcategories',
+        name: 'unisaojose/artigos',
         component: ArticleComponent,
         meta: {
           breadcrumb: [
@@ -69,12 +68,12 @@ const routes = [
   //Colégio Realengo (Site)
   {
     path: '/colegiorealengo',
-    name: 'colegiorealengo',
+    //name: 'colegiorealengo',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/',
-        name: 'home',
+        name: 'colegiorealengo/categorias',
         component: CategoriesComponent,
         meta: {
           breadcrumb: [
@@ -84,8 +83,8 @@ const routes = [
         }
       },
       {
-        path: '/colegiorealengo/subcategorias/:slug',
-        name: 'colegiorealengo/subcategorie',
+        path: '/colegiorealengo/:any',
+        name: 'colegiorealengo/subcategorias',
         component: SubcategorieComponent,
         meta: {
           breadcrumb: [
@@ -96,8 +95,8 @@ const routes = [
         }
       },
       {
-        path: '/colegiorealengo/subcategorias/:slug/artigos',
-        name: 'colegiorealengo/subcategorias/artigos',
+        path: '/colegiorealengo/:categories/:subcategories',
+        name: 'colegiorealengo/artigos',
         component: ArticleComponent,
         meta: {
           breadcrumb: [
@@ -113,22 +112,22 @@ const routes = [
   //Colégio Aplicação Taquara (Site)
   {
     path: '/colegioaplicacaotaquara',
-    name: 'colegioaplicacaotaquara',
+    //name: 'colegioaplicacaotaquara',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/',
-        name: 'home',
+        name: 'colegioaplicacaotaquara/categorias',
         component: CategoriesComponent
       },
       {
-        path: '/colegioaplicacaotaquara/subcategorias/:slug',
-        name: 'colegioaplicacaotaquara/subcategorie',
+        path: '/colegioaplicacaotaquara/:any',
+        name: 'colegioaplicacaotaquara/subcategorias',
         component: SubcategorieComponent
       },
       {
-        path: '/colegioaplicacaotaquara/subcategorias/:slug/artigos',
-        name: 'colegioaplicacaotaquara/subcategorias/artigos',
+        path: '/colegioaplicacaotaquara/:categories/:subcategories',
+        name: 'colegioaplicacaotaquara/artigos',
         component: ArticleComponent
       },
     ]
@@ -136,22 +135,22 @@ const routes = [
   //Colégio Aplicação Vila Militar (Site)
   {
     path: '/colegioaplicacaovilamilitar',
-    name: 'colegioaplicacaovilamilitar',
+    //name: 'colegioaplicacaovilamilitar',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
         path: '/',
-        name: 'home',
+        name: 'colegioaplicacaovilamilitar/categorias',
         component: CategoriesComponent
       },
       {
-        path: '/colegioaplicacaovilamilitar/subcategorias/:slug',
-        name: 'colegioaplicacaovilamilitar/subcategorie',
+        path: '/colegioaplicacaovilamilitar/:any',
+        name: 'colegioaplicacaovilamilitar/subcategorias',
         component: SubcategorieComponent
       },
       {
-        path: '/colegioaplicacaovilamilitar/subcategorias/:slug/artigos',
-        name: 'colegioaplicacaovilamilitar/subcategorias/artigos',
+        path: '/colegioaplicacaovilamilitar/:categories/:subcategories',
+        name: 'colegioaplicacaovilamilitar/artigos',
         component: ArticleComponent
       },
     ]

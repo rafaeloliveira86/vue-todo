@@ -128,6 +128,10 @@
                 if (localStorage.getItem("subcategorie")) {
                     localStorage.removeItem("subcategorie");
                 }
+
+                if (localStorage.getItem("article")) {
+                    localStorage.removeItem("article");
+                }
             },
             redirectSite(data) {
                 window.location.href = data;

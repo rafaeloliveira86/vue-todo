@@ -40,8 +40,8 @@
                                     <strong>{{ subcategorie.subcategorie_name }}</strong>
                                 </v-expansion-panel-header>
 
-                                <section v-if="article_error">
-                                    <v-expansion-panel-content v-show="showArticles">
+                                <v-expansion-panel-content v-show="showArticles">
+                                    <section v-if="article_error">
                                         <v-divider></v-divider>
                                         <br>
                                         <v-alert text prominent icon="mdi-alert-circle" outlined type="error" v-if="(article_status_error != null) && (article_message_error != null)">
@@ -51,23 +51,24 @@
                                                 </v-col>
                                             </v-row>
                                         </v-alert>
-                                    </v-expansion-panel-content>
-                                </section>
-
-                                <section v-else>
-                                    <v-expansion-panel-content v-show="showArticles">
+                                    </section>
+                                    <section v-else>
                                         <div v-if="article_loading">Carregando...</div>
                                         <div v-else>
                                             <v-divider></v-divider>
                                             <br>
                                             <div v-for="(article, index) in arrayArticles" :key="index">
                                                 <div class="wiki-sub-link">
-                                                    <router-link :to="`${$route.path}/artigos`" v-model="id_article" :value="article.id" @click="selectArticle()" class="text-decoration-none" style="margin-bottom: 10px;">{{ article.article_name }}</router-link>
+                                                    <router-link :to="`${$route.path + '/' + article.slug}`" class="text-decoration-none">
+                                                        <v-btn text color="primary" @click="selectArticle(article.id)">
+                                                            {{ article.article_name }}
+                                                        </v-btn>
+                                                    </router-link>
                                                 </div>
                                             </div>
                                         </div>
-                                    </v-expansion-panel-content>
-                                </section>
+                                    </section>
+                                </v-expansion-panel-content>
                             </v-expansion-panel>
                         </v-expansion-panels>
                     </div>
@@ -103,11 +104,10 @@
             showArticles: false
         }),
         mounted() {
-            console.log(this.$route.params.slug);
+            console.log(this.$route.params.any);
         },
         created() {
             this.getSubcategoriesByCategorieAndUnitID();
-            //this.getArticleBySubategorieID();
         },
         methods: {
             async getSubcategoriesByCategorieAndUnitID() {
@@ -175,6 +175,8 @@
             },
             selectArticle(data) {
                 this.setItemLocalStorage("article", data);
+                //this.$router.push(`${this.$route.path + '/' + article.slug}`);
+                //console.log(data);
             },
             setItemLocalStorage(key, value) {
                 localStorage.setItem(key, btoa(value)); //btoa (Base 64 encode) - atob (Base 64 decode)
@@ -219,14 +221,9 @@
         margin-bottom: 20px;        
     }
 
-    .wiki-subcat .wiki-subcat-col .v-card {
-        font-size: 13px;
-        text-decoration: none;
-        color: #333333;
-    }
-
-    .wiki-subcat .wiki-subcat-col .v-card:hover {
-        color: #01579B;      
+    .v-btn {
+        font-weight: normal;
+        text-transform: none;
     }
 
     @media only screen and (max-width: 992px) {

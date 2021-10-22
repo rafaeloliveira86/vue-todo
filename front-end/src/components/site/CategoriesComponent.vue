@@ -37,7 +37,7 @@
                                     <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ categorie.categorie_name }}
                                 </v-card>
                             </router-link> -->
-                            <router-link :to="`${$route.path}/subcategorias/${categorie.slug}`" class="text-decoration-none">
+                            <router-link :to="`${$route.path + '/' + categorie.slug}`" class="text-decoration-none">
                                 <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile @click="selectCategorie(categorie.id)">
                                     <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ categorie.categorie_name }}
                                 </v-card>
