@@ -68,4 +68,23 @@ class CategoriesModel extends Model {
             die($e->getMessage());
         }
     }
+
+	public function getCategorieByUnitSlug(string $unit_slug) {
+        try {
+            $this->select('
+				c.*,
+				u.class AS unit_class
+			');
+			$this->from('tbl_categories AS c');
+            $this->join('tbl_categories_units AS cu', 'cu.id_categorie = c.id');
+			$this->join('tbl_units AS u', 'cu.id_unit = u.id');
+            $this->where('u.slug', $unit_slug);
+			$this->where('c.id_status', 1);
+			$this->groupBy('c.categorie_name');
+			$this->orderBy('c.id', 'ASC');
+            return $this->asObject()->findAll();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

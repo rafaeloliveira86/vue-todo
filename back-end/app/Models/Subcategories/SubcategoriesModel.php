@@ -75,4 +75,30 @@ class SubcategoriesModel extends Model {
             die($e->getMessage());
         }
     }
+
+    public function getSubcategorieByCategorieAndUnitSlug(string $categorie_slug, string $unit_slug) {
+        try {
+            $this->select('
+                c.id AS id_categorie,
+                c.categorie_name,
+                s.id AS id_subcategorie,
+                s.subcategorie_name,
+                s.slug,
+                s.id_status,
+                u.unit_name
+			');
+			$this->from('tbl_subcategories AS s');
+            $this->join('tbl_categories_subcategories AS cs', 'cs.id_subcategorie = s.id');
+			$this->join('tbl_categories AS c', 'cs.id_categorie = c.id');
+			$this->join('tbl_units AS u', 'cs.id_unit = u.id');
+            $this->where('c.slug', $categorie_slug);
+            $this->where('u.slug', $unit_slug);
+			$this->where('s.id_status', 1);
+			$this->groupBy('s.subcategorie_name');
+			$this->orderBy('s.id', 'ASC');
+            return $this->asObject()->findAll();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

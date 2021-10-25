@@ -23,13 +23,11 @@ const routes = [
   },
   //UniSãoJosé (Site)
   { 
-    path: '/unisaojose',
-    //name: 'unisaojose',
+    path: '/:unit_slug',
     component: () => import('../views/site/Home.vue'),
     children: [
       {
-        path: '/',
-        name: 'unisaojose/categorias',
+        path: '/:unit_slug',
         component: CategoriesComponent,
         meta: {
           breadcrumb: [
@@ -39,8 +37,7 @@ const routes = [
         }
       },
       {
-        path: '/unisaojose/:any',
-        name: 'unisaojose/subcategorias',
+        path: '/:unit_slug/:categorie_slug',
         component: SubcategorieComponent,
         meta: {
           breadcrumb: [
@@ -51,8 +48,7 @@ const routes = [
         }
       },
       {
-        path: '/unisaojose/:categories/:subcategories',
-        name: 'unisaojose/artigos',
+        path: '/:unit_slug/:categorie_slug/:subcategorie_slug',
         component: ArticleComponent,
         meta: {
           breadcrumb: [
@@ -62,96 +58,6 @@ const routes = [
             { text: 'Artigos' }
           ]
         }
-      },
-    ]
-  },
-  //Colégio Realengo (Site)
-  {
-    path: '/colegiorealengo',
-    //name: 'colegiorealengo',
-    component: () => import('../views/site/Home.vue'),
-    children: [
-      {
-        path: '/',
-        name: 'colegiorealengo/categorias',
-        component: CategoriesComponent,
-        meta: {
-          breadcrumb: [
-            { text: 'Home', href: '/colegiorealengo' },
-            { text: 'Categorias', href: '/colegiorealengo' },
-          ]
-        }
-      },
-      {
-        path: '/colegiorealengo/:any',
-        name: 'colegiorealengo/subcategorias',
-        component: SubcategorieComponent,
-        meta: {
-          breadcrumb: [
-            { text: 'Home', href: '/colegiorealengo' },
-            { text: 'Categorias', href: '/colegiorealengo'  },
-            { text: 'Subcategorias', href: '/colegiorealengo/subcategorias' }
-          ]
-        }
-      },
-      {
-        path: '/colegiorealengo/:categories/:subcategories',
-        name: 'colegiorealengo/artigos',
-        component: ArticleComponent,
-        meta: {
-          breadcrumb: [
-            { text: 'Home', href: '/colegiorealengo' },
-            { text: 'Categorias', href: '/colegiorealengo'  },
-            { text: 'Subcategorias', href: '/colegiorealengo/subcategorias' },
-            { text: 'Artigos' }
-          ]
-        }
-      },
-    ]
-  },
-  //Colégio Aplicação Taquara (Site)
-  {
-    path: '/colegioaplicacaotaquara',
-    //name: 'colegioaplicacaotaquara',
-    component: () => import('../views/site/Home.vue'),
-    children: [
-      {
-        path: '/',
-        name: 'colegioaplicacaotaquara/categorias',
-        component: CategoriesComponent
-      },
-      {
-        path: '/colegioaplicacaotaquara/:any',
-        name: 'colegioaplicacaotaquara/subcategorias',
-        component: SubcategorieComponent
-      },
-      {
-        path: '/colegioaplicacaotaquara/:categories/:subcategories',
-        name: 'colegioaplicacaotaquara/artigos',
-        component: ArticleComponent
-      },
-    ]
-  },
-  //Colégio Aplicação Vila Militar (Site)
-  {
-    path: '/colegioaplicacaovilamilitar',
-    //name: 'colegioaplicacaovilamilitar',
-    component: () => import('../views/site/Home.vue'),
-    children: [
-      {
-        path: '/',
-        name: 'colegioaplicacaovilamilitar/categorias',
-        component: CategoriesComponent
-      },
-      {
-        path: '/colegioaplicacaovilamilitar/:any',
-        name: 'colegioaplicacaovilamilitar/subcategorias',
-        component: SubcategorieComponent
-      },
-      {
-        path: '/colegioaplicacaovilamilitar/:categories/:subcategories',
-        name: 'colegioaplicacaovilamilitar/artigos',
-        component: ArticleComponent
       },
     ]
   },

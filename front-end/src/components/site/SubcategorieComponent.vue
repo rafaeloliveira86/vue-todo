@@ -32,7 +32,7 @@
                 <div class="wiki-subcat">
                     <div class="wiki-subcat-col">
                         <v-expansion-panels accordion tile mandatory>
-                            <v-expansion-panel v-for="(subcategorie, index) in arraySubcategories" :key="index" @click="selectSubcategorie(subcategorie.id_subcategorie)">
+                            <v-expansion-panel v-for="(subcategorie, index) in arraySubcategories" :key="index" @click="selectSubcategorie()">
                                 <v-expansion-panel-header>
                                     <template v-slot:actions>
                                         <v-icon size="30" color="#999999">mdi-forum</v-icon>
@@ -104,17 +104,17 @@
             showArticles: false
         }),
         mounted() {
-            console.log(this.$route.params.any);
+            console.log(this.$route.params.unit_slug + '/' + this.$route.params.categorie_slug);
         },
         created() {
-            this.getSubcategoriesByCategorieAndUnitID();
+            this.getSubcategoriesByCategorieAndUnitSlug();
         },
         methods: {
-            async getSubcategoriesByCategorieAndUnitID() {
-                let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
-                let id_categorie = atob(localStorage.getItem("categorie")); //btoa (Base 64 encode) - atob (Base 64 decode)
+            async getSubcategoriesByCategorieAndUnitSlug() {
+                let unit_slug = this.$route.params.unit_slug;
+                let categorie_slug = this.$route.params.categorie_slug;
 
-                await axios.get(base_url_api + '/subcategoria/categoria/' + id_categorie + '/unidade/' + id_unit)
+                await axios.get(base_url_api + '/subcategoria/categoria/' + categorie_slug + '/unidade/' + unit_slug)
                 .then(res => {
                     this.arraySubcategories = [...res.data.data];
                 })
@@ -136,8 +136,10 @@
                 })
                 .finally(() => this.loading = false)
             },
-            async getArticleBySubategorieID(id_subcategorie) {
-                await axios.get(base_url_api + '/artigo/subcategoria/' + id_subcategorie)
+            async getArticleBySubategorieID() {
+                let subcategorie_slug = this.$route.params.subcategorie_slug;
+
+                await axios.get(base_url_api + '/artigo/subcategoria/' + subcategorie_slug)
                 .then(res => {
                     this.arrayArticles = [...res.data.data];
                     this.article_error = false;
@@ -160,32 +162,36 @@
                 })
                 .finally(() => this.article_loading = false)
             },
-            selectSubcategorie(data) {
-                this.article_loading = true;
+            selectSubcategorie() {
+                let subcategorie_slug = this.$route.params.subcategorie_slug;
+                this.$router.push(subcategorie_slug);
+            }
+            // selectSubcategorie(data) {
+            //     this.article_loading = true;
 
-                this.removeItemLocalStorage();
+            //     this.removeItemLocalStorage();
 
-                this.setItemLocalStorage("subcategorie", data);
+            //     this.setItemLocalStorage("subcategorie", data);
 
-                this.showArticles = true;
+            //     this.showArticles = true;
 
-                let id_subcategorie = atob(localStorage.getItem("subcategorie")); //btoa (Base 64 encode) - atob (Base 64 decode)
+            //     let id_subcategorie = atob(localStorage.getItem("subcategorie")); //btoa (Base 64 encode) - atob (Base 64 decode)
 
-                this.getArticleBySubategorieID(id_subcategorie);
-            },
-            selectArticle(data) {
-                this.setItemLocalStorage("article", data);
-                //this.$router.push(`${this.$route.path + '/' + article.slug}`);
-                //console.log(data);
-            },
-            setItemLocalStorage(key, value) {
-                localStorage.setItem(key, btoa(value)); //btoa (Base 64 encode) - atob (Base 64 decode)
-            },
-            removeItemLocalStorage() {
-                if (localStorage.getItem("subcategorie")) {
-                    localStorage.removeItem("subcategorie");
-                }
-            },
+            //     this.getArticleBySubategorieID(id_subcategorie);
+            // },
+            // selectArticle(data) {
+            //     this.setItemLocalStorage("article", data);
+            //     //this.$router.push(`${this.$route.path + '/' + article.slug}`);
+            //     //console.log(data);
+            // },
+            // setItemLocalStorage(key, value) {
+            //     localStorage.setItem(key, btoa(value)); //btoa (Base 64 encode) - atob (Base 64 decode)
+            // },
+            // removeItemLocalStorage() {
+            //     if (localStorage.getItem("subcategorie")) {
+            //         localStorage.removeItem("subcategorie");
+            //     }
+            // },
         }
     }
 </script>

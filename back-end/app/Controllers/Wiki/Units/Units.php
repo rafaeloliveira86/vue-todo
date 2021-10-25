@@ -25,7 +25,7 @@ class Units extends BaseController {
             //return json_encode($objUnit);die;
 
             if (!$objUnit) {
-                return $this->fail('Nenhum usuário encontrado.', 404);
+                return $this->fail('Oops! Desculpe, nenhuma unidade encontrada.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 
@@ -74,7 +74,56 @@ class Units extends BaseController {
             //return json_encode($objUnit);die;
 
             if (!$objUnit) {
-                return $this->fail('Nenhum registro encontrado.', 404);
+                return $this->fail('Oops! Desculpe, nenhuma unidade encontrada.', 404);
+            } else {
+                /*$decoded = $jwt->getToken();
+
+                if ($decoded) {
+                    $response = [
+                        'status' => 200,
+                        'error' => FALSE,
+                        'messages' => 'Listagem de Unidades.',
+                        'data' => $objUnit
+                    ];
+
+                    return $this->respond($response);
+                }*/
+                $response = [
+                    'status' => 200,
+                    'error' => FALSE,
+                    'messages' => 'Unidade',
+                    'data' => $objUnit
+                ];
+
+                return $this->respond($response);
+            }
+        } catch (Exception $ex) {
+            $response = [
+                'status' => 401,
+                'error' => TRUE,
+                'messages' => 'Acesso Negado. Token expirado ou não existe.'
+            ];
+
+            return $this->respond($response);
+        }
+    }
+
+    public function getUnitBySlug($unit_slug) {
+        $this->response->setHeader('Access-Control-Allow-Origin', '*')
+                       ->setHeader('Access-Control-Allow-Headers', '*')
+                       ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+                       ->setStatusCode(200);
+        $this->response->setContentType('application/json');
+
+        try {
+            //$jwt = new ValidateJWT();
+            $unitModel = new UnitsModel();
+
+            $objUnit = $unitModel->where('slug', $unit_slug)->where('id_status <>', 3)->asObject()->find();
+            //return json_encode($objUnit);die;
+
+            if (!$objUnit) {
+                return $this->fail('Oops! Desculpe, nenhuma unidade encontrada.', 404);
             } else {
                 /*$decoded = $jwt->getToken();
 

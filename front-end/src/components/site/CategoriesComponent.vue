@@ -74,11 +74,12 @@
         },
         methods: {
             async getCategoriesByUnitID() {
-                let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
+                let unit_slug = this.$route.params.unit_slug;
 
-                await axios.get(base_url_api + '/categoria/unidade/' + id_unit)
+                await axios.get(base_url_api + '/categoria/unidade/' + unit_slug)
                 .then(res => {
                     this.arrayCategories = [...res.data.data];
+                    console.log(this.arrayCategories);
                 })
                 .catch(err => {
                     this.error = true;
@@ -98,12 +99,12 @@
                 })
                 .finally(() => this.loading = false)
             },
-            selectCategorie(data) {
-                this.setItemLocalStorage(data);
-            },
-            setItemLocalStorage(data) {
-                localStorage.setItem("categorie", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
-            }
+            // selectCategorie(data) {
+            //     this.setItemLocalStorage(data);
+            // },
+            // setItemLocalStorage(data) {
+            //     localStorage.setItem("categorie", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
+            // }
         }
     }
 </script>

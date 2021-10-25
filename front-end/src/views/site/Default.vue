@@ -7,10 +7,10 @@
             <div class="wiki-select-box">
                 <v-select
                     :items="arrayUnits"
-                    v-model="id_unit"
+                    v-model="unit_slug"
                     label="Selecionar Unidade"
                     item-text="unit_name"
-                    item-value="id"
+                    item-value="slug"
                     prepend-inner-icon="mdi-chevron-right"
                     @change="selectUnit()"
                     solo
@@ -69,17 +69,17 @@
         },
         data: () => ({
             arrayUnits: [],
-            id_unit: null
+            unit_slug: null
         }),
         beforeDestroy () {
-            clearInterval(this.interval);
+            //clearInterval(this.interval);
         },
         created() {
             this.getUnitsAll();
         },
         mounted() {
             //document.querySelector('.loader').style.display = 'none';
-            this.removeItemLocalStorage();
+            //this.removeItemLocalStorage();
         },
         methods: {
             async getUnitsAll () {
@@ -94,47 +94,9 @@
             selectUnit() {
                 //document.querySelector('.loader').style.display = 'block';
 
-                switch (this.id_unit) {
-                    case '1':
-                        this.setItemLocalStorage(this.id_unit);
-                        this.redirectSite('/unisaojose');
-                        break;
-                    case '2':
-                        this.setItemLocalStorage(this.id_unit);
-                        this.redirectSite('/colegiorealengo');
-                        break;
-                    case '3':
-                        this.setItemLocalStorage(this.id_unit);
-                        this.redirectSite('/colegioaplicacaotaquara');
-                        break;
-                    case '4':
-                        this.setItemLocalStorage(this.id_unit);
-                        this.redirectSite('/colegioaplicacaovilamilitar');
-                        break;
-                }
-            },
-            setItemLocalStorage(data) {
-                localStorage.setItem("unit", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
-            },
-            removeItemLocalStorage() {
-                if (localStorage.getItem("unit")) {
-                    localStorage.removeItem("unit");
-                }
+                window.location.href = this.unit_slug;
+                //this.$router.push(this.unit_slug);
 
-                if (localStorage.getItem("categorie")) {
-                    localStorage.removeItem("categorie");
-                }
-
-                if (localStorage.getItem("subcategorie")) {
-                    localStorage.removeItem("subcategorie");
-                }
-
-                if (localStorage.getItem("article")) {
-                    localStorage.removeItem("article");
-                }
-            },
-            redirectSite(data) {
-                window.location.href = data;
                 /*setInterval(() => {
                     window.location.href = data;
                     this.$router.push(url);

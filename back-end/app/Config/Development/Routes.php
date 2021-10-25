@@ -21,18 +21,22 @@ $routes->group("wiki/api/v1", function ($routes) {
     //Unidades
     $routes->resource('unidades', ['namespace' => 'App\Controllers\Wiki\Units', 'controller' => 'Units']); //POST / GET / PUT / PATCH / DELETE
     $routes->get("unidade/(:num)", "Units::getUnitByID/$1", ['namespace' => 'App\Controllers\Wiki\Units']);
+    $routes->get("unidade/(:any)", "Units::getUnitBySlug/$1", ['namespace' => 'App\Controllers\Wiki\Units']);
 
     //Categorias
     $routes->resource('categorias', ['namespace' => 'App\Controllers\Wiki\Categories', 'controller' => 'Categories']); //POST / GET / PUT / PATCH / DELETE
     $routes->get("categoria/unidade/(:num)", "Categories::categoriesByUnitID/$1", ['namespace' => 'App\Controllers\Wiki\Categories']);
+    $routes->get("categoria/unidade/(:any)", "Categories::categoriesByUnitSlug/$1", ['namespace' => 'App\Controllers\Wiki\Categories']);
 
     //Subcategorias
     $routes->resource('subcategorias', ['namespace' => 'App\Controllers\Wiki\Subcategories', 'controller' => 'Subcategories']); //POST / GET / PUT / PATCH / DELETE
     $routes->get("subcategoria/categoria/(:num)/unidade/(:num)", "Subcategories::subcategoriesByCategoriesAndUnitID/$1/$2", ['namespace' => 'App\Controllers\Wiki\Subcategories']);
+    $routes->get("subcategoria/categoria/(:any)/unidade/(:any)", "Subcategories::subcategoriesByCategoriesAndUnitSlug/$1/$2", ['namespace' => 'App\Controllers\Wiki\Subcategories']);
     
     //Artigos
     $routes->resource('artigos', ['namespace' => 'App\Controllers\Wiki\Articles', 'controller' => 'Articles']);
     $routes->get("artigo/(:num)", "Articles::getArticleByID/$1", ['namespace' => 'App\Controllers\Wiki\Articles']);
     $routes->get("artigo/subcategoria/(:num)", "Articles::getArticlesBySubcategorieID/$1", ['namespace' => 'App\Controllers\Wiki\Articles']);
+    $routes->get("artigo/subcategoria/(:any)", "Articles::getArticlesBySubcategorieSlug/$1", ['namespace' => 'App\Controllers\Wiki\Articles']);
 });
 ?>

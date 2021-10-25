@@ -46,9 +46,9 @@
         },
         methods: {
             async getUnitByID () {
-                let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
+                let unit_slug = this.$route.params.unit_slug;
 
-                await axios.get(base_url_api + '/unidade/' + id_unit)
+                await axios.get(base_url_api + '/unidade/' + unit_slug)
                 .then(res => {
                     this.arrayUnit = [...res.data.data];
                 })

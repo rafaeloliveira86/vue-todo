@@ -108,4 +108,54 @@ class Subcategories extends BaseController {
             return $this->respond($response);
         }
 	}
+
+    public function subcategoriesByCategoriesAndUnitSlug(string $categorie_slug, string $unit_slug) {
+		$this->response->setHeader('Access-Control-Allow-Origin', '*')
+                       ->setHeader('Access-Control-Allow-Headers', '*')
+                       ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+                       ->setStatusCode(200);
+        $this->response->setContentType('application/json');
+
+		try {
+            //$jwt = new ValidateJWT();
+            $subcategoriesModel = new SubcategoriesModel();
+
+            //$objUnidade = $subcategoriesModel->where('id_unidade', $id_unidade)->where('id_status <>', 3)->asObject()->findAll();
+            $objCategories = $subcategoriesModel->getSubcategorieByCategorieAndUnitSlug($categorie_slug, $unit_slug);
+            //return json_encode($objCategories);die;
+
+            if (!$objCategories) {
+                return $this->fail('Oops! Desculpe, nenhuma subcategoria encontrada.', 404);
+            } else {
+                /*$decoded = $jwt->getToken();
+
+                if ($decoded) {
+                    $response = [
+                        'status' => 200,
+                        'error' => FALSE,
+                        'messages' => 'Listagem de categorias por unidade.',
+                        'data' => $objCategories
+                    ];
+
+                    return $this->respond($response);
+                }*/
+                $response = [
+                    'status' => 200,
+                    'error' => FALSE,
+                    'messages' => 'Listagem de subcategorias.',
+                    'data' => $objCategories
+                ];
+
+                return $this->respond($response);
+            }
+        } catch (Exception $ex) {
+            $response = [
+                'status' => 401,
+                'error' => TRUE,
+                'messages' => 'Acesso Negado. Token expirado ou não existe.'
+            ];
+
+            return $this->respond($response);
+        }
+	}
 }

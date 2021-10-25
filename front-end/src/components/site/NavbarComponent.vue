@@ -24,7 +24,7 @@
                                     </v-btn>
                                 </template>
                                 <v-list>
-                                    <v-list-item v-for="(item, index) in arrayUnits" :key="index" v-model="unit" @click="selectUnit(item.id)">
+                                    <v-list-item v-for="(item, index) in arrayUnits" :key="index" v-model="unit" @click="selectUnit(item.slug)">
                                         <v-list-item-title v-text="item.unit_name"></v-list-item-title>
                                     </v-list-item>
                                 </v-list>
@@ -40,7 +40,6 @@
 <script>
     import axios from 'axios';
 
-    //const base_url = 'http://localhost:8080';
     const base_url_api = 'http://localhost/wiki/api/v1';
 
     export default {
@@ -52,7 +51,7 @@
         }),
         created() {
             this.getUnitsAll();
-            this.getUnitByID();
+            this.getUnitBySlug();
         },
         methods: {
             async getUnitsAll () {
@@ -64,10 +63,10 @@
                     console.log(err);
                 })
             },
-            async getUnitByID () {
-                let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
+            async getUnitBySlug () {
+                let unit_slug = this.$route.params.unit_slug;
 
-                await axios.get(base_url_api + '/unidade/' + id_unit)
+                await axios.get(base_url_api + '/unidade/' + unit_slug)
                 .then(res => {
                     this.arrayUnit = [...res.data.data];
                 })
@@ -76,35 +75,7 @@
                 })
             },
             selectUnit(data) {
-                switch (data) {
-                    case '1':
-                        this.setItemLocalStorage(data);
-                        this.redirectSite('/unisaojose');
-                        break;
-                    case '2':
-                        this.setItemLocalStorage(data);
-                        this.redirectSite('/colegiorealengo');
-                        break;
-                    case '3':
-                        this.setItemLocalStorage(data);
-                        this.redirectSite('/colegioaplicacaotaquara');
-                        break;
-                    case '4':
-                        this.setItemLocalStorage(data);
-                        this.redirectSite('/colegioaplicacaovilamilitar');
-                        break;
-                }
-            },
-            setItemLocalStorage(data) {
-                localStorage.setItem("unit", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
-            },
-            removeItemLocalStorage() {
-                localStorage.removeItem("unit");
-            },
-            redirectSite(data) {
                 window.location.href = data;
-                //this.$router.push(data);
-                //this.$router.push({ path: data });
             }
         }
     }

@@ -2,6 +2,7 @@
 namespace App\Models\Articles;
 
 use CodeIgniter\Model;
+use Exception;
 
 class ArticlesModel extends Model {
     protected $DBGroup              = 'default';
@@ -52,4 +53,17 @@ class ArticlesModel extends Model {
     protected $afterFind            = [];
     protected $beforeDelete         = [];
     protected $afterDelete          = [];
+
+    public function getArticlesBySubcategorieSlug(string $subcategorie_slug) {
+        try {
+            $this->select('a.*');
+            $this->from('tbl_articles AS a');
+            $this->join('tbl_subcategories AS s', 'a.id_subcategorie = s.id');
+            $this->where('s.slug', $subcategorie_slug);
+            $this->where('a.id_status <>', 3);
+            return $this->asObject()->findAll();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
