@@ -48,7 +48,7 @@ const routes = [
         }
       },
       {
-        path: '/:unit_slug/:categorie_slug/:subcategorie_slug',
+        path: '/:unit_slug/:categorie_slug/:subcategorie_slug/:article_slug',
         component: ArticleComponent,
         meta: {
           breadcrumb: [

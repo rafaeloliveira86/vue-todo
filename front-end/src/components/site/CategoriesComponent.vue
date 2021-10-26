@@ -51,9 +51,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
-    const base_url_api = 'http://localhost/wiki/api/v1';
+    import api from "../../api";
 
     export default {
         name: "CategoriesComponent",
@@ -76,7 +74,7 @@
             async getCategoriesByUnitID() {
                 let unit_slug = this.$route.params.unit_slug;
 
-                await axios.get(base_url_api + '/categoria/unidade/' + unit_slug)
+                await api.get('/categoria/unidade/' + unit_slug)
                 .then(res => {
                     this.arrayCategories = [...res.data.data];
                     console.log(this.arrayCategories);

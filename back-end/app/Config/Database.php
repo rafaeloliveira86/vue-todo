@@ -32,10 +32,19 @@ class Database extends Config
 	 */
 	public $default = [
 		'DSN'      => '',
+
+		//Localhost
 		'hostname' => 'localhost',
 		'username' => 'root',
 		'password' => '',
 		'database' => 'db_wiki',
+
+		//Locaweb
+		/*'hostname' => 'db_wiki.vpshost2760.mysql.dbaas.com.br',
+		'username' => 'db_wiki',
+		'password' => 'W!.K#!@*[21v1]',
+		'database' => 'db_wiki',*/
+
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,

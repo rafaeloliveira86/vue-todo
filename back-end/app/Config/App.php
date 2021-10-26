@@ -23,7 +23,8 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'http://localhost/';
+	public $baseURL = 'http://localhost/'; //Localhost
+	//public $baseURL = 'https://wiki.saojose.br/'; //Locaweb
 
 	/**
 	 * --------------------------------------------------------------------------

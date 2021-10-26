@@ -38,9 +38,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
-    const base_url_api = 'http://localhost/wiki/api/v1';
+    import api from "../../api";
 
     export default {
         name: "NavbarComponent",
@@ -55,7 +53,7 @@
         },
         methods: {
             async getUnitsAll () {
-                await axios.get(base_url_api + '/unidades')
+                await api.get('/unidades')
                 .then(res => {
                     this.arrayUnits = [...res.data.data];
                 })
@@ -66,7 +64,7 @@
             async getUnitBySlug () {
                 let unit_slug = this.$route.params.unit_slug;
 
-                await axios.get(base_url_api + '/unidade/' + unit_slug)
+                await api.get('/unidade/' + unit_slug)
                 .then(res => {
                     this.arrayUnit = [...res.data.data];
                 })

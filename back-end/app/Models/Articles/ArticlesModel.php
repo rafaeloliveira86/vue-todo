@@ -54,9 +54,51 @@ class ArticlesModel extends Model {
     protected $beforeDelete         = [];
     protected $afterDelete          = [];
 
+    //SubQuery (NÃO EXCLUIR - MÉTODO FUNCIONA!!!)
+    // public function getArticlesBySubcategorieID(int $id_subcategorie) {
+	// 	try {
+    //         $query = $this->query("
+    //             SELECT 
+    //             a.*,
+    //             (SELECT s.slug FROM tbl_subcategories AS s WHERE a.id_subcategorie = s.id) AS subcategorie_slug
+    //             FROM tbl_articles AS a
+    //             WHERE 
+    //             a.id_subcategorie = $id_subcategorie AND 
+    //             a.id_status <> 3
+    //         ");
+			
+    //         return $query->getResult();
+    //     } catch (Exception $e) {
+    //         die($e->getMessage());
+    //     }
+	// }
+
+    //InnerJoin
+    public function getArticlesBySubcategorieID(int $id_subcategorie) {
+		try {
+            $query = $this->query("
+                SELECT 
+                a.*,
+                s.slug AS subcategorie_slug
+                FROM tbl_articles AS a
+                INNER JOIN tbl_subcategories AS s ON (a.id_subcategorie = s.id)
+                WHERE 
+                a.id_subcategorie = $id_subcategorie AND 
+                a.id_status <> 3
+            ");
+			
+            return $query->getResult();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+	}
+
     public function getArticlesBySubcategorieSlug(string $subcategorie_slug) {
         try {
-            $this->select('a.*');
+            $this->select('
+                a.*,
+                s.slug AS subcategorie_slug
+            ');
             $this->from('tbl_articles AS a');
             $this->join('tbl_subcategories AS s', 'a.id_subcategorie = s.id');
             $this->where('s.slug', $subcategorie_slug);

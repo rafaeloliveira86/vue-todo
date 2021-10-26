@@ -13,9 +13,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
-    const base_url_api = 'http://localhost/wiki/api/v1';
+    import api from "../../api";
 
     export default {
         name: "SplashComponent",
@@ -28,16 +26,18 @@
         },
         methods: {
             async getUnitByID () {
-                let id_unit = atob(localStorage.getItem("unit")); //btoa (Base 64 encode) - atob (Base 64 decode)
-
-                await axios.get(base_url_api + '/unidade/' + id_unit)
-                .then(res => {
-                    this.arrayUnit = [...res.data.data];
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-            },
+                if (this.$route.params.unit_slug) {
+                    let unit_slug = this.$route.params.unit_slug;
+                
+                    await api.get('/unidade/' + unit_slug)
+                    .then(res => {
+                        this.arrayUnit = [...res.data.data];
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                }
+            }
         }
     }
 </script>

@@ -53,28 +53,28 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
-    const base_url_api = 'http://localhost/wiki/api/v1';
+    import api from "../../api";
 
     export default {
         name: "ArticleComponent",
         data: () => ({
             loading: true,
             error: false,
+            status_error: null,
+            message_error: null,
             arrayArticles: []
         }),
         mounted() {
-            
+            console.log(this.$route.params.article_slug);
         },
         created() {
             this.getArticleByID();
         },
         methods: {
             async getArticleByID() {
-                let id_article = atob(localStorage.getItem("article")); //btoa (Base 64 encode) - atob (Base 64 decode)
+                let article_slug = this.$route.params.article_slug;
 
-                await axios.get(base_url_api + '/artigo/' + id_article)
+                await api.get('/artigo/nome/' + article_slug)
                 .then(res => {
                     this.arrayArticles = [...res.data.data];
                 })

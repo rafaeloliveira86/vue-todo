@@ -57,10 +57,8 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import api from "../../api";
     import SplashComponent from '../../components/site/SplashComponent.vue';
-
-    const base_url_api = 'http://localhost/wiki/api/v1';
 
     export default ({
         name: "Default",
@@ -83,7 +81,7 @@
         },
         methods: {
             async getUnitsAll () {
-                await axios.get(base_url_api + '/unidades')
+                await api.get('/unidades')
                 .then(res => {
                     this.arrayUnits = [...res.data.data];
                 })

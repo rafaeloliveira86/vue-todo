@@ -108,6 +108,55 @@ class Articles extends BaseController {
         }
     }
 
+    public function getArticleBySlug(string $article_slug) {
+        $this->response->setHeader('Access-Control-Allow-Origin', '*')
+                       ->setHeader('Access-Control-Allow-Headers', '*')
+                       ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+                       ->setStatusCode(200);
+        $this->response->setContentType('application/json');
+
+		try {
+            //$jwt = new ValidateJWT();
+            $articleModel = new ArticlesModel();
+
+            $objArticles = $articleModel->where('slug', $article_slug)->where('id_status <>', 3)->asObject()->findAll();
+            //return json_encode($objArticles);die;
+
+            if (!$objArticles) {
+                return $this->fail('Oops! Desculpe, nenhum artigo encontrado.', 404);
+            } else {
+                /*$decoded = $jwt->getToken();
+
+                if ($decoded) {
+                    $response = [
+                        'status' => 200,
+                        'error' => FALSE,
+                        'messages' => 'Listagem de Categorias.',
+                        'data' => $objArticles
+                    ];
+
+                    return $this->respond($response);
+                }*/
+                $response = [
+                    'status' => 200,
+                    'error' => FALSE,
+                    'messages' => 'Artigo selecionado.',
+                    'data' => $objArticles
+                ];
+
+                return $this->respond($response);
+            }
+        } catch (Exception $ex) {
+            $response = [
+                'status' => 401,
+                'error' => TRUE,
+                'messages' => 'Acesso Negado. Token expirado ou não existe.'
+            ];
+
+            return $this->respond($response);
+        }
+    }
+
     public function getArticlesBySubcategorieID(int $id_subcategorie) {
         $this->response->setHeader('Access-Control-Allow-Origin', '*')
                        ->setHeader('Access-Control-Allow-Headers', '*')
@@ -119,7 +168,8 @@ class Articles extends BaseController {
             //$jwt = new ValidateJWT();
             $articleModel = new ArticlesModel();
 
-            $objArticles = $articleModel->where('id_subcategorie', $id_subcategorie)->where('id_status <>', 3)->asObject()->findAll();
+            //$objArticles = $articleModel->where('id_subcategorie', $id_subcategorie)->where('id_status <>', 3)->asObject()->findAll();
+            $objArticles = $articleModel->getArticlesBySubcategorieID($id_subcategorie);
             //return json_encode($objArticles);die;
 
             if (!$objArticles) {

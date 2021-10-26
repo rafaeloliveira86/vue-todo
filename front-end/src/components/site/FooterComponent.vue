@@ -25,10 +25,9 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import api from "../../api";
 
     const base_url = 'http://localhost:8080';
-    const base_url_api = 'http://localhost/wiki/api/v1';
 
     export default {
         name: "FooterComponent",
@@ -48,7 +47,7 @@
             async getUnitByID () {
                 let unit_slug = this.$route.params.unit_slug;
 
-                await axios.get(base_url_api + '/unidade/' + unit_slug)
+                await api.get('/unidade/' + unit_slug)
                 .then(res => {
                     this.arrayUnit = [...res.data.data];
                 })
