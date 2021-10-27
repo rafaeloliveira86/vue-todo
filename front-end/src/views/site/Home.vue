@@ -1,6 +1,6 @@
 <template>
     <div class="wiki-body">
-        <LoaderComponent />
+        <!-- <LoaderComponent /> -->
 
         <NavbarComponent />
 
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import LoaderComponent from '../../components/LoaderComponent.vue';
+    //import LoaderComponent from '../../components/LoaderComponent.vue';
     import NavbarComponent from '../../components/site/NavbarComponent.vue';
     import SplashComponent from '../../components/site/SplashComponent.vue';
     import BreadcrumbComponent from '../../components/site/BreadcrumbComponent.vue';
@@ -43,7 +43,7 @@
     export default ({
         name: "Home",
         components: {
-            LoaderComponent,
+            //LoaderComponent,
             NavbarComponent,
             SplashComponent,
             BreadcrumbComponent,

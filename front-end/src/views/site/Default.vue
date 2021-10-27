@@ -43,7 +43,9 @@
             </div>
             <footer class="wiki-foot wiki-foot-content">
                 <div class="wiki-foot-item" v-for="(item, index) in arrayUnits" :key="index">
-                    <div align="center"><v-img :src="require(`../../assets/image/${item.icon_footer}`)" width="40" /></div>
+                    <div align="center">
+                        <v-img :src="require(`../../assets/image/${item.icon_footer}`)" width="40" />
+                    </div>
                     <a :href="item.site" target="_blank">{{ item.unit_name }}</a>
                 </div>
             </footer>
@@ -57,7 +59,6 @@
 </template>
 
 <script>
-    import api from "../../api";
     import SplashComponent from '../../components/site/SplashComponent.vue';
 
     export default ({
@@ -66,29 +67,34 @@
             SplashComponent
         },
         data: () => ({
-            arrayUnits: [],
+            //arrayUnits: [],
             unit_slug: null
         }),
         beforeDestroy () {
             //clearInterval(this.interval);
         },
         created() {
-            this.getUnitsAll();
+            //this.getUnitsAll();
+        },
+        computed: {
+            arrayUnits() {
+                return this.$store.state.unitsAll
+            }
         },
         mounted() {
             //document.querySelector('.loader').style.display = 'none';
-            //this.removeItemLocalStorage();
+            this.$store.dispatch("getUnitsAll");
         },
         methods: {
-            async getUnitsAll () {
-                await api.get('/unidades')
-                .then(res => {
-                    this.arrayUnits = [...res.data.data];
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-            },
+            // async getUnitsAll () {
+            //     await api.get('/unidades')
+            //     .then(res => {
+            //         this.arrayUnits = [...res.data.data];
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //     })
+            // },
             selectUnit() {
                 //document.querySelector('.loader').style.display = 'block';
 
@@ -236,11 +242,11 @@
     .wiki-foot-item a {
         font-size: 15px;
         text-decoration: none;
-        color: #ffffff;
+        color: #ffffff !important;
     }
 
     .wiki-foot-item a:hover {
-        color: #e1e1e1;
+        color: #e1e1e1 !important;
     }
 
     .v-footer {

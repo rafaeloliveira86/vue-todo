@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar v-for="(item, index) in arrayUnit" :key="index" :color="item.class" dark>
+        <v-app-bar v-for="(unit, index) in unitSlug" :key="index" :color="unit.class" dark>
             <!-- <template v-slot:img="{ props }">
                 <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(28,108,199,.8)"></v-img>
             </template> -->
@@ -9,12 +9,12 @@
                     <div class="wiki-app-bar">
                         <div class="wiki-app-bar-col">
                             <a href="/unisaojose">
-                                <v-img :src="require(`../../assets/image/${item.logo_navbar}`)" contain position="left" content-class="wiki-app-bar-logo" />
+                                <v-img :src="require(`../../assets/image/${unit.logo_navbar}`)" contain position="left" content-class="wiki-app-bar-logo" />
                             </a>
                         </div>
                         <div class="wiki-app-bar-col">
                             <v-spacer></v-spacer>
-                            <v-btn icon :to="`/${item.slug}`">
+                            <v-btn icon :to="`/${unit.slug}`">
                                 <v-icon>mdi-home</v-icon>
                             </v-btn>
                             <v-menu left bottom>
@@ -24,8 +24,8 @@
                                     </v-btn>
                                 </template>
                                 <v-list>
-                                    <v-list-item v-for="(item, index) in arrayUnits" :key="index" v-model="unit" @click="selectUnit(item.slug)">
-                                        <v-list-item-title v-text="item.unit_name"></v-list-item-title>
+                                    <v-list-item v-for="(units, index) in unitsAll" :key="index" @click="selectUnit(units.slug)">
+                                        <v-list-item-title v-text="units.unit_name"></v-list-item-title>
                                     </v-list-item>
                                 </v-list>
                             </v-menu>
@@ -38,40 +38,29 @@
 </template>
 
 <script>
-    import api from "../../api";
+    //import api from "../../api";
 
     export default {
         name: "NavbarComponent",
         data: () => ({
-            arrayUnits: [],
-            arrayUnit: [],
-            unit: null,
+            
         }),
+        computed: {
+            unitsAll() {
+                return this.$store.state.unitsAll
+            },
+            unitSlug() {
+                return this.$store.state.unitSlug
+            }
+        },
+        mounted() {
+            this.$store.dispatch("getUnitsAll");
+            this.$store.dispatch("getUnitBySlug", { unit_slug: this.$route.params.unit_slug });
+        },
         created() {
-            this.getUnitsAll();
-            this.getUnitBySlug();
+            
         },
         methods: {
-            async getUnitsAll () {
-                await api.get('/unidades')
-                .then(res => {
-                    this.arrayUnits = [...res.data.data];
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-            },
-            async getUnitBySlug () {
-                let unit_slug = this.$route.params.unit_slug;
-
-                await api.get('/unidade/' + unit_slug)
-                .then(res => {
-                    this.arrayUnit = [...res.data.data];
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-            },
             selectUnit(data) {
                 window.location.href = data;
             }

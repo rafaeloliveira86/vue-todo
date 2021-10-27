@@ -15,6 +15,24 @@ const routes = [
     name: 'NotFound',
     component: () => import('../views/site/PageNotFound.vue')
   },
+  //Dashboard (Admin)
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import('../views/dashboard/Dashboard.vue'),
+    children: [
+      {
+        path: '/dashboard/tarefas',
+        name: 'Tarefas',
+        component: Tarefas
+      },
+      {
+        path: '/dashboard/sobre',
+        name: 'Sobre',
+        component: () => import('../views/dashboard/Sobre.vue')
+      }
+    ]
+  },
   //Página Inicial Unidades
   {
     path: '/',
@@ -59,24 +77,6 @@ const routes = [
           ]
         }
       },
-    ]
-  },
-  //Dashboard (Admin)
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('../views/dashboard/Dashboard.vue'),
-    children: [
-      {
-        path: '/dashboard/tarefas',
-        name: 'Tarefas',
-        component: Tarefas
-      },
-      {
-        path: '/dashboard/sobre',
-        name: 'Sobre',
-        component: () => import('../views/dashboard/Sobre.vue')
-      }
     ]
   }
 ]

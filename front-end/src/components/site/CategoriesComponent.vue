@@ -28,8 +28,8 @@
                 </div>
             </div>
 
-            <div class="wiki-cat" v-else>
-                <div class="wiki-cat-col" v-for="(categorie, index) in arrayCategories" :key="index">
+            <div class="wiki-cat">
+                <div class="wiki-cat-col" v-for="(categorie, index) in categoriesSlug" :key="index">
                     <v-hover>
                         <template v-slot:default="{ hover }">
                             <!-- <router-link :to="`${$route.path}/subcategorias`" class="text-decoration-none">
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-    import api from "../../api";
+    //import api from "../../api";
 
     export default {
         name: "CategoriesComponent",
@@ -61,42 +61,56 @@
             },
         },
         data: () => ({
-            loading: true,
-            error: false,
-            status_error: null,
-            message_error: null,
-            arrayCategories: [],
+            //loading: true,
+            //error: false,
+            //status_error: null,
+            //message_error: null,
+            //arrayCategories: [],
         }),
+        computed: {
+            categoriesSlug() {
+                return this.$store.state.categoriesSlug
+            }
+        },
+        mounted() {
+            this.$store.dispatch("getCategoriesByUnitSlug", { 
+                loading: true,
+                error: false,
+                status_error: null,
+                message_error: null,
+                unit_slug: this.$route.params.unit_slug,
+            });
+        },
         created() {
-            this.getCategoriesByUnitID();
+            //this.getCategoriesByUnitID();
         },
         methods: {
-            async getCategoriesByUnitID() {
-                let unit_slug = this.$route.params.unit_slug;
+            // async getCategoriesByUnitID() {
+            //     let unit_slug = this.$route.params.unit_slug;
 
-                await api.get('/categoria/unidade/' + unit_slug)
-                .then(res => {
-                    this.arrayCategories = [...res.data.data];
-                    console.log(this.arrayCategories);
-                })
-                .catch(err => {
-                    this.error = true;
+            //     await api.get('/categoria/unidade/' + unit_slug)
+            //     .then(res => {
+            //         this.arrayCategories = [...res.data.data];
+            //         console.log(this.arrayCategories);
+            //     })
+            //     .catch(err => {
+            //         this.error = true;
 
-                    if (err.response) { //Solicitação feita e resposta do servidor                        
-                        console.log(err.response.data);
-                        console.log(err.response.status);
-                        console.log(err.response.headers);
+            //         if (err.response) { //Solicitação feita e resposta do servidor                        
+            //             console.log(err.response.data);
+            //             console.log(err.response.status);
+            //             console.log(err.response.headers);
 
-                        this.status_error = err.response.data.error;
-                        this.message_error = err.response.data.messages.error;
-                    } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
-                        console.log(err.request);
-                    } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
-                        console.log('Error', err.message);
-                    }
-                })
-                .finally(() => this.loading = false)
-            },
+            //             this.status_error = err.response.data.error;
+            //             this.message_error = err.response.data.messages.error;
+            //         } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
+            //             console.log(err.request);
+            //         } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
+            //             console.log('Error', err.message);
+            //         }
+            //     })
+            //     .finally(() => this.loading = false)
+            // },
             // selectCategorie(data) {
             //     this.setItemLocalStorage(data);
             // },
