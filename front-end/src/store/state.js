@@ -4,6 +4,7 @@ export default {
         { id: 2, titulo: "Comprar ração", concluido: false },
     ],
     loading: [],
+    localStorage: [],
     unitsAll: [],
     unitSlug: [],
     categoriesSlug: []

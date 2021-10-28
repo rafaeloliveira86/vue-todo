@@ -15,6 +15,9 @@ export default {
         let tarefa = state.tarefas.filter(tarefa => tarefa.id == novaTarefa.id)[0];
         tarefa.titulo = novaTarefa.titulo;
     },
+    getItemLocalStorage(state, data) {
+        state.localStorage = localStorage.getItem(data.key);
+    },
     LOADING(state, loader) {
         state.loading = loader
     },

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import api from "../../api";
+    import api from "../../services/api";
 
     const base_url = 'http://localhost:8080';
 

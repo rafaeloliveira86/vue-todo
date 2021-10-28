@@ -19,7 +19,9 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getUnitBySlug", { unit_slug: this.$route.params.unit_slug });
+      this.$store.dispatch("getUnitBySlug", { 
+        unit_slug: this.$route.params.unit_slug 
+      });
     },
     created() {
       this.loaderInit();

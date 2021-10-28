@@ -79,7 +79,7 @@
         computed: {
             unitsAll() {
                 return this.$store.state.unitsAll
-            }
+            },
         },
         mounted() {
             //document.querySelector('.loader').style.display = 'none';
@@ -97,7 +97,7 @@
             // },
             selectUnit() {
                 //document.querySelector('.loader').style.display = 'block';
-
+                localStorage.setItem("unit", this.unit_slug);
                 window.location.href = this.unit_slug;
                 //this.$router.push(this.unit_slug);
 

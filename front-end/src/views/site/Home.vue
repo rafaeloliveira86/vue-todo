@@ -3,14 +3,13 @@
         <!-- <LoaderComponent /> -->
 
         <section v-if="loading">
-            <div id="wiki-loader-wrapper" v-for="(unit, index) in unitSlug" :key="index">
+            <div id="wiki-loader-wrapper">
                 <div id="wiki-loader"></div>
-                <div :class="`wiki-loader-section ${unit.class}`"></div>
+                <div :class="`wiki-loader-section ${loadClass}`"></div>
             </div>
-            Carregando...
         </section>
 
-        <section v-else>
+        <section>
             <NavbarComponent />
 
             <div class="wiki-col">
@@ -50,57 +49,59 @@
     import SidebarComponent from '../../components/site/SidebarComponent.vue';
     import FooterComponent from '../../components/site/FooterComponent.vue';
 
-    import api from '../../api';
-
     export default ({
         name: "Home",
         data: () => ({
             loading: true,
-            unitSlug: []
+            //unitSlug: [],
+            class: []
         }),
         components: {
-            //LoaderComponent,
             NavbarComponent,
             SplashComponent,
             BreadcrumbComponent,
             SidebarComponent,
             FooterComponent
         },
-        created() {
+        computed: {
+            loadClass() {
+                return this.selectUnitClass();
+            }
+        },
+        mounted() {
             this.loaderInit();
-            this.getUnitBySlug();
+        },
+        created() {
+            this.selectUnitClass();
         },
         methods: {
             loaderInit() {
-                setTimeout(function() {
+                setTimeout(() => {
                     var element = document.querySelector("body");
                     element.classList.add("loaded");
+                    this.loading = false;
                 }, 3000);
             },
-            async getUnitBySlug() {
-                let unit_slug = this.$route.params.unit_slug;
+            selectUnitClass() {
+                this.$store.commit('getItemLocalStorage', { key: 'unit' });
+                console.log(this.$store.state.localStorage);
 
-                await api.get('/unidade/' + unit_slug)
-                .then(res => {
-                    this.unitSlug = [...res.data.data];
-                })
-                .catch(err => {
-                    this.error = true;
+                switch (this.$store.state.localStorage) {
+                    case 'unisaojose':
+                        this.class = 'blue darken-4'
+                        break;
+                    case 'colegio-realengo':
+                        this.class = 'red darken-4'
+                        break;
+                    case 'colegio-aplicacao-taquara':
+                        this.class = 'teal darken-2'
+                        break;
+                    case 'colegio-aplicacao-vilamilitar':
+                        this.class = 'teal darken-2'
+                        break;
+                }
 
-                    if (err.response) { //Solicitação feita e resposta do servidor                        
-                        console.log(err.response.data);
-                        console.log(err.response.status);
-                        console.log(err.response.headers);
-
-                        this.status_error = err.response.data.error;
-                        this.message_error = err.response.data.messages.error;
-                    } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
-                        console.log(err.request);
-                    } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
-                        console.log('Error', err.message);
-                    }
-                })
-                .finally(() => this.loading = false)
+                return this.class;
             }
         }
     })
