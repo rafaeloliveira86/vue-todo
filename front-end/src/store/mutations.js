@@ -15,6 +15,9 @@ export default {
         let tarefa = state.tarefas.filter(tarefa => tarefa.id == novaTarefa.id)[0];
         tarefa.titulo = novaTarefa.titulo;
     },
+    LOADING(state, loader) {
+        state.loading = loader
+    },
     //Unidades (actions.js)
     UNITS_ALL(state, units) {
         state.unitsAll = units
@@ -24,7 +27,8 @@ export default {
         state.unitSlug = units
     },
     //Categorias Por Slug (actions.js)
-    CATEGORIE_SLUG(state, categories) {
+    CATEGORIE_SLUG(state, categories, loading) {
         state.categoriesSlug = categories
+        state.loading = loading
     }
 }

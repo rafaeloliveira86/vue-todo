@@ -29,6 +29,7 @@ export default {
         })
         .catch(err => {
             data.error = true;
+            console.log(data.error);
 
             if (err.response) { //Solicitação feita e resposta do servidor                        
                 console.log(err.response.data);
@@ -43,6 +44,9 @@ export default {
                 console.log('Error', err.message);
             }
         })
-        .finally(() => data.loading = false)
+        .finally(
+            //() => data.loading = false
+            () => commit('LOADING', data.loading = false)
+        )
     }
 }

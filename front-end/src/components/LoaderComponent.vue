@@ -1,23 +1,28 @@
 <template>
     <div>
-        <div id="wiki-loader-wrapper" v-for="(item, index) in arrayUnit" :key="index">
+        <div id="wiki-loader-wrapper" v-for="(unit, index) in unitSlug" :key="index">
           <div id="wiki-loader"></div>
-          <div :class="`wiki-loader-section ${item.class}`"></div>
+          <div :class="`wiki-loader-section ${unit.class}`"></div>
         </div>
     </div>
 </template>
 
 <script>
-  import api from "../api";
-
   export default {
     name: 'LoaderComponent',
     data: () => ({
-      arrayUnit: []
+      
     }),
+    computed: {
+      unitSlug() {
+        return this.$store.state.unitSlug
+      }
+    },
+    mounted() {
+      this.$store.dispatch("getUnitBySlug", { unit_slug: this.$route.params.unit_slug });
+    },
     created() {
       this.loaderInit();
-      this.getUnitByID();
     },
     methods: {
       loaderInit() {
@@ -25,18 +30,6 @@
           var element = document.querySelector("body");
           element.classList.add("loaded");
         }, 3000);
-      },
-      async getUnitByID () {
-        let unit_slug = this.$route.params.unit_slug;
-
-        await api.get('/unidade/' + unit_slug)
-        .then(res => {
-            this.arrayUnit = [...res.data.data];
-            console.log(this.arrayUnit);
-        })
-        .catch(err => {
-            console.log(err);
-        })
       }
     }
   }

@@ -18,7 +18,7 @@
         <section v-else>
             <!-- <div v-if="loading">Carregando...</div> -->
 
-            <div v-if="loading">
+            <section v-if="loading">
                 <div class="wiki-cat">
                     <div class="wiki-cat-col">
                         <v-sheet :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`" class="pa-3">
@@ -26,9 +26,9 @@
                         </v-sheet>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="wiki-cat">
+            <section v-else class="wiki-cat">
                 <div class="wiki-cat-col" v-for="(categorie, index) in categoriesSlug" :key="index">
                     <v-hover>
                         <template v-slot:default="{ hover }">
@@ -45,7 +45,7 @@
                         </template>
                     </v-hover>
                 </div>
-            </div>
+            </section>
         </section>
     </div>
 </template>
@@ -61,13 +61,15 @@
             },
         },
         data: () => ({
-            //loading: true,
-            //error: false,
+            error: false,
             //status_error: null,
             //message_error: null,
             //arrayCategories: [],
         }),
         computed: {
+            loading() {
+                return this.$store.state.loading
+            },
             categoriesSlug() {
                 return this.$store.state.categoriesSlug
             }
@@ -75,7 +77,7 @@
         mounted() {
             this.$store.dispatch("getCategoriesByUnitSlug", { 
                 loading: true,
-                error: false,
+                error: this.error,
                 status_error: null,
                 message_error: null,
                 unit_slug: this.$route.params.unit_slug,

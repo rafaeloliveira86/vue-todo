@@ -6,7 +6,7 @@
         <div class="wiki-col">
             <div class="wiki-select-box">
                 <v-select
-                    :items="arrayUnits"
+                    :items="unitsAll"
                     v-model="unit_slug"
                     label="Selecionar Unidade"
                     item-text="unit_name"
@@ -42,11 +42,11 @@
                 </div>
             </div>
             <footer class="wiki-foot wiki-foot-content">
-                <div class="wiki-foot-item" v-for="(item, index) in arrayUnits" :key="index">
+                <div class="wiki-foot-item" v-for="(foot, index) in unitsAll" :key="index">
                     <div align="center">
-                        <v-img :src="require(`../../assets/image/${item.icon_footer}`)" width="40" />
+                        <v-img :src="require(`../../assets/image/${foot.icon_footer}`)" width="40" />
                     </div>
-                    <a :href="item.site" target="_blank">{{ item.unit_name }}</a>
+                    <a :href="foot.site" target="_blank">{{ foot.unit_name }}</a>
                 </div>
             </footer>
             <v-footer dark tile elevation="24">
@@ -77,7 +77,7 @@
             //this.getUnitsAll();
         },
         computed: {
-            arrayUnits() {
+            unitsAll() {
                 return this.$store.state.unitsAll
             }
         },
