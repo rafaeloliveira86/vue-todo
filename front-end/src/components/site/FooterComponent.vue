@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div v-for="(item, index) in arrayUnit" :key="index">
+        <div v-for="(unit, index) in objUnit" :key="index">
             <v-container fluid class="white">
                 <div class="wiki-container">
                     <footer class="wiki-foot">
                         <div class="wiki-foot-col">
-                            <a v-for="(link, i) in wikiLinks" :key="i" :href="link.href">
-                                <v-img :src="require(`../../assets/image/${item.logo_footer}`)" position="left" content-class="logo" />
+                            <a :href="objUnitData.base_url">
+                                <v-img :src="require(`../../assets/image/${unit.logo_footer}`)" position="left" content-class="logo" />
                             </a>
                         </div>
                         <div class="wiki-foot-col">
@@ -17,7 +17,7 @@
             </v-container>
             <v-footer dark tile elevation="24">
                 <v-col class="text-center" cols="12">
-                    &COPY; Todos os direitos reservados - {{ item.unit_name }} - {{ new Date().getFullYear() }}
+                    &COPY; Todos os direitos reservados - {{ unit.unit_name }} - {{ new Date().getFullYear() }}
                 </v-col>
             </v-footer>
         </div>
@@ -25,36 +25,30 @@
 </template>
 
 <script>
-    import api from "../../services/api";
-
-    const base_url = 'http://localhost:8080';
-
     export default {
         name: "FooterComponent",
         data: () => ({
-            arrayUnit: [],
-            wikiLinks: [
-                {
-                    text: 'Página Inicial',
-                    href: base_url + '/unisaojose',
-                }
-            ]
+            
         }),
+        computed: {
+            objUnit() {
+                return this.$store.state.unitSlug
+            },
+            objUnitData() {
+                return this.selectUnitData();
+            }
+        },
+        mounted() {
+            this.$store.dispatch("getUnitBySlug", { unit_slug: this.$route.params.unit_slug });
+        },
         created() {
-            this.getUnitByID();
+            console.log(process.env.VUE_APP_BASE_URL);
         },
         methods: {
-            async getUnitByID () {
-                let unit_slug = this.$route.params.unit_slug;
-
-                await api.get('/unidade/' + unit_slug)
-                .then(res => {
-                    this.arrayUnit = [...res.data.data];
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-            },
+            selectUnitData() {
+                this.$store.commit('getUnitData', { key: 'unit', base_url: process.env.VUE_APP_BASE_URL });
+                return this.$store.state.localStorage;
+            }
         }
     }
 </script>

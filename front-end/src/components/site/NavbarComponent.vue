@@ -38,8 +38,6 @@
 </template>
 
 <script>
-    //import api from "../../api";
-
     export default {
         name: "NavbarComponent",
         data: () => ({
@@ -57,11 +55,9 @@
             this.$store.dispatch("getUnitsAll");
             this.$store.dispatch("getUnitBySlug", { unit_slug: this.$route.params.unit_slug });
         },
-        created() {
-            
-        },
         methods: {
             selectUnit(data) {
+                localStorage.setItem("unit", data); //Altera o slug da unidade em local storage para o VUEX passar os dados da nova unidade para o preloader em Home.vue
                 window.location.href = data;
             }
         }

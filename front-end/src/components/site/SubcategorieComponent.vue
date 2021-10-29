@@ -32,7 +32,7 @@
                 <div class="wiki-subcat">
                     <div class="wiki-subcat-col">
                         <v-expansion-panels accordion tile mandatory>
-                            <v-expansion-panel v-for="(subcategorie, index) in arraySubcategories" :key="index" @click="selectSubcategorie(subcategorie.id_subcategorie)">
+                            <v-expansion-panel v-for="(subcategorie, index) in objSubcategories" :key="index" @click="selectSubcategorie(subcategorie.id_subcategorie)">
                                 <v-expansion-panel-header>
                                     <template v-slot:actions>
                                         <v-icon size="30" color="#999999">mdi-forum</v-icon>
@@ -57,12 +57,10 @@
                                         <div v-else>
                                             <v-divider></v-divider>
                                             <br>
-                                            <div v-for="(article, index) in arrayArticles" :key="index">
+                                            <div v-for="(article, index) in objArticle" :key="index">
                                                 <div class="wiki-sub-link">
                                                     <router-link :to="`${$route.path + '/' + article.subcategorie_slug + '/' + article.slug}`" class="text-decoration-none">
-                                                        <v-btn text color="primary">
-                                                            {{ article.article_name }}
-                                                        </v-btn>
+                                                        {{ article.article_name }}                                                        
                                                     </router-link>
                                                 </div>
                                             </div>
@@ -79,8 +77,6 @@
 </template>
 
 <script>
-    import api from "../../services/api";
-
     export default {
         name: "SubcategorieComponent",
         inject: {
@@ -89,81 +85,44 @@
             },
         },
         data: () => ({
-            loading: true,
-            article_loading: true,
             error: false,
-            status_error: null,
-            message_error: null,
             article_error: false,
-            article_status_error: null,
-            article_message_error: null,
-            arraySubcategories: [],
-            arrayArticles: [],
             showArticles: false
         }),
-        mounted() {
-            console.log(this.$route.params.unit_slug + '/' + this.$route.params.categorie_slug);
+        computed: {
+            loading() {
+                return this.$store.state.loading
+            },
+            article_loading() {
+                return this.$store.state.article_loading
+            },
+            objSubcategories() {
+                return this.$store.state.subcategorieSlug
+            },
+            objArticle() {
+                return this.$store.state.article
+            }
         },
-        created() {
-            this.getSubcategoriesByCategorieAndUnitSlug();
+        mounted() {
+            this.$store.dispatch("getSubcategoriesByCategorieAndUnitSlug", { 
+                loading: true,
+                error: this.error,
+                status_error: null,
+                message_error: null,
+                unit_slug: this.$route.params.unit_slug,
+                categorie_slug: this.$route.params.categorie_slug
+            });
         },
         methods: {
-            async getSubcategoriesByCategorieAndUnitSlug() {
-                let unit_slug = this.$route.params.unit_slug;
-                let categorie_slug = this.$route.params.categorie_slug;
-
-                await api.get('/subcategoria/categoria/' + categorie_slug + '/unidade/' + unit_slug)
-                .then(res => {
-                    this.arraySubcategories = [...res.data.data];
-                })
-                .catch(err => {
-                    this.error = true;
-
-                    if (err.response) { //Solicitação feita e resposta do servidor                        
-                        console.log(err.response.data);
-                        console.log(err.response.status);
-                        console.log(err.response.headers);
-
-                        this.status_error = err.response.data.error;
-                        this.message_error = err.response.data.messages.error;
-                    } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
-                        console.log(err.request);
-                    } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
-                        console.log('Error', err.message);
-                    }
-                })
-                .finally(() => this.loading = false)
-            },
-            async getArticleBySubategorieID(id_subcategorie) {
-                await api.get('/artigo/subcategoria/' + id_subcategorie)
-                .then(res => {
-                    this.arrayArticles = [...res.data.data];
-                    this.article_error = false;
-                })
-                .catch(err => {
-                    this.article_error = true;
-
-                    if (err.response) { //Solicitação feita e resposta do servidor                        
-                        console.log(err.response.data);
-                        console.log(err.response.status);
-                        console.log(err.response.headers);
-
-                        this.article_status_error = err.response.data.error;
-                        this.article_message_error = err.response.data.messages.error;
-                    } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
-                        console.log(err.request);
-                    } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
-                        console.log('Error', err.message);
-                    }
-                })
-                .finally(() => this.article_loading = false)
-            },
             selectSubcategorie(id_subcategorie) {
-                this.article_loading = true;
-
                 this.showArticles = true;
 
-                this.getArticleBySubategorieID(id_subcategorie);
+                this.$store.dispatch('getArticleBySubategorieID', { 
+                    article_loading: this.article_loading, 
+                    article_status_error: null,
+                    article_message_error: null,
+                    id_subcategorie: id_subcategorie 
+                });
             }
         }
     }
@@ -176,7 +135,7 @@
 
     .wiki-sub-link {
         font-size: 15px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     .wiki-sub-link a:hover {

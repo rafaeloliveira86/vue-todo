@@ -29,16 +29,11 @@
             </section>
 
             <section v-else class="wiki-cat">
-                <div class="wiki-cat-col" v-for="(categorie, index) in categoriesSlug" :key="index">
+                <div class="wiki-cat-col" v-for="(categorie, index) in objCategories" :key="index">
                     <v-hover>
                         <template v-slot:default="{ hover }">
-                            <!-- <router-link :to="`${$route.path}/subcategorias`" class="text-decoration-none">
-                                <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile @click="selectCategorie(categorie.id)">
-                                    <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ categorie.categorie_name }}
-                                </v-card>
-                            </router-link> -->
                             <router-link :to="`${$route.path + '/' + categorie.slug}`" class="text-decoration-none">
-                                <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile @click="selectCategorie(categorie.id)">
+                                <v-card :elevation="hover ? 6 : 3" class="mx-auto pa-5" tile>
                                     <v-icon left size="30" color="#555555">mdi-view-quilt</v-icon> {{ categorie.categorie_name }}
                                 </v-card>
                             </router-link>
@@ -51,8 +46,6 @@
 </template>
 
 <script>
-    //import api from "../../api";
-
     export default {
         name: "CategoriesComponent",
         inject: {
@@ -61,16 +54,13 @@
             },
         },
         data: () => ({
-            error: false,
-            //status_error: null,
-            //message_error: null,
-            //arrayCategories: [],
+            error: false
         }),
         computed: {
             loading() {
                 return this.$store.state.loading
             },
-            categoriesSlug() {
+            objCategories() {
                 return this.$store.state.categoriesSlug
             }
         },
@@ -82,43 +72,6 @@
                 message_error: null,
                 unit_slug: this.$route.params.unit_slug,
             });
-        },
-        created() {
-            //this.getCategoriesByUnitID();
-        },
-        methods: {
-            // async getCategoriesByUnitID() {
-            //     let unit_slug = this.$route.params.unit_slug;
-
-            //     await api.get('/categoria/unidade/' + unit_slug)
-            //     .then(res => {
-            //         this.arrayCategories = [...res.data.data];
-            //         console.log(this.arrayCategories);
-            //     })
-            //     .catch(err => {
-            //         this.error = true;
-
-            //         if (err.response) { //Solicitação feita e resposta do servidor                        
-            //             console.log(err.response.data);
-            //             console.log(err.response.status);
-            //             console.log(err.response.headers);
-
-            //             this.status_error = err.response.data.error;
-            //             this.message_error = err.response.data.messages.error;
-            //         } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
-            //             console.log(err.request);
-            //         } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
-            //             console.log('Error', err.message);
-            //         }
-            //     })
-            //     .finally(() => this.loading = false)
-            // },
-            // selectCategorie(data) {
-            //     this.setItemLocalStorage(data);
-            // },
-            // setItemLocalStorage(data) {
-            //     localStorage.setItem("categorie", btoa(data)); //btoa (Base 64 encode) - atob (Base 64 decode)
-            // }
         }
     }
 </script>

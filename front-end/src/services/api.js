@@ -1,5 +1,7 @@
 import axios from "axios";
 
+//axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
+
 const api = axios.create({
     baseURL: "http://localhost/wiki/api/v1", //Localhost
     //baseURL: "https://wiki.escolasz.com.br/backend/wiki/api/v1", //Locaweb

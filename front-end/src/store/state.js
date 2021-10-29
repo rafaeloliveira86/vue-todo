@@ -4,8 +4,11 @@ export default {
         { id: 2, titulo: "Comprar ração", concluido: false },
     ],
     loading: [],
+    article_loading: [],
     localStorage: [],
     unitsAll: [],
     unitSlug: [],
-    categoriesSlug: []
+    categoriesSlug: [],
+    subcategorieSlug: [],
+    article: []
 }

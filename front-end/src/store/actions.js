@@ -29,7 +29,6 @@ export default {
         })
         .catch(err => {
             data.error = true;
-            console.log(data.error);
 
             if (err.response) { //Solicitação feita e resposta do servidor                        
                 console.log(err.response.data);
@@ -47,6 +46,62 @@ export default {
         .finally(
             //() => data.loading = false
             () => commit('LOADING', data.loading = false)
+        )
+    },
+    //Subcategorias Por Slug
+    async getSubcategoriesByCategorieAndUnitSlug({ commit }, data) {
+        await api.get('/subcategoria/categoria/' + data.categorie_slug + '/unidade/' + data.unit_slug)
+        .then(res => {
+            commit('SUBCATEGORIE_SLUG', [...res.data.data]);
+        })
+        .catch(err => {
+            data.error = true;
+
+            if (err.response) { //Solicitação feita e resposta do servidor                        
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers);
+
+                data.status_error = err.response.data.error;
+                data.message_error = err.response.data.messages.error;
+            } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
+                console.log(err.request);
+            } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
+                console.log('Error', err.message);
+            }
+        })
+        .finally(
+            //() => this.loading = false
+            () => commit('LOADING', data.loading = false)
+        )
+    },
+    //Artigos Por Subcategoria
+    async getArticleBySubategorieID({ commit }, data) {
+        console.log(data.article_loading);
+        await api.get('/artigo/subcategoria/' + data.id_subcategorie)
+        .then(res => {
+            commit('ARTICLE', [...res.data.data]);
+            data.article_error = false;
+        })
+        .catch(err => {
+            data.article_error = true;
+
+            if (err.response) { //Solicitação feita e resposta do servidor                        
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers);
+
+                data.article_status_error = err.response.data.error;
+                data.article_message_error = err.response.data.messages.error;
+            } else if (err.request) { //A solicitação foi feita, mas nenhuma resposta foi recebida                        
+                console.log(err.request);
+            } else { //Algo aconteceu na configuração da solicitação que acionou um erro                        
+                console.log('Error', err.message);
+            }
+        })
+        .finally(
+            //() => this.article_loading = false
+            () => commit('ARTICLE_LOADING', data.article_loading = false)
         )
     }
 }
