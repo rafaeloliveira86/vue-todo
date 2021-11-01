@@ -3,10 +3,10 @@
         <h3 class="underline mb-5 wiki-subcat-title">Subcategorias</h3>
 
         <section v-if="error">
-            <v-alert text prominent icon="mdi-alert-circle" outlined type="error" v-if="(status_error != null) && (message_error != null)">
+            <v-alert text prominent icon="mdi-alert-circle" outlined type="error" v-if="objSubcategories.error">
                 <v-row align="center" no-gutters>
                     <v-col class="grow">
-                        {{ 'Erro ' + status_error + ' - ' + message_error }}
+                        {{ 'Erro ' + objSubcategories.error }}
                     </v-col>
                     <v-col class="shrink">
                         <v-btn rounded color="error"><v-icon>mdi-arrow-left</v-icon></v-btn>
@@ -41,7 +41,7 @@
                                 </v-expansion-panel-header>
 
                                 <v-expansion-panel-content v-show="showArticles">
-                                    <section v-if="article_error">
+                                    <!-- <section v-if="article_error">
                                         <v-divider></v-divider>
                                         <br>
                                         <v-alert text prominent icon="mdi-alert-circle" outlined type="error" v-if="(article_status_error != null) && (article_message_error != null)">
@@ -62,6 +62,31 @@
                                                     <router-link :to="`${$route.path + '/' + article.subcategorie_slug + '/' + article.slug}`" class="text-decoration-none">
                                                         {{ article.article_name }}                                                        
                                                     </router-link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section> -->
+                                    <section>
+                                        <div v-if="article_loading">Carregando...</div>
+                                        <div v-else>
+                                            <v-divider></v-divider>
+                                            <br>
+                                            <div v-for="(article, index) in objArticle" :key="index">
+                                                <div class="wiki-sub-link">                                                
+                                                    <div v-if="article_error == false">
+                                                        <router-link :to="`${$route.path + '/' + article.subcategorie_slug + '/' + article.slug}`" class="text-decoration-none">
+                                                            {{ article.article_name }}                                                        
+                                                        </router-link>
+                                                    </div>
+                                                    <div v-else>
+                                                        <v-alert text prominent icon="mdi-alert-circle" outlined type="error">
+                                                            <v-row align="center" no-gutters>
+                                                                <v-col class="grow">
+                                                                    {{ article.error }}
+                                                                </v-col>
+                                                            </v-row>
+                                                        </v-alert>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,6 +128,9 @@
                 return this.$store.state.article
             }
         },
+        created() {
+            console.log(this.$store.state.article)
+        },
         mounted() {
             this.$store.dispatch("getSubcategoriesByCategorieAndUnitSlug", { 
                 loading: true,
@@ -111,6 +139,12 @@
                 message_error: null,
                 unit_slug: this.$route.params.unit_slug,
                 categorie_slug: this.$route.params.categorie_slug
+            })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                alert(err)
             });
         },
         methods: {

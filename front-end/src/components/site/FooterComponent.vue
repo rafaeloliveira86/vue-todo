@@ -41,9 +41,6 @@
         mounted() {
             this.$store.dispatch("getUnitBySlug", { unit_slug: this.$route.params.unit_slug });
         },
-        created() {
-            console.log(process.env.VUE_APP_BASE_URL);
-        },
         methods: {
             selectUnitData() {
                 this.$store.commit('getUnitData', { key: 'unit', base_url: process.env.VUE_APP_BASE_URL });
