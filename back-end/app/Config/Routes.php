@@ -69,6 +69,11 @@ $routes->group("wiki/api/v1", function ($routes) {
     $routes->get("artigo/subcategoria/(:any)", "Articles::getArticlesBySubcategorieSlug/$1", ['namespace' => 'App\Controllers\Wiki\Articles']);
 });
 
+//Unimestre
+$routes->group("unimestre/api/v1", function ($routes) {
+    $routes->get("tipo-inscricao-vestibular", "Courses::getTypeSubscription", ['namespace' => 'App\Controllers\Unimestre\Courses']);
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
